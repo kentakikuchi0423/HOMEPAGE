@@ -14,7 +14,7 @@ export default function VideoSection() {
       className={`bg-white px-4 py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
       <div className="mx-auto max-w-3xl">
-        <SectionHeading>動画</SectionHeading>
+        <SectionHeading en="VIDEO">動画</SectionHeading>
 
         <div className="overflow-hidden rounded-2xl bg-blue-50 shadow-sm">
           {/* 16:9 placeholder */}

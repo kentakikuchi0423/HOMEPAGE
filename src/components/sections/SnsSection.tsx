@@ -14,7 +14,7 @@ export default function SnsSection() {
       className={`bg-blue-50 px-4 py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
       <div className="mx-auto max-w-2xl">
-        <SectionHeading>最新情報</SectionHeading>
+        <SectionHeading en="TIMELINE">最新情報</SectionHeading>
 
         <div className="overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm">
           <div className="border-b border-blue-50 bg-blue-600 px-6 py-3">

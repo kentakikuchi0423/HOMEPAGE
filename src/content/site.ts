@@ -5,13 +5,7 @@ export type Policy = {
 };
 
 export type SnsLink = {
-  platform:
-    | "X"
-    | "Instagram"
-    | "Facebook"
-    | "YouTube"
-    | "LINE"
-    | "選挙ドットコム";
+  platform: "X" | "Instagram" | "Facebook" | "YouTube" | "選挙ドットコム";
   url: string;
   order: number; // 表示順（昇順）
 };
@@ -63,7 +57,7 @@ export const siteConfig: SiteConfig = {
   profile: {
     name: "菊地 けんた",
     nameKana: "KIKUCHI KENTA",
-    title: "○○市議会議員候補",
+    title: "大洲市議会議員",
     bio: "○○市生まれ、○○大学卒業。市民の声を政治に届けるため、地域に根ざした活動を続けています。子育て・教育・地域経済の活性化を最重要テーマとして掲げています。",
     photo: "/images/profile.jpg",
     catchcopy: "未来をひらく、あなたとともに。",
@@ -100,7 +94,7 @@ export const siteConfig: SiteConfig = {
     title: "菊地けんた 政策紹介動画",
   },
   xTimeline: {
-    handle: "taro_yamada", // X アカウント名（@ なし）を入力してください
+    handle: "kenta_kikuchi", // X アカウント名（@ なし）を入力してください
   },
   donation: {
     url: "#",
@@ -113,7 +107,6 @@ export const siteConfig: SiteConfig = {
     { platform: "Facebook", url: "#", order: 2 },
     { platform: "Instagram", url: "#", order: 3 },
     { platform: "YouTube", url: "#", order: 4 },
-    { platform: "LINE", url: "#", order: 5 },
     { platform: "選挙ドットコム", url: "#", order: 6 },
   ],
   footer: {

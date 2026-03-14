@@ -11,7 +11,7 @@ export default function DonationSection() {
     <section
       ref={ref}
       id="donation"
-      className={`relative overflow-hidden bg-gradient-to-br from-blue-800 via-blue-700 to-blue-600 px-4 py-24 text-center reveal ${inView ? 'is-visible' : ''}`}
+      className={`relative overflow-hidden bg-gradient-to-br from-blue-950 via-blue-800 to-blue-700 px-4 py-24 text-center reveal ${inView ? 'is-visible' : ''}`}
     >
       {/* Background decoration */}
       <div className="pointer-events-none absolute inset-0">
@@ -20,7 +20,7 @@ export default function DonationSection() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-2xl">
-        <SectionHeading light>ご支援のお願い</SectionHeading>
+        <SectionHeading en="SUPPORT" light>ご支援のお願い</SectionHeading>
 
         {description && (
           <p className="mb-10 leading-relaxed text-blue-100">{description}</p>
@@ -30,7 +30,7 @@ export default function DonationSection() {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block rounded-full bg-white px-10 py-4 text-lg font-bold text-blue-700 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl"
+          className="inline-block rounded-full bg-white px-10 py-4 text-lg font-bold text-blue-800 shadow-xl transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-2xl"
         >
           {label}
         </a>

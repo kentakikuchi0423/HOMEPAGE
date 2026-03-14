@@ -1,41 +1,45 @@
 import { siteConfig } from '@/content/site'
 
 export default function HeroSection() {
-  const { name, catchcopy, subcopy } = siteConfig.profile
+  const { name, nameKana, title, catchcopy } = siteConfig.profile
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 px-4 text-center"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-blue-950 via-blue-800 to-blue-700 px-4 py-28 text-center lg:py-36"
     >
-      {/* Decorative blobs */}
+      {/* Decorative blobs — kept subtle */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-sky-400/20 blur-3xl" />
-        <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-blue-300/15 blur-3xl" />
-        <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-2xl" />
+        <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
+        <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-blue-300/8 blur-3xl" />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center gap-6">
-        {/* Name badge */}
-        <p className="hero-animate rounded-full border border-white/30 bg-white/10 px-5 py-1.5 text-sm font-medium tracking-widest text-blue-100 backdrop-blur-sm">
-          {name}
+      <div className="relative z-10 flex flex-col items-center gap-7">
+        {/* Title badge */}
+        <p className="hero-animate rounded-full border border-white/20 bg-white/8 px-5 py-1.5 text-xs font-medium tracking-[0.15em] text-blue-200 backdrop-blur-sm">
+          {title}
         </p>
 
-        {/* Main catchcopy */}
-        <h1 className="hero-animate hero-delay-1 max-w-2xl text-4xl font-bold leading-snug tracking-wide text-white sm:text-5xl md:text-6xl">
-          {catchcopy}
-        </h1>
+        {/* Name — main visual element */}
+        <div className="hero-animate hero-delay-1 flex flex-col items-center gap-1">
+          <h1 className="text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl md:text-7xl">
+            {name}
+          </h1>
+          <p className="text-sm font-medium tracking-[0.25em] text-blue-300 sm:text-base">
+            {nameKana}
+          </p>
+        </div>
 
-        {/* Subcopy */}
+        {/* Catchcopy */}
         <p className="hero-animate hero-delay-2 max-w-lg text-lg leading-relaxed text-blue-100 sm:text-xl">
-          {subcopy}
+          {catchcopy}
         </p>
 
-        {/* CTA button */}
+        {/* CTA */}
         <a
           href="#profile"
-          className="hero-animate hero-delay-3 mt-2 rounded-full bg-white px-8 py-3 font-semibold text-blue-700 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl"
+          className="hero-animate hero-delay-3 mt-1 rounded-full bg-white px-8 py-3 font-semibold text-blue-800 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl"
         >
-          詳しくはこちら
+          プロフィールを見る
         </a>
       </div>
 

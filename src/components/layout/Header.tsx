@@ -23,7 +23,7 @@ export default function Header() {
         <p className="text-base font-bold text-blue-700 sm:text-lg">
           {siteConfig.profile.name}
         </p>
-        <nav className="hidden items-center gap-5 text-sm font-medium text-gray-600 sm:flex">
+        <nav className="hidden items-center gap-5 text-sm font-medium text-gray-700 sm:flex">
           <a href="#profile" className="transition-colors hover:text-blue-600">
             プロフィール
           </a>
@@ -35,7 +35,7 @@ export default function Header() {
           </a>
           <a
             href="#donation"
-            className="rounded-full bg-blue-600 px-5 py-1.5 text-white transition-colors hover:bg-blue-700"
+            className="rounded-full bg-blue-600 px-5 py-1.5 font-semibold text-white transition-colors hover:bg-blue-700"
           >
             応援する
           </a>
@@ -43,7 +43,7 @@ export default function Header() {
         {/* Mobile CTA */}
         <a
           href="#donation"
-          className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 sm:hidden"
+          className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 sm:hidden"
         >
           応援する
         </a>

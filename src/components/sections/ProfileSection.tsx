@@ -14,7 +14,7 @@ export default function ProfileSection() {
       className={`bg-white px-4 py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
       <div className="mx-auto max-w-4xl">
-        <SectionHeading>プロフィール</SectionHeading>
+        <SectionHeading en="PROFILE">プロフィール</SectionHeading>
 
         <div className="flex flex-col items-center gap-10 md:flex-row md:items-start">
           {/* Photo */}
@@ -39,13 +39,13 @@ export default function ProfileSection() {
           {/* Text */}
           <div className="flex flex-col gap-4 text-center md:text-left">
             <div>
-              <p className="text-2xl font-bold text-gray-900">{name}</p>
-              <p className="mt-0.5 text-sm text-gray-500">（{nameKana}）</p>
+              <p className="text-3xl font-bold tracking-tight text-gray-900">{name}</p>
+              <p className="mt-1 text-xs font-medium tracking-widest text-blue-400 uppercase">{nameKana}</p>
             </div>
             <span className="mx-auto inline-block rounded-full bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700 md:mx-0">
               {title}
             </span>
-            <p className="leading-relaxed text-gray-700">{bio}</p>
+            <p className="leading-8 text-gray-700">{bio}</p>
           </div>
         </div>
       </div>
