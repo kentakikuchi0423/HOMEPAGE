@@ -12,6 +12,11 @@ export type SnsLink = {
   iconImage?: string; // 画像パス（public/ 以下）例: "/images/social/x.png"
 };
 
+export type VideoItem = {
+  youtubeVideoId: string; // YouTube 動画 ID（空文字はプレースホルダー表示）
+  title?: string;         // 動画タイトル（任意）
+};
+
 export type SiteConfig = {
   brand: {
     headerLogo?: string; // ヘッダーロゴ画像パス（public/ 以下）例: "/images/brand/logo.png"
@@ -35,8 +40,7 @@ export type SiteConfig = {
   };
   policies: Policy[];
   video: {
-    youtubeVideoId: string; // YouTube 動画 ID（例："dQw4w9WgXcQ"）
-    title?: string; // 動画タイトル（任意）
+    videos: VideoItem[]; // YouTube 動画リスト（最大2本）
   };
   xTimeline: {
     handle: string; // X アカウント名（@ なし）
@@ -73,8 +77,8 @@ export const siteConfig: SiteConfig = {
     title: "大洲市議会議員",
     bio: "○○市生まれ、○○大学卒業。市民の声を政治に届けるため、地域に根ざした活動を続けています。子育て・教育・地域経済の活性化を最重要テーマとして掲げています。",
     photo: "/images/profile/profile.jpg",
-    catchcopy: "未来をひらく、あなたとともに。",
-    subcopy: "市民の声を、政治の力に変えます。",
+    catchcopy: "いつまでも魅力的な大洲市に。",
+    subcopy: "未来をひらく、あなたとともに。",
   },
   policies: [
     {
@@ -103,8 +107,10 @@ export const siteConfig: SiteConfig = {
     },
   ],
   video: {
-    youtubeVideoId: "", // YouTube 動画 ID を入力してください
-    title: "菊地けんた 政策紹介動画",
+    videos: [
+      { youtubeVideoId: "", title: "菊地けんた 政策紹介動画" },
+      { youtubeVideoId: "", title: "菊地けんた 活動レポート" },
+    ],
   },
   xTimeline: {
     handle: "kenta_kikuchi", // X アカウント名（@ なし）を入力してください

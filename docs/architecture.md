@@ -89,6 +89,11 @@ export type Policy = {
   description: string   // 政策説明文
 }
 
+export type VideoItem = {
+  youtubeVideoId: string  // YouTube 動画 ID（空文字はプレースホルダー表示）
+  title?: string          // 動画タイトル（任意）
+}
+
 export type SnsLink = {
   platform: 'X' | 'Instagram' | 'Facebook' | 'YouTube' | '選挙ドットコム'
   url: string
@@ -115,8 +120,7 @@ export type SiteConfig = {
   }
   policies: Policy[]
   video: {
-    youtubeVideoId: string  // YouTube 動画 ID（例："dQw4w9WgXcQ"）
-    title?: string          // 動画タイトル（任意）
+    videos: VideoItem[]     // YouTube 動画リスト（最大2本）
   }
   xTimeline: {
     handle: string       // X アカウント名（@ なし、例："taro_yamada"）
