@@ -37,6 +37,8 @@ export type SiteConfig = {
     photo: string; // 顔写真パス（public/ 以下）
     catchcopy: string; // Hero キャッチコピー
     subcopy: string; // Hero サブコピー
+    qualifications?: string[]; // 資格・試験リスト（任意）
+    hobbies?: string[]; // 趣味・特技リスト（任意）
   };
   policies: Policy[];
   video: {
@@ -79,6 +81,16 @@ export const siteConfig: SiteConfig = {
     photo: "/images/profile/profile.jpg",
     catchcopy: "いつまでも魅力的な大洲市に。",
     subcopy: "未来をひらく、あなたとともに。",
+    qualifications: [
+      "普通自動車免許",
+      "日本漢字能力検定2級",
+      "○○資格（例）",
+    ],
+    hobbies: [
+      "登山・トレッキング",
+      "地域の祭りへの参加",
+      "読書（歴史・政治）",
+    ],
   },
   policies: [
     {
