@@ -14,7 +14,10 @@ HomePage/
 ├── public/
 │   └── images/
 │       ├── profile.jpg         # プロフィール写真
-│       └── ogp.png             # OGP 画像
+│       ├── ogp.png             # OGP 画像
+│       ├── favicon.png         # favicon 元画像
+│       ├── policy/             # 政策アイコン画像（差し替え用）
+│       └── social/             # SNS リンクアイコン画像（差し替え用）
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx          # RootLayout（フォント・メタタグ）
@@ -71,16 +74,26 @@ HomePage/
 コンテンツの変更はこのファイルのみ行う。
 
 ```typescript
+export type SiteConfig = {
+  brand: {
+    headerLogo?: string   // ヘッダーロゴ画像パス（public/ 以下）例: "/images/brand/logo.png"
+    logoAlt?: string      // alt テキスト（省略時は profile.name を使用）
+  }
+  // ...
+}
+
 export type Policy = {
-  icon: string         // アイコン識別子（Heroicons 等のコンポーネント名）
-  title: string        // 政策タイトル
-  description: string  // 政策説明文
+  icon: string          // 絵文字フォールバック識別子
+  iconImage?: string    // 画像パス（public/ 以下）例: "/images/policy/education.png"
+  title: string         // 政策タイトル
+  description: string   // 政策説明文
 }
 
 export type SnsLink = {
-  platform: 'X' | 'Instagram' | 'Facebook' | 'YouTube' | 'LINE'
+  platform: 'X' | 'Instagram' | 'Facebook' | 'YouTube' | '選挙ドットコム'
   url: string
-  order: number        // 表示順（昇順）
+  order: number         // 表示順（昇順）
+  iconImage?: string    // 画像パス（public/ 以下）例: "/images/social/x.png"
 }
 
 export type SiteConfig = {
@@ -89,6 +102,7 @@ export type SiteConfig = {
     description: string  // サイト説明文（OGP）
     url: string          // 本番 URL（https://...）
     ogImage: string      // OGP 画像パス（public/ 以下）
+    favicon: string      // favicon 画像パス（public/ 以下）例: "/images/favicon.png"
   }
   profile: {
     name: string         // 氏名（漢字）

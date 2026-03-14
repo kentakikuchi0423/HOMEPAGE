@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer'
 export const metadata: Metadata = {
   title: siteConfig.meta.title,
   description: siteConfig.meta.description,
+  icons: { icon: siteConfig.meta.favicon },
 }
 
 export default function RootLayout({

@@ -1,5 +1,6 @@
 export type Policy = {
-  icon: string; // アイコン識別子（Phase 4 で Heroicons 等に対応）
+  icon: string; // 絵文字フォールバック識別子
+  iconImage?: string; // 画像パス（public/ 以下）例: "/images/policy/education.png"
   title: string;
   description: string;
 };
@@ -8,14 +9,20 @@ export type SnsLink = {
   platform: "X" | "Instagram" | "Facebook" | "YouTube" | "選挙ドットコム";
   url: string;
   order: number; // 表示順（昇順）
+  iconImage?: string; // 画像パス（public/ 以下）例: "/images/social/x.png"
 };
 
 export type SiteConfig = {
+  brand: {
+    headerLogo?: string; // ヘッダーロゴ画像パス（public/ 以下）例: "/images/brand/logo.png"
+    logoAlt?: string;    // ロゴ画像の alt テキスト（省略時は profile.name を使用）
+  };
   meta: {
     title: string; // ブラウザタブ・OGP タイトル
     description: string; // OGP 説明
     url: string; // 本番 URL（https://...）
     ogImage: string; // OGP 画像パス（public/ 以下）
+    favicon: string; // favicon 画像パス（public/ 以下）例: "/images/brand/favicon.png"
   };
   profile: {
     name: string; // 氏名（漢字）
@@ -48,18 +55,24 @@ export type SiteConfig = {
 };
 
 export const siteConfig: SiteConfig = {
+  brand: {
+    // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
+    // headerLogo: "/images/brand/logo.png",
+    // logoAlt: "菊地けんた 公式ロゴ",
+  },
   meta: {
     title: "菊地けんた 公式サイト",
     description: "菊地けんたの政治活動プロフィールサイトです。",
     url: "https://example.com",
-    ogImage: "/images/ogp.png",
+    ogImage: "/images/brand/ogp.png",
+    favicon: "/images/brand/favicon.png",
   },
   profile: {
     name: "菊地 けんた",
     nameKana: "KIKUCHI KENTA",
     title: "大洲市議会議員",
     bio: "○○市生まれ、○○大学卒業。市民の声を政治に届けるため、地域に根ざした活動を続けています。子育て・教育・地域経済の活性化を最重要テーマとして掲げています。",
-    photo: "/images/profile.jpg",
+    photo: "/images/profile/profile.jpg",
     catchcopy: "未来をひらく、あなたとともに。",
     subcopy: "市民の声を、政治の力に変えます。",
   },
@@ -103,11 +116,11 @@ export const siteConfig: SiteConfig = {
       "菊地けんたの活動を応援してください。皆さまのご支援が、市民のための政治を実現します。",
   },
   sns: [
-    { platform: "X", url: "#", order: 1 },
-    { platform: "Facebook", url: "#", order: 2 },
-    { platform: "Instagram", url: "#", order: 3 },
-    { platform: "YouTube", url: "#", order: 4 },
-    { platform: "選挙ドットコム", url: "#", order: 6 },
+    { platform: "X", url: "#", order: 1, iconImage: "/images/social/x.png" },
+    { platform: "Facebook", url: "#", order: 2, iconImage: "/images/social/facebook.png" },
+    { platform: "Instagram", url: "#", order: 3, iconImage: "/images/social/instagram.png" },
+    { platform: "YouTube", url: "#", order: 4, iconImage: "/images/social/youtube.png" },
+    { platform: "選挙ドットコム", url: "#", order: 6, iconImage: "/images/social/senkyo.png" },
   ],
   footer: {
     copyright: "© 2026 菊地けんた",
