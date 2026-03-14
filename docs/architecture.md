@@ -31,9 +31,8 @@ HomePage/
 │   │   │   ├── HeroSection.tsx
 │   │   │   ├── ProfileSection.tsx
 │   │   │   ├── PolicySection.tsx
-│   │   │   ├── XTimelineSection.tsx
-│   │   │   ├── DonationSection.tsx
-│   │   │   └── SnsSection.tsx
+│   │   │   ├── ActivitySection.tsx
+│   │   │   └── DonationSection.tsx
 │   │   └── ui/
 │   │       ├── Button.tsx
 │   │       ├── Card.tsx
@@ -62,9 +61,9 @@ HomePage/
 | 1 | Hero | `HeroSection` | 顔写真・キャッチコピー・サブコピー |
 | 2 | Profile | `ProfileSection` | 自己紹介文・経歴ハイライト |
 | 3 | Policy | `PolicySection` | 政策3〜5項目（アイコン付きカード） |
-| 4 | X Timeline | `XTimelineSection` | X の最新投稿埋め込み |
+| 4 | Activity | `ActivitySection` | X タイムライン + 市政報告（2カラム） |
 | 5 | Donation | `DonationSection` | 外部寄付ページへの CTA |
-| 6 | SNS | `SnsSection` | 各 SNS へのリンクボタン群 |
+| 6 | SNS | `SocialLinksSection` | 各 SNS へのリンクボタン群 |
 | 7 | Footer | `Footer` (layout) | コピーライト・免責 |
 
 ---
@@ -125,6 +124,13 @@ export type SiteConfig = {
   xTimeline: {
     handle: string       // X アカウント名（@ なし、例："taro_yamada"）
     tweetLimit?: number  // 表示件数（省略時は X ウィジェットデフォルト）
+  }
+  activity: {
+    municipalReport: {
+      image?: string      // 画像パス（public/ 以下）例: "/images/activity/report.jpg"
+      imageAlt?: string   // 画像の alt テキスト
+      description: string // 説明文
+    }
   }
   donation: {
     url: string          // 外部寄付ページ URL

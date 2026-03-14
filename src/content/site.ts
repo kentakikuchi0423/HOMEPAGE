@@ -22,6 +22,13 @@ export type SiteConfig = {
     headerLogo?: string; // ヘッダーロゴ画像パス（public/ 以下）例: "/images/brand/logo.png"
     logoAlt?: string;    // ロゴ画像の alt テキスト（省略時は profile.name を使用）
   };
+  activity: {
+    municipalReport: {
+      image?: string;      // 画像パス（public/ 以下）例: "/images/activity/report.jpg"
+      imageAlt?: string;   // 画像の alt テキスト
+      description: string; // 説明文
+    };
+  };
   meta: {
     title: string; // ブラウザタブ・OGP タイトル
     description: string; // OGP 説明
@@ -126,6 +133,15 @@ export const siteConfig: SiteConfig = {
   },
   xTimeline: {
     handle: "kenta_kikuchi", // X アカウント名（@ なし）を入力してください
+  },
+  activity: {
+    municipalReport: {
+      // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
+      // image: "/images/activity/report.jpg",
+      // imageAlt: "市政報告の様子",
+      description:
+        "市政報告を定期的に開催し、市政の動きや議会の審議内容を丁寧にお伝えしています。開催情報や詳しい内容は X・Facebook・Instagram などの各種 SNS でご案内していますので、ぜひフォローしてご確認ください。",
+    },
   },
   donation: {
     url: "#",
