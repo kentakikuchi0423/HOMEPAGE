@@ -9,8 +9,8 @@ export default function HeroSection() {
     >
       {/* Decorative blobs — kept subtle */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
-        <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-blue-300/8 blur-3xl" />
+        <div className="hero-blob absolute -right-32 -top-32 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
+        <div className="hero-blob-offset absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-blue-300/8 blur-3xl" />
       </div>
 
       <div className="relative z-10 flex flex-col items-center gap-7">

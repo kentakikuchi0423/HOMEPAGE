@@ -28,7 +28,7 @@ export default function SectionHeading({ children, en, light = false }: Props) {
         {children}
       </h2>
       <div
-        className={`mx-auto mt-3 h-[3px] w-16 rounded-full ${
+        className={`section-bar mx-auto mt-3 h-[3px] rounded-full ${
           light ? 'bg-white/60' : 'bg-blue-600'
         }`}
       />

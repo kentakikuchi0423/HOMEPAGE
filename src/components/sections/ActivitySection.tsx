@@ -21,7 +21,7 @@ export default function ActivitySection() {
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {/* X タイムライン */}
-          <div className="overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm">
+          <div className={`reveal reveal-delay-1 ${inView ? 'is-visible' : ''} overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm`}>
             <div className="border-b border-blue-50 bg-blue-600 px-6 py-3">
               <p className="font-semibold text-white">@{handle} の投稿</p>
             </div>
@@ -37,7 +37,7 @@ export default function ActivitySection() {
           </div>
 
           {/* 市政報告 */}
-          <div className="overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm">
+          <div className={`reveal reveal-delay-2 ${inView ? 'is-visible' : ''} overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm`}>
             <div className="border-b border-blue-50 bg-blue-600 px-6 py-3">
               <p className="font-semibold text-white">市政報告</p>
             </div>

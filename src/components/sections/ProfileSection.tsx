@@ -18,16 +18,18 @@ export default function ProfileSection() {
         <SectionHeading en="PROFILE">プロフィール</SectionHeading>
 
         {/* 上段: プロフィール本体 */}
-        <ProfileCard />
+        <div className={`reveal reveal-delay-1 ${inView ? 'is-visible' : ''}`}>
+          <ProfileCard />
+        </div>
 
         {/* 下段: 資格・趣味（デスクトップ2カラム / モバイル縦積み） */}
-        <div
-          className={`mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 transition-opacity duration-500 ${
-            inView ? 'opacity-100 delay-150' : 'opacity-0'
-          }`}
-        >
-          <QualificationsCard />
-          <HobbiesCard />
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className={`reveal reveal-delay-2 ${inView ? 'is-visible' : ''}`}>
+            <QualificationsCard />
+          </div>
+          <div className={`reveal reveal-delay-3 ${inView ? 'is-visible' : ''}`}>
+            <HobbiesCard />
+          </div>
         </div>
       </div>
     </section>
