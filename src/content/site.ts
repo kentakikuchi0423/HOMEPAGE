@@ -40,12 +40,14 @@ export type SiteConfig = {
     name: string; // 氏名（漢字）
     nameKana: string; // 氏名（ふりがな）
     title: string; // 肩書き（例："○○市議会議員候補"）
-    bio: string; // プロフィール本文
+    bio: string[]; // プロフィール本文（箇条書き）
     photo: string; // 顔写真パス（public/ 以下）
     catchcopy: string; // Hero キャッチコピー
     subcopy: string; // Hero サブコピー
     qualifications?: string[]; // 資格・試験リスト（任意）
+    qualificationsIcon?: string; // 資格セクションアイコン画像パス（public/ 以下）例: "/images/profile/qualifications.png"
     hobbies?: string[]; // 趣味・特技リスト（任意）
+    hobbiesIcon?: string; // 趣味セクションアイコン画像パス（public/ 以下）例: "/images/profile/hobbies.png"
   };
   policies: Policy[];
   video: {
@@ -93,8 +95,18 @@ export const siteConfig: SiteConfig = {
     photo: "/images/profile/profile.jpg",
     catchcopy: "いつまでも魅力的な大洲市に。",
     subcopy: "未来をひらく、あなたとともに。",
-    qualifications: ["普通自動車免許", "日本漢字能力検定2級", "○○資格（例）"],
-    hobbies: ["登山・トレッキング", "地域の祭りへの参加", "読書（歴史・政治）"],
+    qualifications: [
+      "TOEIC 930",
+      "応用情報技術者試験",
+      "日商簿記 2級",
+      "FP技能検定 2級",
+      "証券外務員一種",
+      "色彩検定 2級",
+    ],
+    // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
+    // qualificationsIcon: "/images/profile/qualifications.png",
+    hobbies: ["フルマラソン", "カヌー", "筋トレ", "居酒屋巡り", "読書", "旅行"],
+    // hobbiesIcon: "/images/profile/hobbies.png",
   },
   policies: [
     {
@@ -124,8 +136,14 @@ export const siteConfig: SiteConfig = {
   ],
   video: {
     videos: [
-      { youtubeVideoId: "", title: "菊地けんた 政策紹介動画" },
-      { youtubeVideoId: "", title: "菊地けんた 活動レポート" },
+      {
+        youtubeVideoId: "https://youtu.be/pZFlAz39n6o?si=sm7gBWPkuxuIMcDA",
+        title: "政治をもっと身近に！",
+      },
+      {
+        youtubeVideoId: "https://youtu.be/HPDoWxzRdBo?si=VdqDEZaphgTtIh3R",
+        title: "市政を分かりやすく解説",
+      },
     ],
   },
   xTimeline: {
@@ -137,38 +155,43 @@ export const siteConfig: SiteConfig = {
       // image: "/images/activity/report.jpg",
       // imageAlt: "市政報告の様子",
       description:
-        "市政報告を定期的に開催し、市政の動きや議会の審議内容を丁寧にお伝えしています。開催情報や詳しい内容は X・Facebook・Instagram などの各種 SNS でご案内していますので、ぜひフォローしてご確認ください。",
+        "市政報告を定期的に開催し、市政の動きを丁寧にお伝えしています。開催情報や詳しい内容は X・Facebook・Instagram などの各種 SNS でご案内していますので、ぜひフォローしてご確認ください。",
     },
   },
   donation: {
-    url: "#",
+    url: "https://go2senkyo.com/donate/flow/196504",
     label: "活動を応援する",
     description:
       "菊地けんたの活動を応援してください。皆さまのご支援が、市民のための政治を実現します。",
   },
   sns: [
-    { platform: "X", url: "#", order: 1, iconImage: "/images/social/x.png" },
+    {
+      platform: "X",
+      url: "https://x.com/kkikuchi_maru",
+      order: 1,
+      iconImage: "/images/social/x.png",
+    },
     {
       platform: "Facebook",
-      url: "#",
+      url: "https://www.facebook.com/kenta.kikuchi.9022",
       order: 2,
       iconImage: "/images/social/facebook.png",
     },
     {
       platform: "Instagram",
-      url: "#",
+      url: "https://www.instagram.com/kkikuchi_maru/",
       order: 3,
       iconImage: "/images/social/instagram.png",
     },
     {
       platform: "YouTube",
-      url: "#",
+      url: "https://www.youtube.com/@%E8%8F%8A%E5%9C%B0%E3%81%91%E3%82%93%E3%81%9F%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB",
       order: 4,
       iconImage: "/images/social/youtube.png",
     },
     {
       platform: "選挙ドットコム",
-      url: "#",
+      url: "https://go2senkyo.com/seijika/196504",
       order: 6,
       iconImage: "/images/social/senkyo.png",
     },

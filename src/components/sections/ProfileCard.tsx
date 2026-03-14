@@ -33,7 +33,11 @@ export default function ProfileCard() {
         <span className="mx-auto inline-block rounded-full bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700 md:mx-0">
           {title}
         </span>
-        <p className="mt-1 leading-8 text-gray-700 text-left">{bio}</p>
+        <ul className="mt-1 space-y-1 text-gray-700 text-left list-disc list-inside leading-8">
+          {bio.map((line, i) => (
+            <li key={i}>{line}</li>
+          ))}
+        </ul>
       </div>
     </div>
   )

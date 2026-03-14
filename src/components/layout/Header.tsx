@@ -28,8 +28,13 @@ export default function Header() {
               className="h-8 w-auto object-contain sm:h-10"
             />
           ) : (
-            <span className="text-base font-bold text-blue-700 sm:text-lg">
-              {siteConfig.profile.name}
+            <span className="flex flex-col leading-tight">
+              <span className="text-[10px] font-medium tracking-widest text-blue-400 uppercase sm:text-xs">
+                {siteConfig.profile.title}
+              </span>
+              <span className="text-base font-bold text-blue-700 sm:text-lg">
+                {siteConfig.profile.name}
+              </span>
             </span>
           )}
         </a>
