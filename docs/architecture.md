@@ -100,6 +100,10 @@ export type SiteConfig = {
     subcopy: string      // Hero サブコピー（補足メッセージ）
   }
   policies: Policy[]
+  video: {
+    youtubeVideoId: string  // YouTube 動画 ID（例："dQw4w9WgXcQ"）
+    title?: string          // 動画タイトル（任意）
+  }
   xTimeline: {
     handle: string       // X アカウント名（@ なし、例："taro_yamada"）
     tweetLimit?: number  // 表示件数（省略時は X ウィジェットデフォルト）
