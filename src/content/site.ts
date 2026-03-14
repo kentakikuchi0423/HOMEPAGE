@@ -110,28 +110,28 @@ export const siteConfig: SiteConfig = {
   },
   policies: [
     {
-      icon: “ComputerDesktopIcon”,
-      title: “IT活用で賢い財政運営”,
+      icon: "ComputerDesktopIcon",
+      title: "IT活用で賢い財政運営",
       description:
-        “市民の声を反映した”使われるサービス”で”無駄を削減し、浮いた財源を市民の暮らしに再投資。”,
+        "市民の声を反映した「使われるサービス」で無駄を削減し、浮いた財源を市民の暮らしに再投資。",
     },
     {
-      icon: “HeartIcon”,
-      title: “医療・介護・移動支援で暮らし向上”,
+      icon: "HeartIcon",
+      title: "医療・介護・移動支援で暮らし向上",
       description:
-        “質の高い教育と在宅ケア、買い物・通院サポートで全世代が安心して暮らせる環境を整備。”,
+        "質の高い教育と在宅ケア、買い物・通院サポートで全世代が安心して暮らせる環境を整備。",
     },
     {
-      icon: “MapIcon”,
-      title: “観光軸拡充で大洲の価値向上”,
+      icon: "MapIcon",
+      title: "観光軸拡充で大洲の価値向上",
       description:
-        “肱南と駅前を結ぶ観光ルートを核に誘客範囲を市内全域に広げ、地域経済を底上げ。”,
+        "肱南と駅前を結ぶ観光ルートを核に誘客範囲を市内全域に広げ、地域経済を底上げ。",
     },
     {
-      icon: “ShieldCheckIcon”,
-      title: “想定超災害に備える災害対策”,
+      icon: "ShieldCheckIcon",
+      title: "想定超災害に備える災害対策",
       description:
-        “テクノロジーで被害予測と最適避難ルートの提示を可能とし、”想定外”の災害から命と暮らしを守る。”,
+        "テクノロジーで被害予測と最適避難ルートの提示を可能とし、「想定外」の災害から命と暮らしを守る。",
     },
   ],
   video: {
