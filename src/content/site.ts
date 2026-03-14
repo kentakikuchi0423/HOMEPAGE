@@ -87,7 +87,7 @@ export const siteConfig: SiteConfig = {
     nameKana: "KIKUCHI KENTA",
     title: "大洲市議会議員",
     bio: [
-      "1996年、愛媛県大洲市生まれ。",
+      "1996年4月、愛媛県大洲市生まれ。",
       "大洲高校を経て、広島大学工学部、京都大学大学院情報学研究科を修了。",
       "アクセンチュア株式会社では公共事業分野を中心に、テクノロジーを活用した課題解決に従事。",
       "2025年に退社後は、大洲市を拠点に地域の未来に向き合う活動を続けている。",
@@ -104,34 +104,34 @@ export const siteConfig: SiteConfig = {
       "色彩検定 2級",
     ],
     // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
-    // qualificationsIcon: "/images/profile/qualifications.png",
+    qualificationsIcon: "/images/profile/qualifications.png",
     hobbies: ["フルマラソン", "カヌー", "筋トレ", "居酒屋巡り", "読書", "旅行"],
     // hobbiesIcon: "/images/profile/hobbies.png",
   },
   policies: [
     {
-      icon: "AcademicCapIcon",
-      title: "子育て・教育の充実",
+      icon: “ComputerDesktopIcon”,
+      title: “IT活用で賢い財政運営”,
       description:
-        "保育所・学童の拡充と教育費の無償化を推進し、すべての子どもが笑顔で育てる環境をつくります。",
+        “市民の声を反映した”使われるサービス”で”無駄を削減し、浮いた財源を市民の暮らしに再投資。”,
     },
     {
-      icon: "BuildingOfficeIcon",
-      title: "地域経済の活性化",
+      icon: “HeartIcon”,
+      title: “医療・介護・移動支援で暮らし向上”,
       description:
-        "地元中小企業への支援強化と空き店舗活用で、地域に活気とにぎわいを取り戻します。",
+        “質の高い教育と在宅ケア、買い物・通院サポートで全世代が安心して暮らせる環境を整備。”,
     },
     {
-      icon: "HeartIcon",
-      title: "高齢者・福祉の向上",
+      icon: “MapIcon”,
+      title: “観光軸拡充で大洲の価値向上”,
       description:
-        "在宅介護支援の拡充と地域包括ケアの整備で、安心して年を重ねられる○○市をめざします。",
+        “肱南と駅前を結ぶ観光ルートを核に誘客範囲を市内全域に広げ、地域経済を底上げ。”,
     },
     {
-      icon: "LeafIcon",
-      title: "環境・防災まちづくり",
+      icon: “ShieldCheckIcon”,
+      title: “想定超災害に備える災害対策”,
       description:
-        "再生可能エネルギーの導入促進と防災インフラ整備で、持続可能で強いまちをつくります。",
+        “テクノロジーで被害予測と最適避難ルートの提示を可能とし、”想定外”の災害から命と暮らしを守る。”,
     },
   ],
   video: {

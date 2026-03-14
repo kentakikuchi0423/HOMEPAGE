@@ -8,6 +8,9 @@ const iconMap: Record<string, string> = {
   BuildingOfficeIcon: '🏢',
   HeartIcon: '❤️',
   LeafIcon: '🌿',
+  ComputerDesktopIcon: '💻',
+  MapIcon: '🗺️',
+  ShieldCheckIcon: '🛡️',
 }
 
 const fallbackIcon = '📌'
