@@ -14,18 +14,18 @@ export type SnsLink = {
 
 export type VideoItem = {
   youtubeVideoId: string; // YouTube 動画 ID（空文字はプレースホルダー表示）
-  title?: string;         // 動画タイトル（任意）
+  title?: string; // 動画タイトル（任意）
 };
 
 export type SiteConfig = {
   brand: {
     headerLogo?: string; // ヘッダーロゴ画像パス（public/ 以下）例: "/images/brand/logo.png"
-    logoAlt?: string;    // ロゴ画像の alt テキスト（省略時は profile.name を使用）
+    logoAlt?: string; // ロゴ画像の alt テキスト（省略時は profile.name を使用）
   };
   activity: {
     municipalReport: {
-      image?: string;      // 画像パス（public/ 以下）例: "/images/activity/report.jpg"
-      imageAlt?: string;   // 画像の alt テキスト
+      image?: string; // 画像パス（public/ 以下）例: "/images/activity/report.jpg"
+      imageAlt?: string; // 画像の alt テキスト
       description: string; // 説明文
     };
   };
@@ -88,16 +88,8 @@ export const siteConfig: SiteConfig = {
     photo: "/images/profile/profile.jpg",
     catchcopy: "いつまでも魅力的な大洲市に。",
     subcopy: "未来をひらく、あなたとともに。",
-    qualifications: [
-      "普通自動車免許",
-      "日本漢字能力検定2級",
-      "○○資格（例）",
-    ],
-    hobbies: [
-      "登山・トレッキング",
-      "地域の祭りへの参加",
-      "読書（歴史・政治）",
-    ],
+    qualifications: ["普通自動車免許", "日本漢字能力検定2級", "○○資格（例）"],
+    hobbies: ["登山・トレッキング", "地域の祭りへの参加", "読書（歴史・政治）"],
   },
   policies: [
     {
@@ -151,13 +143,33 @@ export const siteConfig: SiteConfig = {
   },
   sns: [
     { platform: "X", url: "#", order: 1, iconImage: "/images/social/x.png" },
-    { platform: "Facebook", url: "#", order: 2, iconImage: "/images/social/facebook.png" },
-    { platform: "Instagram", url: "#", order: 3, iconImage: "/images/social/instagram.png" },
-    { platform: "YouTube", url: "#", order: 4, iconImage: "/images/social/youtube.png" },
-    { platform: "選挙ドットコム", url: "#", order: 6, iconImage: "/images/social/senkyo.png" },
+    {
+      platform: "Facebook",
+      url: "#",
+      order: 2,
+      iconImage: "/images/social/facebook.png",
+    },
+    {
+      platform: "Instagram",
+      url: "#",
+      order: 3,
+      iconImage: "/images/social/instagram.png",
+    },
+    {
+      platform: "YouTube",
+      url: "#",
+      order: 4,
+      iconImage: "/images/social/youtube.png",
+    },
+    {
+      platform: "選挙ドットコム",
+      url: "#",
+      order: 6,
+      iconImage: "/images/social/senkyo.png",
+    },
   ],
   footer: {
-    copyright: "© 2026 菊地けんた",
+    copyright: "© 2026 Kenta Kikuchi. All rights reserved.",
     disclaimer:
       "本サイトは菊地けんたの政治活動に関する情報提供を目的としています。",
   },

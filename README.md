@@ -51,6 +51,42 @@ src/content/site.ts
 
 詳細な型定義は `docs/architecture.md` を参照してください。
 
+## 画像の差し替え方法
+
+画像ファイルは `public/images/` 以下に配置し、`src/content/site.ts` で参照します。
+
+```
+public/images/
+  ├── brand/
+  │   ├── favicon.png      ← favicon 元画像
+  │   ├── logo.png         ← ヘッダーロゴ（差し替え用）
+  │   └── ogp.png          ← OGP 画像（SNS シェア用）
+  ├── profile/
+  │   └── profile.jpg      ← プロフィール写真
+  ├── policy/
+  │   └── *.png            ← 政策アイコン
+  └── social/
+      └── *.png            ← SNS アイコン
+```
+
+### よく使う差し替え手順
+
+**ヘッダーロゴ**
+1. `public/images/brand/logo.png` を配置
+2. `site.ts` の `brand.headerLogo` のコメントを外す
+
+**政策アイコン**
+1. `public/images/policy/` に画像を配置
+2. `site.ts` の該当 policy に `iconImage` フィールドを追加
+
+**SNS アイコン**
+1. `public/images/social/` に画像を配置
+2. `site.ts` の該当 sns エントリに `iconImage` フィールドを追加
+
+> 各フィールドが未設定の場合はテキストや絵文字がフォールバックとして表示されます。
+
+推奨サイズ・詳細手順は `docs/assets.md` を参照してください。
+
 ## プロジェクト構成
 
 詳細は `docs/architecture.md` を参照。
