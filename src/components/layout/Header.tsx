@@ -20,17 +20,19 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-        {siteConfig.brand.headerLogo ? (
-          <img
-            src={siteConfig.brand.headerLogo}
-            alt={siteConfig.brand.logoAlt ?? siteConfig.profile.name}
-            className="h-8 w-auto object-contain sm:h-10"
-          />
-        ) : (
-          <p className="text-base font-bold text-blue-700 sm:text-lg">
-            {siteConfig.profile.name}
-          </p>
-        )}
+        <a href="/" aria-label="トップへ戻る" className="shrink-0">
+          {siteConfig.brand.headerLogo ? (
+            <img
+              src={siteConfig.brand.headerLogo}
+              alt={siteConfig.brand.logoAlt ?? siteConfig.profile.name}
+              className="h-8 w-auto object-contain sm:h-10"
+            />
+          ) : (
+            <span className="text-base font-bold text-blue-700 sm:text-lg">
+              {siteConfig.profile.name}
+            </span>
+          )}
+        </a>
         <nav className="hidden items-center gap-5 text-sm font-medium text-gray-700 sm:flex">
           <a href="#profile" className="transition-colors hover:text-blue-600">
             プロフィール
