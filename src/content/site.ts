@@ -1,112 +1,124 @@
 export type Policy = {
-  icon: string        // アイコン識別子（Phase 4 で Heroicons 等に対応）
-  title: string
-  description: string
-}
+  icon: string; // アイコン識別子（Phase 4 で Heroicons 等に対応）
+  title: string;
+  description: string;
+};
 
 export type SnsLink = {
-  platform: 'X' | 'Instagram' | 'Facebook' | 'YouTube' | 'LINE' | '選挙ドットコム'
-  url: string
-  order: number       // 表示順（昇順）
-}
+  platform:
+    | "X"
+    | "Instagram"
+    | "Facebook"
+    | "YouTube"
+    | "LINE"
+    | "選挙ドットコム";
+  url: string;
+  order: number; // 表示順（昇順）
+};
 
 export type SiteConfig = {
   meta: {
-    title: string        // ブラウザタブ・OGP タイトル
-    description: string  // OGP 説明
-    url: string          // 本番 URL（https://...）
-    ogImage: string      // OGP 画像パス（public/ 以下）
-  }
+    title: string; // ブラウザタブ・OGP タイトル
+    description: string; // OGP 説明
+    url: string; // 本番 URL（https://...）
+    ogImage: string; // OGP 画像パス（public/ 以下）
+  };
   profile: {
-    name: string         // 氏名（漢字）
-    nameKana: string     // 氏名（ふりがな）
-    title: string        // 肩書き（例："○○市議会議員候補"）
-    bio: string          // プロフィール本文
-    photo: string        // 顔写真パス（public/ 以下）
-    catchcopy: string    // Hero キャッチコピー
-    subcopy: string      // Hero サブコピー
-  }
-  policies: Policy[]
+    name: string; // 氏名（漢字）
+    nameKana: string; // 氏名（ふりがな）
+    title: string; // 肩書き（例："○○市議会議員候補"）
+    bio: string; // プロフィール本文
+    photo: string; // 顔写真パス（public/ 以下）
+    catchcopy: string; // Hero キャッチコピー
+    subcopy: string; // Hero サブコピー
+  };
+  policies: Policy[];
   video: {
-    youtubeVideoId: string  // YouTube 動画 ID（例："dQw4w9WgXcQ"）
-    title?: string          // 動画タイトル（任意）
-  }
+    youtubeVideoId: string; // YouTube 動画 ID（例："dQw4w9WgXcQ"）
+    title?: string; // 動画タイトル（任意）
+  };
   xTimeline: {
-    handle: string       // X アカウント名（@ なし）
-    tweetLimit?: number  // 表示件数（省略時は X ウィジェットデフォルト）
-  }
+    handle: string; // X アカウント名（@ なし）
+    tweetLimit?: number; // 表示件数（省略時は X ウィジェットデフォルト）
+  };
   donation: {
-    url: string          // 外部寄付ページ URL
-    label: string        // CTA ボタンラベル
-    description?: string // セクション説明文（任意）
-  }
-  sns: SnsLink[]
+    url: string; // 外部寄付ページ URL
+    label: string; // CTA ボタンラベル
+    description?: string; // セクション説明文（任意）
+  };
+  sns: SnsLink[];
   footer: {
-    copyright: string    // コピーライト文
-    disclaimer?: string  // 免責文（任意）
-  }
-}
+    copyright: string; // コピーライト文
+    disclaimer?: string; // 免責文（任意）
+  };
+};
 
 export const siteConfig: SiteConfig = {
   meta: {
-    title: '山田太郎 公式サイト',
-    description: '山田太郎の政治活動プロフィールサイトです。',
-    url: 'https://example.com',
-    ogImage: '/images/ogp.png',
+    title: "菊地けんた 公式サイト",
+    description: "菊地けんたの政治活動プロフィールサイトです。",
+    url: "https://example.com",
+    ogImage: "/images/ogp.png",
   },
   profile: {
-    name: '山田 太郎',
-    nameKana: 'やまだ たろう',
-    title: '○○市議会議員候補',
-    bio: '○○市生まれ、○○大学卒業。市民の声を政治に届けるため、地域に根ざした活動を続けています。子育て・教育・地域経済の活性化を最重要テーマとして掲げています。',
-    photo: '/images/profile.jpg',
-    catchcopy: '未来をひらく、あなたとともに。',
-    subcopy: '市民の声を、政治の力に変えます。',
+    name: "菊地 けんた",
+    nameKana: "KIKUCHI KENTA",
+    title: "○○市議会議員候補",
+    bio: "○○市生まれ、○○大学卒業。市民の声を政治に届けるため、地域に根ざした活動を続けています。子育て・教育・地域経済の活性化を最重要テーマとして掲げています。",
+    photo: "/images/profile.jpg",
+    catchcopy: "未来をひらく、あなたとともに。",
+    subcopy: "市民の声を、政治の力に変えます。",
   },
   policies: [
     {
-      icon: 'AcademicCapIcon',
-      title: '子育て・教育の充実',
-      description: '保育所・学童の拡充と教育費の無償化を推進し、すべての子どもが笑顔で育てる環境をつくります。',
+      icon: "AcademicCapIcon",
+      title: "子育て・教育の充実",
+      description:
+        "保育所・学童の拡充と教育費の無償化を推進し、すべての子どもが笑顔で育てる環境をつくります。",
     },
     {
-      icon: 'BuildingOfficeIcon',
-      title: '地域経済の活性化',
-      description: '地元中小企業への支援強化と空き店舗活用で、地域に活気とにぎわいを取り戻します。',
+      icon: "BuildingOfficeIcon",
+      title: "地域経済の活性化",
+      description:
+        "地元中小企業への支援強化と空き店舗活用で、地域に活気とにぎわいを取り戻します。",
     },
     {
-      icon: 'HeartIcon',
-      title: '高齢者・福祉の向上',
-      description: '在宅介護支援の拡充と地域包括ケアの整備で、安心して年を重ねられる○○市をめざします。',
+      icon: "HeartIcon",
+      title: "高齢者・福祉の向上",
+      description:
+        "在宅介護支援の拡充と地域包括ケアの整備で、安心して年を重ねられる○○市をめざします。",
     },
     {
-      icon: 'LeafIcon',
-      title: '環境・防災まちづくり',
-      description: '再生可能エネルギーの導入促進と防災インフラ整備で、持続可能で強いまちをつくります。',
+      icon: "LeafIcon",
+      title: "環境・防災まちづくり",
+      description:
+        "再生可能エネルギーの導入促進と防災インフラ整備で、持続可能で強いまちをつくります。",
     },
   ],
   video: {
-    youtubeVideoId: '',   // YouTube 動画 ID を入力してください
-    title: '山田太郎 政策紹介動画',
+    youtubeVideoId: "", // YouTube 動画 ID を入力してください
+    title: "菊地けんた 政策紹介動画",
   },
   xTimeline: {
-    handle: 'taro_yamada',  // X アカウント名（@ なし）を入力してください
+    handle: "taro_yamada", // X アカウント名（@ なし）を入力してください
   },
   donation: {
-    url: '#',
-    label: '活動を応援する',
-    description: '山田太郎の活動を応援してください。皆さまのご支援が、市民のための政治を実現します。',
+    url: "#",
+    label: "活動を応援する",
+    description:
+      "菊地けんたの活動を応援してください。皆さまのご支援が、市民のための政治を実現します。",
   },
   sns: [
-    { platform: 'X',           url: '#', order: 1 },
-    { platform: 'Facebook',    url: '#', order: 2 },
-    { platform: 'Instagram',   url: '#', order: 3 },
-    { platform: 'YouTube',     url: '#', order: 4 },
-    { platform: 'LINE',        url: '#', order: 5 },
-    { platform: '選挙ドットコム', url: '#', order: 6 },
+    { platform: "X", url: "#", order: 1 },
+    { platform: "Facebook", url: "#", order: 2 },
+    { platform: "Instagram", url: "#", order: 3 },
+    { platform: "YouTube", url: "#", order: 4 },
+    { platform: "LINE", url: "#", order: 5 },
+    { platform: "選挙ドットコム", url: "#", order: 6 },
   ],
   footer: {
-    copyright: '© 2025 山田太郎',
-    disclaimer: '本サイトは山田太郎の政治活動に関する情報提供を目的としています。',
+    copyright: "© 2026 菊地けんた",
+    disclaimer:
+      "本サイトは菊地けんたの政治活動に関する情報提供を目的としています。",
   },
-}
+};
