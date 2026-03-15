@@ -104,7 +104,7 @@ export const siteConfig: SiteConfig = {
       "色彩検定 2級",
     ],
     // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
-    qualificationsIcon: "/images/profile/qualifications.png",
+    // qualificationsIcon: "/images/profile/qualifications.png",
     hobbies: ["フルマラソン", "カヌー", "筋トレ", "居酒屋巡り", "読書", "旅行"],
     // hobbiesIcon: "/images/profile/hobbies.png",
   },
