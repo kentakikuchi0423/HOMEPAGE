@@ -13,6 +13,7 @@ function VideoCard({ youtubeVideoId, title }: { youtubeVideoId: string; title?: 
             title={title ?? 'YouTube 動画'}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            loading="lazy"
             className="absolute inset-0 h-full w-full"
           />
         ) : (
@@ -42,6 +43,8 @@ function VideoCard({ youtubeVideoId, title }: { youtubeVideoId: string; title?: 
   )
 }
 
+const revealDelay = ['reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3', 'reveal-delay-4']
+
 export default function VideoSection() {
   const { videos } = siteConfig.video
   const { ref, inView } = useInView<HTMLElement>()
@@ -57,7 +60,7 @@ export default function VideoSection() {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {videos.map((video, i) => (
-            <div key={i} className={`reveal reveal-delay-${Math.min(i + 1, 4)} ${inView ? 'is-visible' : ''}`}>
+            <div key={i} className={`reveal ${revealDelay[Math.min(i, 3)]} ${inView ? 'is-visible' : ''}`}>
               <VideoCard {...video} />
             </div>
           ))}

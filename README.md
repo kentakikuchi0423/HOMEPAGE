@@ -40,10 +40,13 @@ npx serve out       # ローカルでビルド成果物を確認
 
 ```
 src/content/site.ts
-  ├── meta        サイトタイトル・OGP・URL
-  ├── profile     氏名・肩書き・プロフィール文・顔写真・キャッチコピー
+  ├── meta        サイトタイトル・OGP 画像・URL・favicon
+  ├── brand       ヘッダーロゴ画像パス
+  ├── profile     氏名・肩書き・プロフィール文・顔写真・キャッチコピー・資格・趣味
   ├── policies    政策項目（配列）
+  ├── video       YouTube 動画 ID 一覧（配列）
   ├── xTimeline   X アカウント名
+  ├── activity    市政報告（画像・説明文）
   ├── donation    寄付ページ URL・ボタンラベル
   ├── sns         SNS リンク一覧（配列）
   └── footer      コピーライト・免責文
@@ -74,6 +77,19 @@ public/images/
 **ヘッダーロゴ**
 1. `public/images/brand/logo.png` を配置
 2. `site.ts` の `brand.headerLogo` のコメントを外す
+
+**OGP 画像**
+1. `public/images/brand/ogp.png` を配置（推奨サイズ: 1200×630px）
+2. `site.ts` の `meta.ogImage` に `/images/brand/ogp.png` を設定
+
+**YouTube 動画**
+1. `site.ts` の `video.videos` 配列に `{ youtubeVideoId: "動画ID", title: "タイトル" }` を追加
+2. `youtubeVideoId` を空文字にするとプレースホルダーが表示される
+
+**市政報告画像**
+1. `public/images/activity/` に画像を配置
+2. `site.ts` の `activity.municipalReport.image` にパスを設定
+3. `activity.municipalReport.imageAlt` に alt テキストを設定
 
 **政策アイコン**
 1. `public/images/policy/` に画像を配置

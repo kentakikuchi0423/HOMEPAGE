@@ -63,6 +63,8 @@ const platformConfig: Record<
   },
 };
 
+const revealDelay = ['reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3', 'reveal-delay-4']
+
 export default function SocialLinksSection() {
   const sorted = [...siteConfig.sns].sort((a, b) => a.order - b.order);
   const { ref, inView } = useInView<HTMLElement>();
@@ -87,7 +89,7 @@ export default function SocialLinksSection() {
             return (
               <li
                 key={platform}
-                className={`reveal ${inView ? "is-visible" : ""} reveal-delay-${Math.min(i + 1, 4)}`}
+                className={`reveal ${inView ? "is-visible" : ""} ${revealDelay[Math.min(i, 3)]}`}
               >
                 <a
                   href={url}

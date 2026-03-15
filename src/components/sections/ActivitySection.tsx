@@ -1,14 +1,15 @@
 'use client'
 import Image from 'next/image'
-import Script from 'next/script'
 import { siteConfig } from '@/content/site'
 import { useInView } from '@/hooks/useInView'
+import { useXTimelineWidget } from '@/hooks/useXTimelineWidget'
 import SectionHeading from '@/components/ui/SectionHeading'
 
 export default function ActivitySection() {
   const { handle } = siteConfig.xTimeline
   const { municipalReport } = siteConfig.activity
   const { ref, inView } = useInView<HTMLElement>()
+  const { xFailed, containerRef } = useXTimelineWidget(handle, inView)
 
   return (
     <section
@@ -23,16 +24,27 @@ export default function ActivitySection() {
           {/* X タイムライン */}
           <div className={`reveal reveal-delay-1 ${inView ? 'is-visible' : ''} overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm`}>
             <div className="border-b border-blue-50 bg-blue-600 px-6 py-3">
-              <p className="font-semibold text-white">@{handle} の投稿</p>
+              <p className="font-semibold text-white">X での投稿</p>
             </div>
-            <div className="px-4 py-4">
-              <a
-                className="twitter-timeline"
-                href={`https://twitter.com/${handle}`}
-                data-height="600"
-              >
-                Tweets by @{handle}
-              </a>
+
+            <div className="relative min-h-[320px]">
+              {/* widgets.js がここに <a> を追加し <iframe> に置き換える */}
+              <div ref={containerRef} className="px-4 py-4" />
+
+              {/* 読み込み失敗時のフォールバック */}
+              {xFailed && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-b-2xl bg-white px-6 py-10">
+                  <p className="text-sm text-gray-400">タイムラインを読み込めませんでした</p>
+                  <a
+                    href={`https://x.com/${handle}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full border border-blue-200 bg-blue-50 px-6 py-3 text-sm font-semibold text-blue-700 transition hover:bg-blue-100"
+                  >
+                    最新投稿は X で見る →
+                  </a>
+                </div>
+              )}
             </div>
           </div>
 
@@ -59,11 +71,7 @@ export default function ActivitySection() {
           </div>
         </div>
       </div>
-
-      <Script
-        src="https://platform.twitter.com/widgets.js"
-        strategy="lazyOnload"
-      />
+      {/* widgets.js は layout.tsx でグローバルにロード済み。ここでは読み込まない。 */}
     </section>
   )
 }

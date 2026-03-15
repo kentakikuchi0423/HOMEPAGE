@@ -45,6 +45,9 @@ export default function Header() {
           <a href="#policy" className="transition-colors hover:text-blue-600">
             政策
           </a>
+          <a href="#activity" className="transition-colors hover:text-blue-600">
+            活動報告
+          </a>
           <a href="#social" className="transition-colors hover:text-blue-600">
             SNS
           </a>
