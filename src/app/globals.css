@@ -7,6 +7,10 @@
   --color-accent: #38BDF8;
 }
 
+body {
+  font-family: var(--font-noto-sans-jp), 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+}
+
 /* Scroll-reveal: hidden until JS fires */
 .reveal {
   opacity: 0;

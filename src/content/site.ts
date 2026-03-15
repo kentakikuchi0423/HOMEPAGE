@@ -116,6 +116,12 @@ export const siteConfig: SiteConfig = {
         "市民の声を反映した「使われるサービス」で無駄を削減し、浮いた財源を市民の暮らしに再投資。",
     },
     {
+      icon: "BuildingOfficeIcon",
+      title: "若者が働けるまちづくり",
+      description:
+        "企業誘致とテレワーク拠点づくりで多様な仕事を創出し、人口流出に歯止めを掛ける。",
+    },
+    {
       icon: "HeartIcon",
       title: "医療・介護・移動支援で暮らし向上",
       description:
@@ -137,23 +143,23 @@ export const siteConfig: SiteConfig = {
   video: {
     videos: [
       {
-        youtubeVideoId: "https://youtu.be/pZFlAz39n6o?si=sm7gBWPkuxuIMcDA",
+        youtubeVideoId: "pZFlAz39n6o",
         title: "政治をもっと身近に！",
       },
       {
-        youtubeVideoId: "https://youtu.be/HPDoWxzRdBo?si=VdqDEZaphgTtIh3R",
+        youtubeVideoId: "HPDoWxzRdBo",
         title: "市政を分かりやすく解説",
       },
     ],
   },
   xTimeline: {
-    handle: "kenta_kikuchi", // X アカウント名（@ なし）を入力してください
+    handle: "kkikuchi_maru", // X アカウント名（@ なし）を入力してください
   },
   activity: {
     municipalReport: {
       // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
-      // image: "/images/activity/report.jpg",
-      // imageAlt: "市政報告の様子",
+      image: "/images/activity/report.jpg",
+      imageAlt: "市政報告の様子",
       description:
         "市政報告を定期的に開催し、市政の動きを丁寧にお伝えしています。開催情報や詳しい内容は X・Facebook・Instagram などの各種 SNS でご案内していますので、ぜひフォローしてご確認ください。",
     },
