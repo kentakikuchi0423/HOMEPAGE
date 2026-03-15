@@ -1,15 +1,42 @@
 'use client'
 import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
 import { siteConfig } from '@/content/site'
 import { useInView } from '@/hooks/useInView'
-import { useXTimelineWidget } from '@/hooks/useXTimelineWidget'
 import SectionHeading from '@/components/ui/SectionHeading'
+
+// widgets.js が window.twttr として公開する型（最小限）
+declare global {
+  interface Window {
+    twttr?: {
+      widgets: { load: (el?: HTMLElement | null) => void }
+    }
+  }
+}
 
 export default function ActivitySection() {
   const { handle } = siteConfig.xTimeline
   const { municipalReport } = siteConfig.activity
   const { ref, inView } = useInView<HTMLElement>()
-  const { xFailed, containerRef } = useXTimelineWidget(handle, inView)
+  const [xFailed, setXFailed] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    // widgets.js がすでにロード済みなら手動で load を呼ぶ
+    window.twttr?.widgets?.load(container)
+
+    // 10秒後に iframe が存在しなければ失敗とみなす
+    const timer = setTimeout(() => {
+      if (!container.querySelector('iframe')) {
+        setXFailed(true)
+      }
+    }, 10000)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <section
@@ -28,8 +55,15 @@ export default function ActivitySection() {
             </div>
 
             <div className="relative min-h-[320px]">
-              {/* widgets.js がここに <a> を追加し <iframe> に置き換える */}
-              <div ref={containerRef} className="px-4 py-4" />
+              {/* widgets.js が <a> を <iframe> に置き換える */}
+              <div ref={containerRef} className="px-4 py-4">
+                <a
+                  className="twitter-timeline"
+                  href={`https://twitter.com/${handle}?ref_src=twsrc%5Etfw`}
+                >
+                  {`Tweets by ${handle}`}
+                </a>
+              </div>
 
               {/* 読み込み失敗時のフォールバック */}
               {xFailed && (
@@ -71,7 +105,6 @@ export default function ActivitySection() {
           </div>
         </div>
       </div>
-      {/* widgets.js は layout.tsx でグローバルにロード済み。ここでは読み込まない。 */}
     </section>
   )
 }
