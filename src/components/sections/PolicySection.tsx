@@ -3,6 +3,8 @@ import { siteConfig } from '@/content/site'
 import { useInView } from '@/hooks/useInView'
 import SectionHeading from '@/components/ui/SectionHeading'
 
+const revealDelay = ['reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3', 'reveal-delay-4', 'reveal-delay-5']
+
 export default function PolicySection() {
   const { ref, inView } = useInView<HTMLElement>()
 
@@ -24,7 +26,7 @@ export default function PolicySection() {
             return (
               <li
                 key={policy.title}
-                className={`${colSpan} reveal ${inView ? 'is-visible' : ''} reveal-delay-${Math.min(i + 1, 5)}`}
+                className={`${colSpan} reveal ${inView ? 'is-visible' : ''} ${revealDelay[Math.min(i, 4)]}`}
               >
                 <div className="group relative flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-blue-100 border-t-4 border-t-blue-500 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-200/40 hover:bg-blue-50/50 hover:border-blue-200">
                   {/* Ghost number watermark */}

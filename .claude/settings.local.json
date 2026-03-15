@@ -4,7 +4,8 @@
       "Bash(git:*)",
       "Bash(find:*)",
       "mcp__ide__getDiagnostics",
-      "WebSearch"
+      "WebSearch",
+      "Bash(grep:*)"
     ]
   }
 }

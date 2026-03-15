@@ -14,9 +14,25 @@ const notoSansJP = Noto_Sans_JP({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.meta.url),
   title: siteConfig.meta.title,
   description: siteConfig.meta.description,
   icons: { icon: siteConfig.meta.favicon },
+  openGraph: {
+    title: siteConfig.meta.title,
+    description: siteConfig.meta.description,
+    url: siteConfig.meta.url,
+    siteName: siteConfig.profile.name,
+    images: [{ url: siteConfig.meta.ogImage, width: 1200, height: 630 }],
+    locale: 'ja_JP',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.meta.title,
+    description: siteConfig.meta.description,
+    images: [siteConfig.meta.ogImage],
+  },
 }
 
 export default function RootLayout({
