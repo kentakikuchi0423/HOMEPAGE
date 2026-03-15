@@ -15,3 +15,7 @@ out/
 
 # TypeScript
 next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Claude local settings
+.claude/settings.local.json
