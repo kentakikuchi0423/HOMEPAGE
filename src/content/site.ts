@@ -77,7 +77,7 @@ export const siteConfig: SiteConfig = {
   },
   meta: {
     title: "菊地けんた 公式サイト",
-    description: "菊地けんたの政治活動プロフィールサイトです。",
+    description: "菊地けんたの公式サイトです。",
     url: "https://example.com",
     ogImage: "/images/brand/ogp.png",
     favicon: "/images/brand/favicon.png",
