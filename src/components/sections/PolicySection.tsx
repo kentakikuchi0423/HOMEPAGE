@@ -10,27 +10,52 @@ export default function PolicySection() {
     <section
       ref={ref}
       id="policy"
-      className={`bg-blue-50 px-4 py-20 reveal ${inView ? 'is-visible' : ''}`}
+      className={`bg-white px-4 py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
       <div className="mx-auto max-w-6xl">
         <SectionHeading en="POLICY">政策</SectionHeading>
 
-        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {siteConfig.policies.map((policy, i) => (
-            <li
-              key={policy.title}
-              className={`reveal ${inView ? 'is-visible' : ''} reveal-delay-${Math.min(i + 1, 5)}`}
-            >
-              <div className="group flex h-full flex-col gap-3 rounded-2xl border border-blue-100 bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg hover:bg-blue-50/30">
-                <span className="text-xs font-bold tracking-widest text-blue-300">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="font-bold leading-tight text-blue-950">{policy.title}</h3>
-                <div className="h-px w-8 bg-blue-200 transition-all duration-300 group-hover:w-12" />
-                <p className="text-sm leading-relaxed text-gray-600">{policy.description}</p>
-              </div>
-            </li>
-          ))}
+        <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6">
+          {siteConfig.policies.map((policy, i) => {
+            // 上段2枚は half幅、下段3枚は third幅
+            const colSpan = i < 2 ? 'lg:col-span-3' : 'lg:col-span-2'
+            const isTop = i < 2
+
+            return (
+              <li
+                key={policy.title}
+                className={`${colSpan} reveal ${inView ? 'is-visible' : ''} reveal-delay-${Math.min(i + 1, 5)}`}
+              >
+                <div className="group relative flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-blue-100 border-t-4 border-t-blue-500 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-200/40 hover:bg-blue-50/50 hover:border-blue-200">
+                  {/* Ghost number watermark */}
+                  <span
+                    className="pointer-events-none absolute -bottom-2 right-3 select-none text-8xl font-black leading-none text-blue-100/60 transition-colors duration-300 group-hover:text-blue-200/80"
+                    aria-hidden="true"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+
+                  {/* Number badge */}
+                  <span className="relative text-xs font-bold tracking-widest text-blue-400">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+
+                  {/* Title */}
+                  <h3 className={`relative font-bold leading-tight text-blue-950 ${isTop ? 'text-lg' : 'text-base'}`}>
+                    {policy.title}
+                  </h3>
+
+                  {/* Gradient divider */}
+                  <div className="relative h-0.5 w-8 bg-gradient-to-r from-blue-400 to-blue-200 transition-all duration-300 group-hover:w-14" />
+
+                  {/* Description */}
+                  <p className="relative text-sm leading-relaxed text-gray-600">
+                    {policy.description}
+                  </p>
+                </div>
+              </li>
+            )
+          })}
         </ul>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import { siteConfig } from '@/content/site'
 import Header from '@/components/layout/Header'
@@ -29,6 +30,8 @@ export default function RootLayout({
         <Header />
         <main className="pt-16">{children}</main>
         <Footer />
+        {/* X (Twitter) widgets.js — アプリ全体で1回だけロード */}
+        <Script src="https://platform.twitter.com/widgets.js" strategy="afterInteractive" />
       </body>
     </html>
   )
