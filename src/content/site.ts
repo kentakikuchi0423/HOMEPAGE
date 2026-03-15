@@ -78,7 +78,7 @@ export const siteConfig: SiteConfig = {
   meta: {
     title: "菊地けんた 公式サイト",
     description: "菊地けんたの政治活動プロフィールサイトです。",
-    url: "https://example.com",
+    url: "https://radiant-macaron-7d3619.netlify.app/",
     ogImage: "/images/brand/ogp.png",
     favicon: "/images/brand/favicon.png",
   },
