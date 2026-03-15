@@ -1,10 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(git:*)",
-      "Bash(npm:*)",
-      "Bash(npx:*)"
-    ],
+    "allow": ["Bash(git:*)", "Bash(npm:*)", "Bash(npx:*)"],
     "deny": [
       "Bash(git push *)",
       "Bash(git switch main)",
@@ -24,5 +20,6 @@
           }
         ]
       }
+    ]
   }
 }
