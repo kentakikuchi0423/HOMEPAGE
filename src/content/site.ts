@@ -78,7 +78,7 @@ export const siteConfig: SiteConfig = {
   meta: {
     title: "菊地けんた 公式サイト",
     description: "菊地けんたの政治活動プロフィールサイトです。",
-    url: "https://kentakikuchihomepage.netlify.app/",
+    url: "https://kentakikuchi.netlify.app/",
     ogImage: "/images/brand/ogp.png",
     favicon: "/images/brand/favicon.png",
   },
