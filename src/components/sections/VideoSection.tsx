@@ -60,7 +60,7 @@ export default function VideoSection() {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {videos.map((video, i) => (
-            <div key={i} className={`reveal ${revealDelay[Math.min(i, 3)]} ${inView ? 'is-visible' : ''}`}>
+            <div key={video.youtubeVideoId || i} className={`reveal ${revealDelay[Math.min(i, 3)]} ${inView ? 'is-visible' : ''}`}>
               <VideoCard {...video} />
             </div>
           ))}

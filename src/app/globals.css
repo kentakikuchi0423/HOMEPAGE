@@ -78,6 +78,7 @@ body {
   50%       { opacity: 0.16; }
 }
 .hero-glow-pulse {
+  background: radial-gradient(ellipse at 50% 50%, #38BDF8, transparent 70%);
   animation: heroBgPulse 7s ease-in-out infinite;
 }
 

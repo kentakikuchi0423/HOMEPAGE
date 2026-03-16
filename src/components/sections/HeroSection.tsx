@@ -13,7 +13,7 @@ export default function HeroSection() {
         <div className="hero-blob-offset absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-blue-300/8 blur-3xl" />
         <div className="hero-blob-slow absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-sky-300/6 blur-3xl" />
         {/* Center glow pulse */}
-        <div className="hero-glow-pulse absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ background: 'radial-gradient(ellipse at 50% 50%, #38BDF8, transparent 70%)' }} />
+        <div className="hero-glow-pulse absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full" />
       </div>
 
       <div className="relative z-10 flex flex-col items-center gap-7">

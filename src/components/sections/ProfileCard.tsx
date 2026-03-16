@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { siteConfig } from '@/content/site'
 
 export default function ProfileCard() {
@@ -8,11 +9,11 @@ export default function ProfileCard() {
       {/* Photo */}
       <div className="shrink-0">
         {photo ? (
-          <img
+          <Image
             src={photo}
             alt={name}
-            width={200}
-            height={200}
+            width={192}
+            height={192}
             className="h-48 w-48 rounded-full object-cover shadow-lg ring-4 ring-blue-100"
           />
         ) : (
