@@ -4,15 +4,7 @@ import { siteConfig } from '@/content/site'
 import { useInView } from '@/hooks/useInView'
 import SectionHeading from '@/components/ui/SectionHeading'
 import type { RssItem } from '@/lib/rss'
-
-function formatDate(dateStr: string): string {
-  try {
-    const d = new Date(dateStr)
-    return `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`
-  } catch {
-    return dateStr
-  }
-}
+import { formatDate } from '@/lib/date'
 
 type Props = {
   rssItems?: RssItem[]
@@ -41,8 +33,8 @@ export default function ActivitySection({ rssItems = [] }: Props) {
 
               {rssItems.length > 0 ? (
                 <ul className="max-h-72 divide-y divide-blue-50 overflow-y-auto">
-                  {rssItems.map((item, i) => (
-                    <li key={i}>
+                  {rssItems.map((item) => (
+                    <li key={item.link ?? item.title}>
                       <a
                         href={item.link}
                         target="_blank"

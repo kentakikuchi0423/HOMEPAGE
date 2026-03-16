@@ -45,7 +45,6 @@ src/content/site.ts
   ├── profile     氏名・肩書き・プロフィール文・顔写真・キャッチコピー・資格・趣味
   ├── policies    政策項目（配列）
   ├── video       YouTube 動画 ID 一覧（配列）
-  ├── xTimeline   X アカウント名
   ├── activity    市政報告（画像・説明文）
   ├── donation    寄付ページ URL・ボタンラベル
   ├── sns         SNS リンク一覧（配列）
