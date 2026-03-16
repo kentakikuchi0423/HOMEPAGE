@@ -28,6 +28,12 @@ export type SiteConfig = {
       imageAlt?: string; // 画像の alt テキスト
       description: string; // 説明文
     };
+    rss?: {
+      url: string; // RSS フィード URL
+      title: string; // カードヘッダーのタイトル
+      limit?: number; // 表示件数（デフォルト 5）
+      baseUrl?: string; // リンクのベース URL（相対パスの場合）
+    };
   };
   meta: {
     title: string; // ブラウザタブ・OGP タイトル
@@ -52,10 +58,6 @@ export type SiteConfig = {
   policies: Policy[];
   video: {
     videos: VideoItem[]; // YouTube 動画リスト（最大2本）
-  };
-  xTimeline: {
-    handle: string; // X アカウント名（@ なし）
-    tweetLimit?: number; // 表示件数（省略時は X ウィジェットデフォルト）
   };
   donation: {
     url: string; // 外部寄付ページ URL
@@ -90,7 +92,7 @@ export const siteConfig: SiteConfig = {
       "愛媛県大洲市出身、1996年生まれ。",
       "広島大学工学部・京都大学大学院（情報学）修了。",
       "アクセンチュアにてコンサルタントとして、公共領域のDXに従事。",
-      "2025年に退職し、大洲市にて地域の未来に向き合う活動を開始。",
+      "2025年に退職し、大洲市にて故郷の未来に向き合う活動を開始。",
     ],
     photo: "/images/profile/profile.jpg",
     catchcopy: "いつまでも魅力的な大洲市に。",
@@ -152,9 +154,6 @@ export const siteConfig: SiteConfig = {
       },
     ],
   },
-  xTimeline: {
-    handle: "kkikuchi_maru", // X アカウント名（@ なし）を入力してください
-  },
   activity: {
     municipalReport: {
       // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
@@ -162,6 +161,12 @@ export const siteConfig: SiteConfig = {
       imageAlt: "市政報告の様子",
       description:
         "市政報告を定期的に開催し、市政の動きを丁寧にお伝えしています。開催情報や詳しい内容は X・Facebook・Instagram などの各種 SNS でご案内していますので、ぜひフォローしてご確認ください。",
+    },
+    rss: {
+      url: "https://www.go2senkyo.com/seijika/196504/posts.rss",
+      title: "最新の活動",
+      limit: 10,
+      baseUrl: "https://go2senkyo.com/seijika/196504/posts",
     },
   },
   donation: {
