@@ -11,14 +11,15 @@ export default function ActivitySection() {
   const { municipalReport, rss } = siteConfig.activity
   const { ref, inView } = useInView<HTMLElement>()
   const [rssItems, setRssItems] = useState<RssItem[]>([])
+  const [hasMore, setHasMore] = useState(false)
   const [loading, setLoading] = useState(true)
   const [fetchError, setFetchError] = useState(false)
 
   useEffect(() => {
     if (!rss) { setLoading(false); return }
     fetch('/.netlify/functions/go2senkyo-rss')
-      .then((r) => { if (!r.ok) throw new Error(); return r.json() as Promise<{ items: RssItem[] }> })
-      .then((data) => { setRssItems(data.items ?? []); setLoading(false) })
+      .then((r) => { if (!r.ok) throw new Error(); return r.json() as Promise<{ items: RssItem[]; hasMore?: boolean }> })
+      .then((data) => { setRssItems(data.items ?? []); setHasMore(data.hasMore ?? false); setLoading(false) })
       .catch(() => { setFetchError(true); setLoading(false) })
   }, [rss])
 
@@ -43,7 +44,7 @@ export default function ActivitySection() {
                 <ul className="max-h-72 divide-y divide-blue-50 overflow-y-auto">
                   {Array.from({ length: 4 }).map((_, i) => (
                     <li key={i} className="flex gap-4 px-5 py-4 animate-pulse">
-                      <div className="h-20 w-20 flex-shrink-0 rounded-lg bg-blue-100" />
+                      <div className="h-20 w-20 shrink-0 rounded-lg bg-blue-100" />
                       <div className="flex flex-1 flex-col justify-center gap-2">
                         <div className="h-3 w-20 rounded bg-blue-100" />
                         <div className="h-4 w-full rounded bg-blue-50" />
@@ -53,44 +54,58 @@ export default function ActivitySection() {
                   ))}
                 </ul>
               ) : !fetchError && rssItems.length > 0 ? (
-                <ul className="max-h-72 divide-y divide-blue-50 overflow-y-auto">
-                  {rssItems.map((item) => (
-                    <li key={item.link ?? item.title}>
+                <>
+                  <ul className="max-h-72 divide-y divide-blue-50 overflow-y-auto">
+                    {rssItems.map((item) => (
+                      <li key={item.link ?? item.title}>
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex gap-4 px-5 py-4 transition hover:bg-blue-50/60"
+                        >
+                          {item.image ? (
+                            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src={item.image}
+                                alt=""
+                                className="h-full w-full object-cover"
+                                loading="lazy"
+                              />
+                            </div>
+                          ) : (
+                            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-300">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2zM9 10a2 2 0 100-4 2 2 0 000 4zm12 8l-4.35-4.35a1 1 0 00-1.3 0L12 17l-2.35-2.35a1 1 0 00-1.3 0L5 18" />
+                              </svg>
+                            </div>
+                          )}
+                          <div className="flex min-w-0 flex-1 flex-col justify-center">
+                            <time className="text-xs font-medium text-blue-400">
+                              {formatDate(item.pubDate)}
+                            </time>
+                            <p className="mt-1 line-clamp-2 text-sm leading-snug text-gray-700">
+                              {item.title}
+                            </p>
+                          </div>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  {hasMore && (
+                    <div className="border-t border-blue-50 px-6 py-4 text-center">
                       <a
-                        href={item.link}
+                        href={rss.baseUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex gap-4 px-5 py-4 transition hover:bg-blue-50/60"
+                        className="inline-block rounded-full border border-blue-200 bg-blue-50 px-6 py-2 text-sm font-semibold text-blue-700 transition hover:bg-blue-100"
                       >
-                        {item.image ? (
-                          <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={item.image}
-                              alt=""
-                              className="h-full w-full object-cover"
-                              loading="lazy"
-                            />
-                          </div>
-                        ) : (
-                          <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2zM9 10a2 2 0 100-4 2 2 0 000 4zm12 8l-4.35-4.35a1 1 0 00-1.3 0L12 17l-2.35-2.35a1 1 0 00-1.3 0L5 18" />
-                            </svg>
-                          </div>
-                        )}
-                        <div className="flex min-w-0 flex-1 flex-col justify-center">
-                          <time className="text-xs font-medium text-blue-400">
-                            {formatDate(item.pubDate)}
-                          </time>
-                          <p className="mt-1 line-clamp-2 text-sm leading-snug text-gray-700">
-                            {item.title}
-                          </p>
-                        </div>
+                        活動をもっと見る →
                       </a>
-                    </li>
-                  ))}
-                </ul>
+                    </div>
+                  )}
+                </>
               ) : (
                 <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 py-10">
                   <p className="text-sm text-gray-400">投稿を読み込めませんでした</p>

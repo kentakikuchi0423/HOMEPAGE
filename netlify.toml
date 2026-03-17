@@ -1,3 +1,10 @@
 [build]
   command = "npm run build"
   publish = "out"
+
+[functions]
+  directory = "netlify/functions"
+
+[dev]
+  targetPort = 3000
+  port = 8888
