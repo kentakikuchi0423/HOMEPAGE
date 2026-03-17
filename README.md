@@ -87,27 +87,33 @@ public/images/
 ### よく使う差し替え手順
 
 **ヘッダーロゴ**
+
 1. `public/images/brand/logo.png` を配置
 2. `site.ts` の `brand.headerLogo` のコメントを外す
 
 **OGP 画像**
+
 1. `public/images/brand/ogp.png` を配置（推奨サイズ: 1200×630px）
 2. `site.ts` の `meta.ogImage` に `/images/brand/ogp.png` を設定
 
 **YouTube 動画**
+
 1. `site.ts` の `video.videos` 配列に `{ youtubeVideoId: "動画ID", title: "タイトル" }` を追加
 2. `youtubeVideoId` を空文字にするとプレースホルダーが表示される
 
 **市政報告画像**
+
 1. `public/images/activity/` に画像を配置
 2. `site.ts` の `activity.municipalReport.image` にパスを設定
 3. `activity.municipalReport.imageAlt` に alt テキストを設定
 
 **政策アイコン**
+
 1. `public/images/policy/` に画像を配置
 2. `site.ts` の該当 policy に `iconImage` フィールドを追加
 
 **SNS アイコン**
+
 1. `public/images/social/` に画像を配置
 2. `site.ts` の該当 sns エントリに `iconImage` フィールドを追加
 
