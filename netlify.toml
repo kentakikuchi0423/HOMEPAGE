@@ -8,3 +8,25 @@
 [dev]
   targetPort = 3000
   port = 8888
+
+# セキュリティヘッダー（全ページ共通）
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # クリックジャッキング対策（CSP の frame-ancestors と組み合わせ）
+    X-Frame-Options = "SAMEORIGIN"
+    # MIME タイプスニッフィング防止
+    X-Content-Type-Options = "nosniff"
+    # リファラ情報の制限
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # 不要な機能へのアクセス制限（YouTube の autoplay / picture-in-picture は影響しない）
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # CSP:
+    #   script-src: Next.js 静的エクスポートはインラインスクリプト（__NEXT_DATA__ 等）を生成するため unsafe-inline が必要
+    #   style-src:  Tailwind CSS / Next.js のインラインスタイルに unsafe-inline が必要
+    #   img-src:    RSS フィード由来の外部画像を https: で許可
+    #   font-src:   next/font が自己ホストするフォントのみ（self）で対応
+    #   connect-src: RSS は Netlify Functions（同一オリジン）経由のため self のみ
+    #   frame-src:  YouTube 埋め込みのみ許可
+    #   frame-ancestors: 他ドメインからの iframe 埋め込みを禁止
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-src https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self';"

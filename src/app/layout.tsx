@@ -4,6 +4,7 @@ import "./globals.css";
 import { siteConfig } from "@/content/site";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import JsonLd from "@/components/JsonLd";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -16,6 +17,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.meta.url),
   title: siteConfig.meta.title,
   description: siteConfig.meta.description,
+  alternates: {
+    canonical: siteConfig.meta.url,
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -26,7 +30,7 @@ export const metadata: Metadata = {
     title: siteConfig.meta.title,
     description: siteConfig.meta.description,
     url: siteConfig.meta.url,
-    siteName: siteConfig.profile.name,
+    siteName: "菊地けんた（菊地謙太）公式サイト",
     images: [{ url: siteConfig.meta.ogImage, width: 1200, height: 630 }],
     locale: "ja_JP",
     type: "website",
@@ -50,6 +54,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={notoSansJP.variable}>
+        <JsonLd />
         <Header />
         <main className="pt-16">{children}</main>
         <Footer />
