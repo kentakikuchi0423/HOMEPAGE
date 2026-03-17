@@ -1,4 +1,5 @@
 'use client'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { siteConfig } from '@/content/site'
 import { useInView } from '@/hooks/useInView'
@@ -6,13 +7,20 @@ import SectionHeading from '@/components/ui/SectionHeading'
 import type { RssItem } from '@/lib/rss'
 import { formatDate } from '@/lib/date'
 
-type Props = {
-  rssItems?: RssItem[]
-}
-
-export default function ActivitySection({ rssItems = [] }: Props) {
+export default function ActivitySection() {
   const { municipalReport, rss } = siteConfig.activity
   const { ref, inView } = useInView<HTMLElement>()
+  const [rssItems, setRssItems] = useState<RssItem[]>([])
+  const [loading, setLoading] = useState(true)
+  const [fetchError, setFetchError] = useState(false)
+
+  useEffect(() => {
+    if (!rss) { setLoading(false); return }
+    fetch('/.netlify/functions/go2senkyo-rss')
+      .then((r) => { if (!r.ok) throw new Error(); return r.json() as Promise<{ items: RssItem[] }> })
+      .then((data) => { setRssItems(data.items ?? []); setLoading(false) })
+      .catch(() => { setFetchError(true); setLoading(false) })
+  }, [rss])
 
   return (
     <section
@@ -31,7 +39,20 @@ export default function ActivitySection({ rssItems = [] }: Props) {
                 <p className="font-semibold text-white">{rss.title}</p>
               </div>
 
-              {rssItems.length > 0 ? (
+              {loading ? (
+                <ul className="max-h-72 divide-y divide-blue-50 overflow-y-auto">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <li key={i} className="flex gap-4 px-5 py-4 animate-pulse">
+                      <div className="h-20 w-20 flex-shrink-0 rounded-lg bg-blue-100" />
+                      <div className="flex flex-1 flex-col justify-center gap-2">
+                        <div className="h-3 w-20 rounded bg-blue-100" />
+                        <div className="h-4 w-full rounded bg-blue-50" />
+                        <div className="h-4 w-3/4 rounded bg-blue-50" />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : !fetchError && rssItems.length > 0 ? (
                 <ul className="max-h-72 divide-y divide-blue-50 overflow-y-auto">
                   {rssItems.map((item) => (
                     <li key={item.link ?? item.title}>

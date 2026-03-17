@@ -21,6 +21,19 @@ npm run dev
 
 4. `http://localhost:3000` をブラウザで開く
 
+### 「最新の活動」（RSS）を含めて確認する場合
+
+RSS は Netlify Function 経由で取得するため、`netlify dev` が必要です。
+
+```bash
+npx netlify dev
+```
+
+- `http://localhost:8888` でアクセス
+- Function の動作確認：`curl http://localhost:8888/.netlify/functions/go2senkyo-rss`
+
+> `npm run dev`（ポート 3000）のみの場合、Function が存在しないため「最新の活動」欄はフォールバック表示（「投稿を読み込めませんでした」）になります。
+
 ## ビルド・プレビュー
 
 ```bash
