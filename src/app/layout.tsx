@@ -20,12 +20,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteConfig.meta.url,
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: siteConfig.meta.favicon, type: "image/png" },
-    ],
-  },
+  // favicon / icon / apple-icon は src/app/ のファイルベース metadata で自動生成
+  // （src/app/favicon.ico, src/app/icon.png, src/app/apple-icon.png）
   openGraph: {
     title: siteConfig.meta.title,
     description: siteConfig.meta.description,
