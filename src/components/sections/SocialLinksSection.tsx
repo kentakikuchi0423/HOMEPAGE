@@ -84,7 +84,7 @@ export default function SocialLinksSection() {
       <div className="mx-auto max-w-2xl">
         <SectionHeading en="CONNECT">SNS・リンク</SectionHeading>
 
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+        <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4">
           {sorted.map(({ platform, url, iconImage }, i) => {
             const config = platformConfig[platform] ?? {
               label: platform,
@@ -95,16 +95,16 @@ export default function SocialLinksSection() {
             return (
               <li
                 key={platform}
-                className={`reveal ${inView ? "is-visible" : ""} ${revealDelay[Math.min(i, 3)]}`}
+                className={`h-full reveal ${inView ? "is-visible" : ""} ${revealDelay[Math.min(i, 3)]}`}
               >
                 <a
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center gap-3 rounded-2xl border border-blue-100 bg-white px-4 py-3.5 text-sm font-semibold text-gray-800 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md"
+                  className="flex h-full w-full items-center gap-1.5 rounded-2xl border border-blue-100 bg-white px-1.5 py-3.5 text-sm font-semibold text-gray-800 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md sm:gap-3 sm:px-4"
                 >
                   <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold ${config.iconBg} ${config.iconText}`}
+                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold sm:h-8 sm:w-8 ${config.iconBg} ${config.iconText}`}
                   >
                     <PlatformIcon
                       iconImage={iconImage}

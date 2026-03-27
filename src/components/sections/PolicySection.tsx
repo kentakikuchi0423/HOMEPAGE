@@ -27,7 +27,6 @@ export default function PolicySection() {
           {siteConfig.policies.map((policy, i) => {
             // 上段2枚は half幅、下段3枚は third幅
             const colSpan = i < 2 ? "lg:col-span-3" : "lg:col-span-2";
-            const isTop = i < 2;
 
             return (
               <li
@@ -50,7 +49,7 @@ export default function PolicySection() {
 
                   {/* Title */}
                   <h3
-                    className={`relative font-bold leading-tight text-blue-950 text-base ${isTop ? "lg:text-lg" : ""}`}
+                    className="relative font-bold leading-tight text-blue-950 text-base"
                   >
                     {policy.title}
                   </h3>
