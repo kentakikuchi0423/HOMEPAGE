@@ -55,6 +55,12 @@ const platformConfig: Record<
     iconText: "text-red-500",
     icon: "▶",
   },
+  LINE: {
+    label: "LINE",
+    iconBg: "bg-green-50",
+    iconText: "text-green-600",
+    icon: "L",
+  },
   選挙ドットコム: {
     label: "選挙ドットコム",
     iconBg: "bg-indigo-50",

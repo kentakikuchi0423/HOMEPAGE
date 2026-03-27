@@ -6,7 +6,13 @@ export type Policy = {
 };
 
 export type SnsLink = {
-  platform: "X" | "Instagram" | "Facebook" | "YouTube" | "選挙ドットコム";
+  platform:
+    | "X"
+    | "Instagram"
+    | "Facebook"
+    | "YouTube"
+    | "LINE"
+    | "選挙ドットコム";
   url: string;
   order: number; // 表示順（昇順）
   iconImage?: string; // 画像パス（public/ 以下）例: "/images/social/x.png"
@@ -200,6 +206,12 @@ export const siteConfig: SiteConfig = {
       url: "https://www.youtube.com/@%E8%8F%8A%E5%9C%B0%E3%81%91%E3%82%93%E3%81%9F%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB",
       order: 4,
       iconImage: "/images/social/youtube.png",
+    },
+    {
+      platform: "LINE",
+      url: "https://line.me/R/ti/p/@512nbxiw",
+      order: 5,
+      iconImage: "/images/social/line.png",
     },
     {
       platform: "選挙ドットコム",
