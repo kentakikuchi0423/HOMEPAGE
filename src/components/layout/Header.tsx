@@ -15,7 +15,7 @@ export default function Header() {
     <header
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 shadow-md backdrop-blur-sm'
+          ? 'bg-white/95 shadow-md shadow-pink-200/50 backdrop-blur-sm'
           : 'bg-white/80 backdrop-blur-sm'
       }`}
     >
@@ -29,31 +29,31 @@ export default function Header() {
             />
           ) : (
             <span className="flex flex-col leading-tight">
-              <span className="text-[10px] font-medium tracking-widest text-blue-400 uppercase sm:text-xs">
+              <span className="text-[10px] font-medium tracking-widest text-pink-400 uppercase sm:text-xs">
                 {siteConfig.profile.title}
               </span>
-              <span className="text-base font-bold text-blue-700 sm:text-lg">
+              <span className="text-base font-bold text-pink-700 sm:text-lg">
                 {siteConfig.profile.name}
               </span>
             </span>
           )}
         </a>
         <nav className="hidden items-center gap-5 text-sm font-medium text-gray-700 sm:flex">
-          <a href="#profile" className="transition-colors hover:text-blue-600">
+          <a href="#profile" className="transition-colors hover:text-pink-600">
             プロフィール
           </a>
-          <a href="#policy" className="transition-colors hover:text-blue-600">
+          <a href="#policy" className="transition-colors hover:text-pink-600">
             政策
           </a>
-          <a href="#activity" className="transition-colors hover:text-blue-600">
+          <a href="#activity" className="transition-colors hover:text-pink-600">
             活動報告
           </a>
-          <a href="#social" className="transition-colors hover:text-blue-600">
+          <a href="#social" className="transition-colors hover:text-pink-600">
             SNS
           </a>
           <a
             href="#donation"
-            className="rounded-full bg-blue-600 px-5 py-1.5 font-semibold text-white transition-colors hover:bg-blue-700"
+            className="rounded-full bg-pink-600 px-5 py-1.5 font-semibold text-white transition-colors hover:bg-pink-700"
           >
             応援する
           </a>
@@ -61,7 +61,7 @@ export default function Header() {
         {/* Mobile CTA */}
         <a
           href="#donation"
-          className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 sm:hidden"
+          className="rounded-full bg-pink-600 px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-pink-700 sm:hidden"
         >
           応援する
         </a>

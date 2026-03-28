@@ -43,9 +43,33 @@ npx serve out       # ローカルでビルド成果物を確認
 
 ## Netlify デプロイ
 
-- ビルドコマンド：`npm run build`
-- 公開ディレクトリ：`out`
-- GitHub リポジトリを Netlify に連携すると、main ブランチへの push で自動デプロイ
+`netlify.toml` にビルド設定が記載されており、Netlify 側での手動設定は不要。
+
+### 本番への反映方法
+
+**main ブランチに push するだけで自動的に本番デプロイされる。**
+
+```bash
+git push origin main
+```
+
+Netlify が push を検知し、`npm run build` → `out/` を自動公開する。
+
+### デプロイ状況の確認
+
+- Netlify ダッシュボードの「Deploys」タブでログ・ステータスを確認できる
+- デプロイ完了まで通常 1〜2 分程度
+
+### 初回セットアップ（GitHub 連携がまだの場合）
+
+1. [Netlify](https://app.netlify.com/) にログインし「Add new site → Import an existing project」を選択
+2. GitHub を選択し、このリポジトリを選ぶ
+3. ビルド設定は `netlify.toml` から自動読み込みされるため変更不要
+   - Build command: `npm run build`
+   - Publish directory: `out`
+4. 「Deploy site」をクリック
+
+以降は main ブランチへの push で自動デプロイされる。
 
 ## コンテンツの更新方法
 

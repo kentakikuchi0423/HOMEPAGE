@@ -14,7 +14,7 @@ export default function SectionHeading({ children, en, light = false }: Props) {
       {en && (
         <p
           className={`mb-2 text-xs font-medium tracking-[0.2em] uppercase ${
-            light ? 'text-white/60' : 'text-blue-500'
+            light ? 'text-white/60' : 'text-pink-500'
           }`}
         >
           {en}
@@ -29,7 +29,7 @@ export default function SectionHeading({ children, en, light = false }: Props) {
       </h2>
       <div
         className={`section-bar mx-auto mt-3 h-[3px] rounded-full ${
-          light ? 'bg-white/60' : 'bg-blue-600'
+          light ? 'bg-gradient-to-r from-white/80 to-pink-200/60' : 'bg-gradient-to-r from-pink-500 via-fuchsia-400 to-rose-400'
         }`}
       />
     </div>
