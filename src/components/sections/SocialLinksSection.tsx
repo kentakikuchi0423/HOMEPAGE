@@ -39,8 +39,8 @@ const platformConfig: Record<
   },
   Facebook: {
     label: "Facebook",
-    iconBg: "bg-blue-100",
-    iconText: "text-blue-700",
+    iconBg: "bg-pink-100",
+    iconText: "text-pink-700",
     icon: "f",
   },
   Instagram: {
@@ -79,7 +79,7 @@ export default function SocialLinksSection() {
     <section
       ref={ref}
       id="social"
-      className={`bg-slate-50 px-4 py-20 reveal ${inView ? "is-visible" : ""}`}
+      className={`bg-pink-50/30 px-4 py-20 reveal ${inView ? "is-visible" : ""}`}
     >
       <div className="mx-auto max-w-2xl">
         <SectionHeading en="CONNECT">SNS・リンク</SectionHeading>
@@ -101,7 +101,7 @@ export default function SocialLinksSection() {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-full w-full items-center gap-1.5 rounded-2xl border border-blue-100 bg-white px-1.5 py-3.5 text-sm font-semibold text-gray-800 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md sm:gap-3 sm:px-4"
+                  className="flex h-full w-full items-center gap-1.5 rounded-2xl border border-pink-100 bg-white px-1.5 py-3.5 text-sm font-semibold text-gray-800 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-pink-300 hover:bg-pink-50 hover:text-pink-700 hover:shadow-md sm:gap-3 sm:px-4"
                 >
                   <span
                     className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold sm:h-8 sm:w-8 ${config.iconBg} ${config.iconText}`}

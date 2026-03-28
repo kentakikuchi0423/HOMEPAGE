@@ -5,6 +5,7 @@ import { siteConfig } from "@/content/site";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/JsonLd";
+import SakuraPetals from "@/components/ui/SakuraPetals";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className={notoSansJP.variable}>
         <JsonLd />
+        <SakuraPetals />
         <Header />
         <main className="pt-16">{children}</main>
         <Footer />
