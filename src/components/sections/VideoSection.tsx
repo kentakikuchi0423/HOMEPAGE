@@ -55,10 +55,10 @@ export default function VideoSection() {
       id="video"
       className={`bg-white px-4 py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-6xl">
         <SectionHeading en="VIDEO">動画</SectionHeading>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {videos.map((video, i) => (
             <div key={video.youtubeVideoId || i} className={`reveal ${revealDelay[Math.min(i, 3)]} ${inView ? 'is-visible' : ''}`}>
               <VideoCard {...video} />

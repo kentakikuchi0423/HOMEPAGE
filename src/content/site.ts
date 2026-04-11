@@ -63,7 +63,7 @@ export type SiteConfig = {
   };
   policies: Policy[];
   video: {
-    videos: VideoItem[]; // YouTube 動画リスト（最大2本）
+    videos: VideoItem[]; // YouTube 動画リスト
   };
   donation: {
     url: string; // 外部寄付ページ URL
@@ -157,7 +157,11 @@ export const siteConfig: SiteConfig = {
       },
       {
         youtubeVideoId: "HPDoWxzRdBo",
-        title: "市政を分かりやすく解説",
+        title: "政治をもっと分かりやすく！",
+      },
+      {
+        youtubeVideoId: "pWiOuCa7Q3w",
+        title: "暮らしをもっと便利に！",
       },
     ],
   },
