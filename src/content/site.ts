@@ -47,6 +47,8 @@ export type SiteConfig = {
     url: string; // 本番 URL（https://...）
     ogImage: string; // OGP 画像パス（public/ 以下）
     favicon: string; // favicon 画像パス（public/ 以下）例: "/images/brand/favicon.png"
+    siteName: string; // サイト名（og:site_name・WebSite schema の name に使用）
+    siteNameAlt?: string[]; // サイト名の別表記（WebSite schema の alternateName）
   };
   profile: {
     name: string; // 氏名（漢字）
@@ -84,12 +86,18 @@ export const siteConfig: SiteConfig = {
     // logoAlt: "菊地けんた 公式ロゴ",
   },
   meta: {
-    title: "菊地けんた（菊地謙太）公式サイト｜大洲市議会議員",
+    title: "菊地けんた公式サイト｜大洲市議会議員",
     description:
       "愛媛県大洲市議会議員 菊地けんた（菊地謙太）の公式サイトです。日々の活動情報をお届けします。",
     url: "https://kentakikuchi.netlify.app/",
     ogImage: "/images/brand/ogp.png",
     favicon: "/images/brand/favicon.png",
+    siteName: "菊地けんた公式サイト",
+    siteNameAlt: [
+      "菊地けんた（菊地謙太）公式サイト",
+      "菊地謙太公式サイト",
+      "キクチケンタ公式サイト",
+    ],
   },
   profile: {
     name: "菊地 けんた",
@@ -99,7 +107,7 @@ export const siteConfig: SiteConfig = {
       "愛媛県大洲市出身、1996年生まれ。",
       "広島大学工学部・京都大学大学院（情報学）修了。",
       "アクセンチュアにてコンサルタントとして、公共領域のDXに従事。",
-      "2025年に退職し、大洲市にて故郷の未来に向き合う活動を開始。",
+      "2025年に退社し、大洲市にて故郷の未来に向き合う活動を開始。",
     ],
     photo: "/images/profile/profile.jpg",
     catchcopy: "いつまでも魅力的な大洲市に。",

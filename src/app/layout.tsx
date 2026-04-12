@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: siteConfig.meta.title,
     description: siteConfig.meta.description,
     url: siteConfig.meta.url,
-    siteName: "菊地けんた（菊地謙太）公式サイト",
+    siteName: siteConfig.meta.siteName,
     images: [{ url: siteConfig.meta.ogImage, width: 1200, height: 630 }],
     locale: "ja_JP",
     type: "website",

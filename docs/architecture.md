@@ -22,6 +22,7 @@ HomePage/
 │   ├── app/
 │   │   ├── layout.tsx          # RootLayout（フォント・メタタグ）
 │   │   ├── page.tsx            # 1ページ構成のエントリポイント
+│   │   ├── manifest.ts         # Web App Manifest（/manifest.webmanifest）
 │   │   └── globals.css         # グローバルスタイル
 │   ├── components/
 │   │   ├── layout/
@@ -107,6 +108,8 @@ export type SiteConfig = {
     url: string          // 本番 URL（https://...）
     ogImage: string      // OGP 画像パス（public/ 以下）
     favicon: string      // favicon 画像パス（public/ 以下）例: "/images/favicon.png"
+    siteName: string     // サイト名（og:site_name・WebSite schema の name に使用）
+    siteNameAlt?: string[] // サイト名の別表記（WebSite schema の alternateName）
   }
   profile: {
     name: string         // 氏名（漢字）
