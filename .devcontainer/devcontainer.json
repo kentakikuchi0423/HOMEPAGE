@@ -5,6 +5,11 @@
   "containerEnv": {
     "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
   },
+  "mounts": [
+    "source=${localEnv:USERPROFILE}\\.claude,target=/home/node/.claude,type=bind,consistency=cached",
+    "source=${localEnv:USERPROFILE}\\.claude.json,target=/home/node/.claude.json,type=bind,consistency=cached"
+  ],
+  "postCreateCommand": "sudo npm install -g @anthropic-ai/claude-code",
   "customizations": {
     "vscode": {
       "extensions": [
