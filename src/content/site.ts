@@ -87,9 +87,7 @@ export type SiteConfig = {
     catchcopy: string; // Hero キャッチコピー
     subcopy: string; // Hero サブコピー
     qualifications?: string[]; // 資格・試験リスト（任意）
-    qualificationsIcon?: string; // 資格セクションアイコン画像パス（public/ 以下）例: "/images/profile/qualifications.png"
     hobbies?: string[]; // 趣味・特技リスト（任意）
-    hobbiesIcon?: string; // 趣味セクションアイコン画像パス（public/ 以下）例: "/images/profile/hobbies.png"
     snapshot?: string; // プロフィール欄に添える写真パス（public/ 以下）
     snapshotAlt?: string; // 上記写真の alt テキスト
   };
@@ -206,10 +204,7 @@ export const siteConfig: SiteConfig = {
       "ウイスキー検定 2級",
       "おおず歴史華回廊案内人",
     ],
-    // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
-    // qualificationsIcon: "/images/profile/qualifications.png",
     hobbies: ["フルマラソン", "カヌー", "筋トレ", "居酒屋巡り", "読書", "旅行"],
-    // hobbiesIcon: "/images/profile/hobbies.png",
     snapshot: "/images/profile/cycling.jpg",
     snapshotAlt: "ツール・ド・ひじかわで自転車に乗る菊地けんた",
   },
