@@ -13,9 +13,20 @@ function extractTag(xml: string, tag: string): string {
   return (m?.[1] ?? m?.[2] ?? '').trim()
 }
 
+// 外部フィード由来の URL は http(s) のみ許可する（javascript: 等のスキームを排除）
+function safeHttpUrl(value: string | undefined): string | undefined {
+  if (!value) return undefined
+  try {
+    const { protocol } = new URL(value)
+    return protocol === 'https:' || protocol === 'http:' ? value : undefined
+  } catch {
+    return undefined
+  }
+}
+
 function extractFirstImage(html: string): string | undefined {
   const m = html.match(/<img[^>]+src="([^"]+)"/)
-  return m?.[1]
+  return safeHttpUrl(m?.[1])
 }
 
 export async function fetchRssItems(
@@ -42,8 +53,10 @@ export async function fetchRssItems(
         link = baseUrl + link
       }
 
-      if (title) {
-        items.push({ title, link, pubDate, image })
+      const safeLink = safeHttpUrl(link)
+
+      if (title && safeLink) {
+        items.push({ title, link: safeLink, pubDate, image })
       }
     }
 
