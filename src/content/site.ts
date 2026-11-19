@@ -153,6 +153,8 @@ export const siteConfig: SiteConfig = {
       "FP技能検定 2級",
       "証券外務員一種",
       "色彩検定 2級",
+      "ウイスキー検定 2級",
+      "おおず歴史華回廊案内人",
     ],
     // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
     // qualificationsIcon: "/images/profile/qualifications.png",

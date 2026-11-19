@@ -39,11 +39,20 @@ function VideoCard({ youtubeVideoId, title }: { youtubeVideoId: string; title?: 
               loading="lazy"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
-            <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand text-white">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 translate-x-0.5" aria-hidden="true">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </span>
+            {/* 動画サイトで一般的な、角丸長方形に三角の再生ボタン */}
+            <svg
+              viewBox="0 0 68 48"
+              className="absolute left-1/2 top-1/2 h-12 w-[4.25rem] -translate-x-1/2 -translate-y-1/2"
+              aria-hidden="true"
+            >
+              <rect
+                width="68"
+                height="48"
+                rx="12"
+                className="fill-ink/85 transition-colors duration-300 group-hover:fill-brand"
+              />
+              <path d="M27 14v20l18-10z" fill="#fff" />
+            </svg>
           </button>
         )}
       </div>
