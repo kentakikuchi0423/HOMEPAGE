@@ -167,8 +167,8 @@ export const siteConfig: SiteConfig = {
   meta: {
     title: "菊地けんた公式サイト｜大洲市議会議員",
     description:
-      "愛媛県大洲市議会議員 菊地けんた（菊地謙太）の公式サイトです。日々の活動情報をお届けします。",
-    url: "https://kentakikuchi.netlify.app/",
+      "愛媛県大洲市議会議員 菊地けんた（菊地謙太）の公式サイトです。ごあいさつ、プロフィール、政策、市政報告など、日々の活動をお届けします。",
+    url: "https://kikuchi-kenta.jp/",
     ogImage: "/images/brand/ogp.png",
     favicon: "/images/brand/favicon.png",
     siteName: "菊地けんた公式サイト",
