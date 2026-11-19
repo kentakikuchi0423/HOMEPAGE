@@ -110,6 +110,11 @@ export type SiteConfig = {
     copyright: string; // コピーライト文
     disclaimer?: string; // 免責文（任意）
   };
+  notFound: {
+    title: string; // 存在しないページの見出し
+    message: string; // 説明文
+    linkLabel: string; // トップページへ戻るリンクの文言
+  };
 };
 
 export const siteConfig: SiteConfig = {
@@ -322,5 +327,11 @@ export const siteConfig: SiteConfig = {
     copyright: "© 2026 Kenta Kikuchi. All rights reserved.",
     disclaimer:
       "本サイトは菊地けんたの政治活動に関する情報提供を目的としています。",
+  },
+  notFound: {
+    title: "ページが見つかりません",
+    message:
+      "お探しのページは、移動または削除された可能性があります。",
+    linkLabel: "トップページへ戻る",
   },
 };

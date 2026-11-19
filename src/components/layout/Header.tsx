@@ -5,14 +5,12 @@ import { siteConfig } from '@/content/site'
 const MOBILE_MENU_ID = 'mobile-menu'
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false)
   const progressRef = useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const { items, cta, homeLabel, menuOpenLabel, menuCloseLabel } = siteConfig.nav
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 40)
       // 読み進めた割合をヘッダー下端の細い線で示す
       const max = document.documentElement.scrollHeight - window.innerHeight
       const ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0
@@ -37,9 +35,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-50 border-b bg-white/95 backdrop-blur-sm transition-colors duration-500 ${
-        scrolled || menuOpen ? 'border-line' : 'border-transparent'
-      }`}
+      className="fixed left-0 right-0 top-0 z-50 border-b border-line bg-white/95 backdrop-blur-sm"
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="/" aria-label={homeLabel} className="shrink-0">
