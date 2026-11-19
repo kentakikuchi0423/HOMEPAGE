@@ -98,7 +98,7 @@ export default function ActivitySection() {
                           </div>
                         )}
                         <div className="flex min-w-0 flex-1 flex-col justify-center">
-                          <time className="text-xs font-medium text-blue-400">
+                          <time className="text-xs font-medium text-blue-600">
                             {formatDate(item.pubDate)}
                           </time>
                           <p className="mt-1 line-clamp-2 text-sm leading-snug text-gray-700">
@@ -123,7 +123,7 @@ export default function ActivitySection() {
                 </ul>
               ) : (
                 <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 py-10">
-                  <p className="text-sm text-gray-400">投稿を読み込めませんでした</p>
+                  <p className="text-sm text-gray-500">投稿を読み込めませんでした</p>
                   <a
                     href={rss.baseUrl ?? rss.url}
                     target="_blank"

@@ -50,6 +50,10 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={notoSansJP.variable}>
+        {/* JavaScript が無効でも本文が表示されるようにする */}
+        <noscript>
+          <style>{`.reveal,.hero-animate{opacity:1!important;transform:none!important;animation:none!important}.section-bar{width:4rem!important}`}</style>
+        </noscript>
         <JsonLd />
         <Header />
         <main className="pt-16">{children}</main>

@@ -29,7 +29,7 @@ export default function ProfileCard() {
       <div className="flex flex-col gap-3 text-center md:text-left">
         <div>
           <p className="text-3xl font-bold tracking-tight text-gray-900">{name}</p>
-          <p className="mt-1 text-xs font-medium tracking-widest text-blue-400 uppercase">{nameKana}</p>
+          <p className="mt-1 text-xs font-medium tracking-widest text-blue-600 uppercase">{nameKana}</p>
         </div>
         <span className="mx-auto inline-block rounded-full bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700 md:mx-0">
           {title}

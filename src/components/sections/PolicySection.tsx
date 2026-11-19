@@ -43,7 +43,7 @@ export default function PolicySection() {
                   </span>
 
                   {/* Number badge */}
-                  <span className="relative text-xs font-bold tracking-widest text-blue-400">
+                  <span className="relative text-xs font-bold tracking-widest text-blue-600">
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
