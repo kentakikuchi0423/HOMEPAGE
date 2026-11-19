@@ -4,11 +4,9 @@ export default function ProfileCard() {
   const { bio } = siteConfig.profile
 
   return (
-    <ul className="border-t border-line">
+    <ul className="space-y-3 pb-7 text-base">
       {bio.map((line, i) => (
-        <li key={i} className="border-b border-line py-5 text-base">
-          {line}
-        </li>
+        <li key={i}>{line}</li>
       ))}
     </ul>
   )

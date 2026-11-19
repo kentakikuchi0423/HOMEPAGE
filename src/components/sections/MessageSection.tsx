@@ -28,12 +28,12 @@ export default function MessageSection() {
         <div>
           <SectionHeading en="MESSAGE">{title}</SectionHeading>
 
-          <div className="space-y-5 text-base leading-[1.9] md:mt-10">
+          <div className="space-y-5 font-display text-[1.0625rem] font-medium leading-[2] tracking-[0.04em] md:mt-10">
             {paragraphs.map((p, i) =>
               p.emphasis ? (
                 <p
                   key={i}
-                  className="py-2 font-display text-balance [word-break:auto-phrase] text-[1.375rem] font-medium leading-[1.75] tracking-[0.1em] text-brand md:text-2xl md:leading-[1.75]"
+                  className="py-2 text-balance [word-break:auto-phrase] text-[1.375rem] font-medium leading-[1.75] tracking-[0.1em] text-brand md:text-2xl md:leading-[1.75]"
                 >
                   {p.text}
                 </p>
