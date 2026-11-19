@@ -9,6 +9,14 @@
   targetPort = 3000
   port = 8888
 
+# 旧 URL（Netlify の初期アドレス）から独自ドメインへ恒久転送（301）。
+# 検索エンジンの評価を新ドメインへ引き継ぐため、パスを保ったまま転送する
+[[redirects]]
+  from = "https://kentakikuchi.netlify.app/*"
+  to = "https://kikuchi-kenta.jp/:splat"
+  status = 301
+  force = true
+
 # セキュリティヘッダー（全ページ共通）
 [[headers]]
   for = "/*"
