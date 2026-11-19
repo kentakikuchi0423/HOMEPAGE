@@ -15,19 +15,19 @@ export default function HeroSection() {
 
       <div className="relative mx-auto grid max-w-6xl gap-x-12 gap-y-10 px-6 pb-12 pt-10 md:grid-cols-[1fr_minmax(0,27rem)] md:pb-20 md:pt-14 lg:grid-cols-[1fr_minmax(0,30rem)]">
         {/* Text：スマホは上から「キャッチコピー → 氏名」、PC は左下に氏名・右上に縦書きのキャッチコピー */}
-        <div className="flex flex-col-reverse gap-9 md:flex-row md:justify-between md:gap-8">
+        <div className="flex flex-col-reverse gap-6 md:flex-row md:justify-between md:gap-8">
           <div className="md:self-end">
             <p className="text-[0.9375rem] font-medium tracking-[0.16em] text-brand">{title}</p>
-            <h1 className="mt-3 font-display text-[2.75rem] font-semibold leading-tight tracking-[0.1em] text-ink lg:text-6xl">
+            <h1 className="mt-2 font-display text-[2.75rem] font-semibold leading-tight tracking-[0.1em] text-ink lg:text-6xl">
               {name}
             </h1>
-            <p className="mt-2 text-[0.8125rem] tracking-[0.3em] text-sub">{nameKana}</p>
+            <p className="mt-1 text-[0.8125rem] leading-normal tracking-[0.3em] text-sub">{nameKana}</p>
 
-            {subcopy && <p className="mt-5 text-base text-ink">{subcopy}</p>}
+            {subcopy && <p className="mt-3 text-base leading-normal text-ink md:mt-4">{subcopy}</p>}
 
             <a
               href={cta.href}
-              className="arrow-link mt-6 inline-flex items-center gap-8 bg-brand py-3.5 pl-7 pr-6 text-[0.9375rem] tracking-[0.12em] text-white transition-colors hover:bg-ink"
+              className="arrow-link mt-4 inline-flex items-center gap-8 bg-brand py-3 md:mt-5 md:py-3.5 pl-7 pr-6 text-[0.9375rem] tracking-[0.12em] text-white transition-colors hover:bg-ink"
             >
               {cta.label}
               <span className="arrow" aria-hidden="true">→</span>

@@ -44,7 +44,7 @@ export default function MessageSection() {
           </div>
 
           <p className="mt-10 flex items-baseline justify-end gap-5">
-            <span className="text-[0.9375rem] tracking-[0.16em] text-sub">{signatureTitle}</span>
+            <span className="text-base tracking-[0.1em] text-ink">{signatureTitle}</span>
             <span className="font-signature text-[2rem] leading-none tracking-[0.12em] text-ink">
               {signatureName}
             </span>

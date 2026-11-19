@@ -1,21 +1,14 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Shippori_Mincho, Yuji_Syuku } from "next/font/google";
+import { Shippori_Mincho, Yuji_Syuku } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/content/site";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/JsonLd";
 
-const bodyFont = Noto_Sans_JP({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-body",
-  display: "swap",
-});
-
 const mincho = Shippori_Mincho({
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["500", "600", "700"],
   variable: "--font-mincho",
   display: "swap",
 });
@@ -64,7 +57,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={`${bodyFont.variable} ${mincho.variable} ${signature.variable}`}>
+      <body className={`${mincho.variable} ${signature.variable}`}>
         {/* JavaScript が無効でも本文が表示されるようにする */}
         <noscript>
           <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
