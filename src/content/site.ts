@@ -157,7 +157,7 @@ export const siteConfig: SiteConfig = {
     signatureTitle: "大洲市議会議員",
     signatureName: "菊地 謙太",
     photo: "/images/profile/council.jpg",
-    photoAlt: "大洲市議会の本会議で登壇する菊地けんた",
+    photoAlt: "大洲市議会の一般質問で登壇する菊地けんた",
   },
   brand: {
     // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
@@ -206,7 +206,7 @@ export const siteConfig: SiteConfig = {
     hobbies: ["フルマラソン", "カヌー", "筋トレ", "居酒屋巡り", "読書", "旅行"],
     // hobbiesIcon: "/images/profile/hobbies.png",
     snapshot: "/images/profile/cycling.jpg",
-    snapshotAlt: "市内のサイクリングイベントで自転車に乗る菊地けんた",
+    snapshotAlt: "ツール・ド・ひじかわで自転車に乗る菊地けんた",
   },
   policies: [
     {

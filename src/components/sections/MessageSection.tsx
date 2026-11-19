@@ -21,8 +21,8 @@ export default function MessageSection() {
             <Image
               src={photo}
               alt={photoAlt ?? ''}
-              width={600}
-              height={720}
+              width={700}
+              height={840}
               className="aspect-[5/6] w-full object-cover"
             />
           </div>
@@ -31,12 +31,12 @@ export default function MessageSection() {
         <div>
           <SectionHeading en="MESSAGE">{title}</SectionHeading>
 
-          <div className="space-y-7 text-base leading-[2.1] md:mt-12">
+          <div className="space-y-5 text-base leading-[1.9] md:mt-10">
             {paragraphs.map((p, i) =>
               p.emphasis ? (
                 <p
                   key={i}
-                  className="py-3 font-display text-balance [word-break:auto-phrase] text-[1.375rem] font-medium leading-[1.9] tracking-[0.1em] text-brand md:text-2xl md:leading-[1.9]"
+                  className="py-2 font-display text-balance [word-break:auto-phrase] text-[1.375rem] font-medium leading-[1.75] tracking-[0.1em] text-brand md:text-2xl md:leading-[1.75]"
                 >
                   {p.text}
                 </p>
@@ -46,7 +46,7 @@ export default function MessageSection() {
             )}
           </div>
 
-          <p className="mt-12 flex items-baseline justify-end gap-5">
+          <p className="mt-10 flex items-baseline justify-end gap-5">
             <span className="text-[0.9375rem] tracking-[0.16em] text-sub">{signatureTitle}</span>
             <span className="font-signature text-[2rem] leading-none tracking-[0.12em] text-ink">
               {signatureName}

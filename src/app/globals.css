@@ -21,6 +21,10 @@ body {
   letter-spacing: 0.04em;
   line-height: 1.9;
   -webkit-font-smoothing: antialiased;
+  /* 日本語の改行を文節単位にし、行末に1〜2文字だけ残るのを避ける（対応ブラウザのみ） */
+  word-break: auto-phrase;
+  line-break: strict;
+  text-wrap: pretty;
 }
 
 /* ページ内リンクで固定ヘッダーに見出しが隠れないようにする */

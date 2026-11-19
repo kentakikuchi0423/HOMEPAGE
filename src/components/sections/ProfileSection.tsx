@@ -31,9 +31,9 @@ export default function ProfileSection() {
             <Image
               src={snapshot}
               alt={snapshotAlt ?? ''}
-              width={726}
-              height={968}
-              className="aspect-[3/4] w-full max-w-xs object-cover lg:max-w-none"
+              width={574}
+              height={925}
+              className="h-auto w-full max-w-[16rem] lg:max-w-none"
             />
           )}
         </div>
