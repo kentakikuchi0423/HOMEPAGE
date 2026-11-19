@@ -5,15 +5,32 @@ import SectionHeading from '@/components/ui/SectionHeading'
 
 export default function DonationSection() {
   const { url, label, description } = siteConfig.donation
+  const { subcopy } = siteConfig.profile
   const { ref, inView } = useInView<HTMLElement>()
 
   return (
     <section
       ref={ref}
       id="donation"
-      className={`bg-brand px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
+      className={`relative overflow-hidden bg-brand px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
-      <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
+      {/* 背景：サブコピーが大きな文字でゆっくり流れる */}
+      {subcopy && (
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-2 select-none font-display text-[4.5rem] leading-none text-white/[0.07] md:text-[7rem]"
+          aria-hidden="true"
+        >
+          <div className="ticker-track">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <span key={i} className="pr-[1em]">
+                {subcopy}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="relative mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="SUPPORT" light>ご支援のお願い</SectionHeading>
 
         <div>

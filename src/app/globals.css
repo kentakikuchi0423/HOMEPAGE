@@ -71,10 +71,12 @@ html {
   transform: translateX(6px);
 }
 
-/* スクロール連動の表示：ゆっくりとしたフェードのみ */
+/* ---------- 動き ---------- */
+
+/* スクロール連動の表示：ゆっくりとしたフェード */
 .reveal {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(14px);
   transition: opacity 0.9s ease, transform 0.9s ease;
 }
 .reveal.is-visible {
@@ -87,17 +89,167 @@ html {
 .reveal-delay-4 { transition-delay: 0.32s; }
 .reveal-delay-5 { transition-delay: 0.4s; }
 
+/* 見出し：下からせり上がって現れる */
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.08em;
+}
+.rise {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s;
+}
+.is-visible .rise {
+  transform: none;
+}
+
+/* 写真：青い幕が横に引いて現れる（スクロール連動） */
+.curtain {
+  position: relative;
+  overflow: hidden;
+}
+.curtain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-brand);
+  transform-origin: right;
+  transition: transform 1s cubic-bezier(0.7, 0, 0.2, 1) 0.2s;
+}
+.curtain img {
+  transform: scale(1.08);
+  transition: transform 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s;
+}
+.curtain.is-visible::after {
+  transform: scaleX(0);
+}
+.curtain.is-visible img {
+  transform: none;
+}
+
+/* 罫線：左から右へ引かれる */
+.row-line {
+  position: relative;
+}
+.row-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: color-mix(in srgb, var(--color-brand) 28%, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s;
+}
+.row-line.is-visible::after {
+  transform: scaleX(1);
+}
+
+/* メニュー：ホバーで下線が左から伸びる */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35rem;
+  height: 1px;
+  background: var(--color-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ファーストビュー：読み込み時に順に現れる */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+}
+@keyframes heroChar {
+  from { opacity: 0; transform: translateY(0.5em); }
+}
+@keyframes heroPanel {
+  from { transform: scaleX(0); }
+}
+@keyframes heroCover {
+  to { transform: scaleX(0); }
+}
+@keyframes heroZoom {
+  from { transform: scale(1.1); }
+}
+.hero-in {
+  animation: heroFadeUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-char {
+  display: inline-block;
+  animation: heroChar 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-panel {
+  transform-origin: right;
+  animation: heroPanel 1s cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+.hero-photo {
+  position: relative;
+  overflow: hidden;
+}
+.hero-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-paper);
+  transform-origin: right;
+  animation: heroCover 1.1s cubic-bezier(0.7, 0, 0.2, 1) 0.45s both;
+}
+.hero-photo img {
+  animation: heroZoom 2s cubic-bezier(0.2, 0.7, 0.2, 1) 0.45s both;
+}
+
+/* 帯：大きな文字がゆっくり横に流れる */
+@keyframes tickerMove {
+  to { transform: translateX(-50%); }
+}
+.ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: tickerMove 60s linear infinite;
+}
+
 /* 「視差効果を減らす」設定の利用者にはアニメーションを無効化 */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .reveal {
+  .reveal,
+  .rise,
+  .curtain img {
     opacity: 1;
     transform: none;
     transition: none;
   }
-  .arrow-link .arrow {
+  .curtain::after,
+  .hero-photo::after {
+    display: none;
+  }
+  .row-line::after {
+    transform: none;
+    transition: none;
+  }
+  .hero-in,
+  .hero-char,
+  .hero-panel,
+  .hero-photo img,
+  .ticker-track {
+    animation: none;
+  }
+  .arrow-link .arrow,
+  .nav-link::after {
     transition: none;
   }
 }

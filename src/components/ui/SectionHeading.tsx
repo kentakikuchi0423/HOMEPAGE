@@ -16,7 +16,9 @@ export default function SectionHeading({ children, en, light = false }: Props) {
           light ? 'text-white' : 'text-ink'
         }`}
       >
-        {children}
+        <span className="mask">
+          <span className="rise">{children}</span>
+        </span>
       </h2>
       {en && (
         <p

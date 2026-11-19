@@ -60,7 +60,7 @@ export default function RootLayout({
       <body className={`${mincho.variable} ${signature.variable}`}>
         {/* JavaScript が無効でも本文が表示されるようにする */}
         <noscript>
-          <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
+          <style>{`.reveal,.rise,.curtain img{opacity:1!important;transform:none!important}.curtain::after{display:none!important}.row-line::after{transform:none!important}`}</style>
         </noscript>
         <JsonLd />
         <Header />

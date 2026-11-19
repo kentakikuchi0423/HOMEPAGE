@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { siteConfig } from '@/content/site'
 import { useInView } from '@/hooks/useInView'
 import SectionHeading from '@/components/ui/SectionHeading'
+import Reveal from '@/components/ui/Reveal'
 import type { RssItem } from '@/lib/rss'
 import { formatDate } from '@/lib/date'
 
@@ -146,14 +147,14 @@ export default function ActivitySection() {
               <p className="text-base tracking-[0.1em] text-ink">市政報告</p>
             </div>
             {municipalReport.image && (
-              <div className="relative h-56 w-full overflow-hidden">
+              <Reveal className="curtain h-56 w-full">
                 <Image
                   src={municipalReport.image}
                   alt={municipalReport.imageAlt ?? '市政報告'}
                   fill
                   className="object-cover"
                 />
-              </div>
+              </Reveal>
             )}
             <div className="px-5 py-5">
               <p className="text-[0.9375rem] leading-[1.9] text-sub">

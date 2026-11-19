@@ -1,16 +1,24 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { siteConfig } from '@/content/site'
 
 const MOBILE_MENU_ID = 'mobile-menu'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const progressRef = useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const { items, cta, homeLabel, menuOpenLabel, menuCloseLabel } = siteConfig.nav
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40)
+      // 読み進めた割合をヘッダー下端の細い線で示す
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      const ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0
+      if (progressRef.current) progressRef.current.style.transform = `scaleX(${ratio})`
+    }
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -56,7 +64,7 @@ export default function Header() {
         {/* Desktop nav */}
         <nav className="hidden items-center gap-6 text-[0.9375rem] font-medium tracking-[0.04em] text-ink lg:flex">
           {items.map((item) => (
-            <a key={item.href} href={item.href} className="transition-colors hover:text-brand">
+            <a key={item.href} href={item.href} className="nav-link transition-colors hover:text-brand">
               {item.label}
             </a>
           ))}
@@ -99,6 +107,13 @@ export default function Header() {
           </button>
         </div>
       </div>
+
+      <div
+        ref={progressRef}
+        className="absolute bottom-[-1px] left-0 h-0.5 w-full origin-left bg-brand"
+        style={{ transform: 'scaleX(0)' }}
+        aria-hidden="true"
+      />
 
       {/* Mobile menu panel */}
       <nav id={MOBILE_MENU_ID} hidden={!menuOpen} className="border-t border-line bg-white px-6 pb-6 lg:hidden">

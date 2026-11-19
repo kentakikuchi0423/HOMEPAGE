@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { siteConfig } from '@/content/site'
 import { useInView } from '@/hooks/useInView'
 import SectionHeading from '@/components/ui/SectionHeading'
+import Reveal from '@/components/ui/Reveal'
 import ProfileCard from '@/components/sections/ProfileCard'
 import QualificationsCard from '@/components/sections/QualificationsCard'
 import HobbiesCard from '@/components/sections/HobbiesCard'
@@ -28,13 +29,15 @@ export default function ProfileSection() {
           </div>
 
           {snapshot && (
-            <Image
-              src={snapshot}
-              alt={snapshotAlt ?? ''}
-              width={574}
-              height={925}
-              className="h-auto w-full max-w-[16rem] lg:max-w-none"
-            />
+            <Reveal className="curtain w-full max-w-[16rem] self-start lg:max-w-none">
+              <Image
+                src={snapshot}
+                alt={snapshotAlt ?? ''}
+                width={574}
+                height={925}
+                className="h-auto w-full"
+              />
+            </Reveal>
           )}
         </div>
       </div>

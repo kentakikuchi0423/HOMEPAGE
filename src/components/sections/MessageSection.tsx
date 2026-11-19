@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { siteConfig } from '@/content/site'
 import { useInView } from '@/hooks/useInView'
 import SectionHeading from '@/components/ui/SectionHeading'
+import Reveal from '@/components/ui/Reveal'
 
 export default function MessageSection() {
   const { title, paragraphs, signatureTitle, signatureName, photo, photoAlt } = siteConfig.message
@@ -16,13 +17,15 @@ export default function MessageSection() {
     >
       <div className="mx-auto grid max-w-5xl gap-x-16 gap-y-12 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
         {photo && (
-          <Image
-            src={photo}
-            alt={photoAlt ?? ''}
-            width={1100}
-            height={1337}
-            className="h-auto w-full self-start"
-          />
+          <Reveal className="curtain self-start">
+            <Image
+              src={photo}
+              alt={photoAlt ?? ''}
+              width={1100}
+              height={1337}
+              className="h-auto w-full"
+            />
+          </Reveal>
         )}
 
         <div>

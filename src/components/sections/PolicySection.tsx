@@ -2,6 +2,7 @@
 import { siteConfig } from "@/content/site";
 import { useInView } from "@/hooks/useInView";
 import SectionHeading from "@/components/ui/SectionHeading";
+import Reveal from "@/components/ui/Reveal";
 
 export default function PolicySection() {
   const { ref, inView } = useInView<HTMLElement>();
@@ -17,9 +18,11 @@ export default function PolicySection() {
 
         <ol className="border-t border-brand/25">
           {siteConfig.policies.map((policy, i) => (
-            <li
+            <Reveal
+              as="li"
               key={policy.title}
-              className="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-x-4 border-b border-brand/25 py-8 sm:grid-cols-[4rem_minmax(0,1fr)]"
+              threshold={0.4}
+              className="reveal row-line grid grid-cols-[2.75rem_minmax(0,1fr)] gap-x-4 py-8 sm:grid-cols-[4rem_minmax(0,1fr)]"
             >
               <span
                 className="font-display text-xl leading-[1.75] text-brand"
@@ -33,7 +36,7 @@ export default function PolicySection() {
                 </h3>
                 <p className="mt-2 text-base text-sub">{policy.description}</p>
               </div>
-            </li>
+            </Reveal>
           ))}
         </ol>
       </div>
