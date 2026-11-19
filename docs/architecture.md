@@ -90,6 +90,14 @@ export type SiteConfig = {
   hero: {
     cta: NavLink          // Hero のボタン
   }
+  message: {
+    title: string                   // セクション見出し
+    paragraphs: MessageParagraph[]  // 挨拶文（emphasis: true の段落は強調表示）
+    signatureTitle: string          // 署名の肩書き
+    signatureName: string           // 署名の氏名（手書き風フォントで表示）
+    photo?: string                  // 写真パス（public/ 以下）
+    photoAlt?: string               // 写真の alt テキスト
+  }
   brand: {
     headerLogo?: string   // ヘッダーロゴ画像パス（public/ 以下）例: "/images/brand/logo.png"
     logoAlt?: string      // alt テキスト（省略時は profile.name を使用）
@@ -137,7 +145,10 @@ export type SiteConfig = {
   }
   policies: Policy[]
   video: {
-    videos: VideoItem[]     // YouTube 動画リスト（最大2本）
+    videos: VideoItem[]     // YouTube 動画リスト
+    playLabel: string       // 再生ボタンの読み上げラベル
+    fallbackTitle: string   // タイトル未設定時の読み上げ用タイトル
+    placeholder: string     // 動画 ID 未設定時の表示文言
   }
   xTimeline: {
     handle: string       // X アカウント名（@ なし、例："taro_yamada"）
@@ -196,27 +207,20 @@ export const siteConfig: SiteConfig = {
 
 ## デザイントークン方針
 
-`tailwind.config.ts` でカスタムカラーを定義：
+`src/app/globals.css` の `@theme` でトークンを定義する（Tailwind v4 方式。`text-ink` / `bg-paper` などのクラスになる）。
 
-```typescript
-colors: {
-  primary: {
-    50:  '#eff6ff',
-    100: '#dbeafe',
-    500: '#3b82f6',
-    600: '#2563eb',
-    700: '#1d4ed8',
-    900: '#1e3a8a',
-  },
-  surface: {
-    DEFAULT: '#ffffff',
-    muted:   '#f8fafc',
-  },
-  accent: {
-    DEFAULT: '#60a5fa',  // 親しみやすさのポイントカラー
-  },
-}
-```
+| トークン | 値 | 用途 |
+|---|---|---|
+| `ink` | `#1c2430` | 本文・見出しの墨色 |
+| `sub` | `#4b5563` | 補助テキスト |
+| `brand` | `#1e50a2` | イメージカラーの瑠璃色（アクセントはこの1色に限定） |
+| `paper` | `#eff4fa` | 淡い青のセクション背景 |
+| `line` | `#dbe2ec` | 罫線 |
+
+- **書体**：全体を明朝体（Shippori Mincho、標準ウェイト 500）で統一。署名のみ筆ペン風（Yuji Syuku）
+- **文字サイズ**：`html` の基準サイズを画面幅で切り替える（17px → 1024px 以上 18px → 1536px 以上 20px）。各要素は rem 指定のため全体が連動する
+- **形**：角丸・影・グラデーションは使わず、細い罫線と余白で区切る
+- **動き**：定義は `globals.css` の「動き」節に集約。読み込み時の順次表示（`hero-*`）、写真の幕開き（`curtain`）、見出しのせり上がり（`mask` / `rise`）、罫線の描画（`row-line`）、流れる文字（`ticker-track`）。画面に入ったことの検知は `ui/Reveal.tsx` と `hooks/useInView.ts`
 
 ---
 

@@ -5,35 +5,47 @@ import SectionHeading from '@/components/ui/SectionHeading'
 
 export default function DonationSection() {
   const { url, label, description } = siteConfig.donation
+  const { subcopy } = siteConfig.profile
   const { ref, inView } = useInView<HTMLElement>()
 
   return (
     <section
       ref={ref}
       id="donation"
-      className={`relative overflow-hidden bg-gradient-to-br from-blue-950 via-blue-800 to-blue-700 px-4 py-24 text-center reveal ${inView ? 'is-visible' : ''}`}
+      className={`relative overflow-hidden bg-brand px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
-      {/* Background decoration */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/5 blur-2xl" />
-        <div className="absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-white/5 blur-2xl" />
-      </div>
+      {/* 背景：サブコピーが大きな文字でゆっくり流れる */}
+      {subcopy && (
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-2 select-none font-display text-[4.5rem] leading-none text-white/[0.07] md:text-[7rem]"
+          aria-hidden="true"
+        >
+          <div className="ticker-track">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <span key={i} className="pr-[1em]">
+                {subcopy}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
-      <div className="relative z-10 mx-auto max-w-2xl">
+      <div className="relative mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="SUPPORT" light>ご支援のお願い</SectionHeading>
 
-        {description && (
-          <p className="mb-10 leading-relaxed text-blue-100">{description}</p>
-        )}
+        <div>
+          {description && <p className="whitespace-pre-line text-base text-white/90">{description}</p>}
 
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block rounded-full bg-white px-10 py-4 text-lg font-bold text-blue-800 shadow-xl transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-2xl"
-        >
-          {label}
-        </a>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="arrow-link mt-9 inline-flex items-center gap-8 bg-white py-4 pl-8 pr-7 text-base font-bold tracking-[0.1em] text-brand transition-colors hover:bg-paper"
+          >
+            {label}
+            <span className="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
     </section>
   )

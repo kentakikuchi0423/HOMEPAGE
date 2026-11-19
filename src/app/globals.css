@@ -1,120 +1,232 @@
 @import "tailwindcss";
 
-:root {
-  --color-primary: #2563EB;
-  --color-primary-dark: #1E40AF;
-  --color-primary-light: #EFF6FF;
-  --color-accent: #38BDF8;
+/* デザイントークン（Tailwind v4: text-ink / bg-paper / font-display などのクラスになる） */
+@theme {
+  --color-ink: #1c2430; /* 墨色：本文・見出し */
+  --color-sub: #4b5563; /* 補助テキスト */
+  --color-brand: #1e50a2; /* 瑠璃色：アクセント（1色に限定） */
+  --color-paper: #eff4fa; /* 淡い青：セクション背景 */
+  --color-line: #dbe2ec; /* 罫線 */
+}
+
+/* フォント変数は body で定義されるため、inline 指定で実行時に解決させる */
+@theme inline {
+  --font-display: var(--font-mincho), 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --font-signature: var(--font-signature), var(--font-mincho), serif;
 }
 
 body {
-  font-family: var(--font-noto-sans-jp), 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+  font-family: var(--font-mincho), 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  font-weight: 500;
+  color: var(--color-ink);
+  letter-spacing: 0.03em;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  /* 日本語の改行を文節単位にし、行末に1〜2文字だけ残るのを避ける（対応ブラウザのみ） */
+  word-break: auto-phrase;
+  line-break: strict;
+  text-wrap: pretty;
 }
 
-/* Scroll-reveal: hidden until JS fires */
+/* ページ内リンクで固定ヘッダーに見出しが隠れないようにする */
+/* 画面が広いほど文字と余白を一段ずつ大きくする（rem 指定の要素すべてに効く） */
+html {
+  font-size: 106.25%; /* 17px */
+}
+@media (min-width: 1024px) {
+  html {
+    font-size: 112.5%; /* 18px */
+  }
+}
+@media (min-width: 1536px) {
+  html {
+    font-size: 125%; /* 20px */
+  }
+}
+
+html {
+  /* 表示アニメーションで要素が動いても、ブラウザがスクロール位置を補正しないようにする
+     （補正されると、再読み込みのたびに表示位置が少しずつ下へずれる） */
+  overflow-anchor: none;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* ページ内リンクの移動先（セクション）自体にはフォーカス枠を出さない */
+section:focus {
+  outline: none;
+}
+
+/* キーボード操作時のフォーカス表示 */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 4px;
+}
+
+/* Hero のキャッチコピー：PC では縦書きにする */
+@media (min-width: 1024px) {
+  .hero-catch {
+    writing-mode: vertical-rl;
+  }
+}
+
+/* 矢印付きリンク：ホバーで矢印が少し進む */
+.arrow-link .arrow {
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+.arrow-link:hover .arrow {
+  transform: translateX(6px);
+}
+
+/* ---------- 動き ---------- */
+
+/* スクロール連動の表示：ゆっくりとしたフェード */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.65s cubic-bezier(0, 0, 0.2, 1),
-              transform 0.65s cubic-bezier(0, 0, 0.2, 1);
+  transform: translateY(14px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.4s; }
 
-/* SectionHeading underbar expansion */
-@keyframes expandBar {
-  from { width: 0; }
-  to   { width: 4rem; }
+/* 見出し：下からせり上がって現れる */
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.08em;
 }
-.section-bar {
-  width: 0;
+.rise {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s;
 }
-.is-visible .section-bar {
-  animation: expandBar 0.5s cubic-bezier(0, 0, 0.2, 1) 0.2s both;
-}
-
-/* Hero decorative blob float */
-@keyframes floatBlob {
-  0%, 100% { transform: translate(0, 0); }
-  50%       { transform: translate(8px, -10px); }
-}
-.hero-blob {
-  animation: floatBlob 12s ease-in-out infinite;
-}
-.hero-blob-offset {
-  animation: floatBlob 12s ease-in-out 6s infinite;
+.is-visible .rise {
+  transform: none;
 }
 
-/* Hero load-in animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-animate {
-  animation: fadeInUp 0.7s ease-out both;
-}
-.hero-delay-1 { animation-delay: 0.15s; }
-.hero-delay-2 { animation-delay: 0.3s; }
-.hero-delay-3 { animation-delay: 0.45s; }
-.hero-delay-4 { animation-delay: 0.6s; }
-
-/* Hero center glow pulse */
-@keyframes heroBgPulse {
-  0%, 100% { opacity: 0.07; }
-  50%       { opacity: 0.16; }
-}
-.hero-glow-pulse {
-  background: radial-gradient(ellipse at 50% 50%, #38BDF8, transparent 70%);
-  animation: heroBgPulse 7s ease-in-out infinite;
-}
-
-/* Slow blob variant */
-.hero-blob-slow {
-  animation: floatBlob 18s ease-in-out 3s infinite;
-}
-
-/* Hero CTA shimmer */
-.hero-cta {
+/* 写真：青い幕が横に引いて現れる（スクロール連動） */
+.curtain {
   position: relative;
   overflow: hidden;
 }
-.hero-cta::after {
+.curtain::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.28) 50%, transparent 65%);
-  transform: translateX(-120%);
-  transition: transform 0.55s ease;
+  background: var(--color-brand);
+  transform-origin: right;
+  transition: transform 1s cubic-bezier(0.7, 0, 0.2, 1) 0.2s;
 }
-.hero-cta:hover::after {
-  transform: translateX(120%);
+.curtain img {
+  transform: scale(1.08);
+  transition: transform 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s;
+}
+.curtain.is-visible::after {
+  transform: scaleX(0);
+}
+.curtain.is-visible img {
+  transform: none;
 }
 
-/* ページ内リンクで固定ヘッダーに見出しが隠れないようにする */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 4.5rem;
+/* 罫線：左から右へ引かれる */
+.row-line {
+  position: relative;
+}
+.row-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: color-mix(in srgb, var(--color-brand) 28%, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s;
+}
+.row-line.is-visible::after {
+  transform: scaleX(1);
 }
 
-/* キーボード操作時のフォーカス表示 */
-:focus-visible {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 3px;
-  border-radius: 4px;
+/* メニュー：ホバーで下線が左から伸びる */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35rem;
+  height: 1px;
+  background: var(--color-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ファーストビュー：読み込み時に順に現れる */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+}
+@keyframes heroChar {
+  from { opacity: 0; transform: translateY(0.5em); }
+}
+@keyframes heroPanel {
+  from { transform: scaleX(0); }
+}
+@keyframes heroCover {
+  to { transform: scaleX(0); }
+}
+@keyframes heroZoom {
+  from { transform: scale(1.1); }
+}
+.hero-in {
+  animation: heroFadeUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-char {
+  display: inline-block;
+  animation: heroChar 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-panel {
+  transform-origin: right;
+  animation: heroPanel 1s cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+.hero-photo {
+  position: relative;
+  overflow: hidden;
+}
+.hero-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-paper);
+  transform-origin: right;
+  animation: heroCover 1.1s cubic-bezier(0.7, 0, 0.2, 1) 0.45s both;
+}
+.hero-photo img {
+  animation: heroZoom 2s cubic-bezier(0.2, 0.7, 0.2, 1) 0.45s both;
+}
+
+/* 帯：大きな文字がゆっくり横に流れる */
+@keyframes tickerMove {
+  to { transform: translateX(-50%); }
+}
+.ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: tickerMove 60s linear infinite;
 }
 
 /* 「視差効果を減らす」設定の利用者にはアニメーションを無効化 */
@@ -123,20 +235,29 @@ html {
     scroll-behavior: auto;
   }
   .reveal,
-  .hero-animate {
+  .rise,
+  .curtain img {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .curtain::after,
+  .hero-photo::after {
+    display: none;
+  }
+  .row-line::after {
+    transform: none;
+    transition: none;
+  }
+  .hero-in,
+  .hero-char,
+  .hero-panel,
+  .hero-photo img,
+  .ticker-track {
     animation: none;
   }
-  .section-bar {
-    width: 4rem;
-    animation: none !important;
-  }
-  .hero-blob,
-  .hero-blob-offset,
-  .hero-blob-slow,
-  .hero-glow-pulse {
-    animation: none;
+  .arrow-link .arrow,
+  .nav-link::after {
+    transition: none;
   }
 }

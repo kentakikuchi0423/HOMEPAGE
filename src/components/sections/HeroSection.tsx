@@ -6,83 +6,62 @@ export default function HeroSection() {
   const { cta } = siteConfig.hero
 
   return (
-    <section
-      id="hero"
-      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-blue-950 via-blue-800 to-blue-700 px-4 pb-28 pt-16 lg:pb-36 lg:pt-24"
-    >
-      {/* Decorative blobs — kept subtle */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="hero-blob absolute -right-32 -top-32 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
-        <div className="hero-blob-offset absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-blue-300/8 blur-3xl" />
-        <div className="hero-blob-slow absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-sky-300/6 blur-3xl" />
-        {/* Center glow pulse */}
-        <div className="hero-glow-pulse absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full" />
-      </div>
+    <section id="hero" className="relative overflow-hidden bg-white">
+      {/* イメージカラーの色面：PC は右端の縦帯、スマホは写真の下半分に敷く */}
+      <div
+        className="hero-panel absolute bottom-0 right-0 h-44 w-full bg-brand md:h-full md:w-[14vw] lg:w-[calc(50vw-17rem)] xl:w-[calc(50vw-20rem)]"
+        aria-hidden="true"
+      />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center gap-8 md:flex-row-reverse md:justify-between md:gap-12">
+      <div className="relative mx-auto grid max-w-6xl gap-x-12 gap-y-10 px-6 pb-12 pt-8 md:grid-cols-[1fr_minmax(0,20rem)] md:items-center md:pb-16 md:pt-10 lg:grid-cols-[1fr_minmax(0,27rem)] lg:items-stretch xl:grid-cols-[1fr_minmax(0,30rem)]">
+        {/* Text：スマホは上から「キャッチコピー → 氏名」、PC は左下に氏名・右上に縦書きのキャッチコピー */}
+        <div className="flex flex-col-reverse gap-6 lg:flex-row lg:justify-between lg:gap-8">
+          <div className="lg:self-end">
+            <p className="hero-in text-[0.9375rem] font-medium tracking-[0.16em] text-brand [animation-delay:0.3s]">{title}</p>
+            <h1 className="hero-in [animation-delay:0.4s] mt-2 font-display text-[2.75rem] font-semibold leading-tight tracking-[0.1em] whitespace-nowrap text-ink md:text-[2.5rem] lg:text-[3.25rem] xl:text-6xl">
+              {name}
+            </h1>
+            <p className="hero-in [animation-delay:0.5s] mt-1 text-[0.8125rem] leading-normal tracking-[0.3em] text-sub">{nameKana}</p>
+
+            {subcopy && <p className="hero-in [animation-delay:0.6s] mt-3 text-base leading-normal text-ink md:mt-4">{subcopy}</p>}
+
+            <a
+              href={cta.href}
+              className="hero-in [animation-delay:0.7s] arrow-link mt-4 inline-flex items-center gap-8 whitespace-nowrap bg-brand py-3 md:mt-5 md:py-3.5 pl-7 pr-6 text-[0.9375rem] tracking-[0.12em] text-white transition-colors hover:bg-ink"
+            >
+              {cta.label}
+              <span className="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <p className="hero-catch font-display text-[min(1.5rem,5.7vw)] font-medium leading-[1.7] tracking-[0.06em] text-ink md:text-[1.25rem] lg:text-[1.75rem] lg:leading-[2] lg:tracking-[0.24em] xl:text-[2rem]" aria-label={catchcopy}>
+            {/* 1文字ずつ順に現れる */}
+            {Array.from(catchcopy).map((char, i) => (
+              <span
+                key={i}
+                className="hero-char"
+                style={{ animationDelay: `${0.5 + i * 0.07}s` }}
+                aria-hidden="true"
+              >
+                {char}
+              </span>
+            ))}
+          </p>
+        </div>
+
         {/* Photo */}
         {photo && (
-          <div className="hero-animate relative shrink-0">
-            <div className="absolute -inset-3 rounded-full bg-sky-300/20 blur-xl" aria-hidden="true" />
+          <div className="hero-photo aspect-[4/5] w-full lg:max-h-[calc(100svh-10rem)]">
             <Image
               src={photo}
               alt={name}
-              width={352}
-              height={352}
+              width={720}
+              height={720}
               priority
-              className="relative h-44 w-44 rounded-full object-cover shadow-2xl ring-4 ring-white/80 sm:h-56 sm:w-56 md:h-72 md:w-72 lg:h-88 lg:w-88"
+              className="h-full w-full object-cover object-top"
             />
           </div>
         )}
-
-        {/* Text */}
-        <div className="flex flex-col items-center gap-6 text-center md:items-start md:text-left">
-          {/* Title badge */}
-          <p className="hero-animate rounded-full border border-white/25 bg-white/10 px-5 py-1.5 text-xs font-medium tracking-[0.15em] text-blue-100 backdrop-blur-sm">
-            {title}
-          </p>
-
-          {/* Name — main visual element */}
-          <div className="hero-animate hero-delay-1 flex flex-col items-center gap-1 md:items-start">
-            <h1 className="text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
-              {name}
-            </h1>
-            <p className="text-sm font-medium tracking-[0.25em] text-blue-200 sm:text-base">
-              {nameKana}
-            </p>
-          </div>
-
-          {/* Catchcopy + subcopy */}
-          <div className="hero-animate hero-delay-2 flex flex-col gap-2">
-            <p className="text-xl font-bold leading-relaxed text-white sm:text-2xl">
-              {catchcopy}
-            </p>
-            {subcopy && (
-              <p className="text-base leading-relaxed text-blue-100 sm:text-lg">{subcopy}</p>
-            )}
-          </div>
-
-          {/* CTA */}
-          <a
-            href={cta.href}
-            className="hero-cta hero-animate hero-delay-3 mt-1 rounded-full bg-white px-8 py-3 font-semibold text-blue-800 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl"
-          >
-            {cta.label}
-          </a>
-        </div>
-      </div>
-
-      {/* Wave divider */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg
-          viewBox="0 0 1440 72"
-          preserveAspectRatio="none"
-          className="h-14 w-full sm:h-20"
-          fill="white"
-          aria-hidden="true"
-        >
-          <path d="M0,36 C400,72 1040,0 1440,36 L1440,72 L0,72 Z" />
-        </svg>
       </div>
     </section>
   )

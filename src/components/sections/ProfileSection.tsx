@@ -1,35 +1,44 @@
 'use client'
+import Image from 'next/image'
+import { siteConfig } from '@/content/site'
 import { useInView } from '@/hooks/useInView'
 import SectionHeading from '@/components/ui/SectionHeading'
+import Reveal from '@/components/ui/Reveal'
 import ProfileCard from '@/components/sections/ProfileCard'
 import QualificationsCard from '@/components/sections/QualificationsCard'
 import HobbiesCard from '@/components/sections/HobbiesCard'
 
 export default function ProfileSection() {
+  const { snapshot, snapshotAlt } = siteConfig.profile
   const { ref, inView } = useInView<HTMLElement>()
 
   return (
     <section
       ref={ref}
       id="profile"
-      className={`bg-white px-4 py-20 reveal ${inView ? 'is-visible' : ''}`}
+      className={`bg-white px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="PROFILE">プロフィール</SectionHeading>
 
-        {/* 上段: プロフィール本体 */}
-        <div className={`reveal reveal-delay-1 ${inView ? 'is-visible' : ''}`}>
-          <ProfileCard />
-        </div>
-
-        {/* 下段: 資格・趣味（デスクトップ2カラム / モバイル縦積み） */}
-        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div className={`reveal reveal-delay-2 ${inView ? 'is-visible' : ''}`}>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_14rem]">
+          <div>
+            <ProfileCard />
+            <HobbiesCard />
             <QualificationsCard />
           </div>
-          <div className={`reveal reveal-delay-3 ${inView ? 'is-visible' : ''}`}>
-            <HobbiesCard />
-          </div>
+
+          {snapshot && (
+            <Reveal className="curtain w-full max-w-[16rem] self-start lg:max-w-none">
+              <Image
+                src={snapshot}
+                alt={snapshotAlt ?? ''}
+                width={574}
+                height={925}
+                className="h-auto w-full"
+              />
+            </Reveal>
+          )}
         </div>
       </div>
     </section>

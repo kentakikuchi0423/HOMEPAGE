@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP } from "next/font/google";
+import { Shippori_Mincho, Yuji_Syuku } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/content/site";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/JsonLd";
+import InPageNav from "@/components/layout/InPageNav";
 
-const notoSansJP = Noto_Sans_JP({
+const mincho = Shippori_Mincho({
   subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
-  variable: "--font-noto-sans-jp",
+  weight: ["500", "600", "700"],
+  variable: "--font-mincho",
+  display: "swap",
+});
+
+// 署名用の手書き（筆ペン）風フォント
+const signature = Yuji_Syuku({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-signature",
   display: "swap",
 });
 
@@ -49,12 +58,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={notoSansJP.variable}>
+      <body className={`${mincho.variable} ${signature.variable}`}>
         {/* JavaScript が無効でも本文が表示されるようにする */}
         <noscript>
-          <style>{`.reveal,.hero-animate{opacity:1!important;transform:none!important;animation:none!important}.section-bar{width:4rem!important}`}</style>
+          <style>{`.reveal,.rise,.curtain img{opacity:1!important;transform:none!important}.curtain::after{display:none!important}.row-line::after{transform:none!important}`}</style>
         </noscript>
         <JsonLd />
+        <InPageNav />
         <Header />
         <main className="pt-16">{children}</main>
         <Footer />

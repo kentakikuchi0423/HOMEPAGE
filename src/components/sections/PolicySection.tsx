@@ -2,14 +2,7 @@
 import { siteConfig } from "@/content/site";
 import { useInView } from "@/hooks/useInView";
 import SectionHeading from "@/components/ui/SectionHeading";
-
-const revealDelay = [
-  "reveal-delay-1",
-  "reveal-delay-2",
-  "reveal-delay-3",
-  "reveal-delay-4",
-  "reveal-delay-5",
-];
+import Reveal from "@/components/ui/Reveal";
 
 export default function PolicySection() {
   const { ref, inView } = useInView<HTMLElement>();
@@ -18,54 +11,34 @@ export default function PolicySection() {
     <section
       ref={ref}
       id="policy"
-      className={`bg-white px-4 py-20 reveal ${inView ? "is-visible" : ""}`}
+      className={`bg-paper px-6 py-16 md:py-20 reveal ${inView ? "is-visible" : ""}`}
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="POLICY">政策</SectionHeading>
 
-        <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6">
-          {siteConfig.policies.map((policy, i) => {
-            // 上段2枚は half幅、下段3枚は third幅
-            const colSpan = i < 2 ? "lg:col-span-3" : "lg:col-span-2";
-
-            return (
-              <li
-                key={policy.title}
-                className={`${colSpan} reveal ${inView ? "is-visible" : ""} ${revealDelay[Math.min(i, 4)]}`}
+        <ol className="border-t border-brand/25">
+          {siteConfig.policies.map((policy, i) => (
+            <Reveal
+              as="li"
+              key={policy.title}
+              threshold={0.4}
+              className="reveal row-line grid grid-cols-[2.75rem_minmax(0,1fr)] gap-x-4 py-8 sm:grid-cols-[4rem_minmax(0,1fr)]"
+            >
+              <span
+                className="font-display text-xl leading-[1.75] text-brand"
+                aria-hidden="true"
               >
-                <div className="group relative flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-blue-100 border-t-4 border-t-blue-500 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-200/40 hover:bg-blue-50/50 hover:border-blue-200">
-                  {/* Ghost number watermark */}
-                  <span
-                    className="pointer-events-none absolute -bottom-2 right-3 select-none text-8xl font-black leading-none text-blue-100/60 transition-colors duration-300 group-hover:text-blue-200/80"
-                    aria-hidden="true"
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-
-                  {/* Number badge */}
-                  <span className="relative text-xs font-bold tracking-widest text-blue-600">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-
-                  {/* Title */}
-                  <h3
-                    className="relative font-bold leading-tight text-blue-950 text-base"
-                  >
-                    {policy.title}
-                  </h3>
-
-                  {/* Gradient divider */}
-                  <div className="relative h-0.5 w-8 bg-linear-to-r from-blue-400 to-blue-200 transition-all duration-300 group-hover:w-14" />
-
-                  {/* Description */}
-                  <p className="relative text-sm leading-relaxed text-gray-600">
-                    {policy.description}
-                  </p>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3 className="text-[1.1875rem] font-bold leading-[1.8] tracking-[0.06em] text-ink">
+                  {policy.title}
+                </h3>
+                <p className="mt-2 text-base text-sub">{policy.description}</p>
+              </div>
+            </Reveal>
+          ))}
+        </ol>
       </div>
     </section>
   );

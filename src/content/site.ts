@@ -28,6 +28,11 @@ export type NavLink = {
   href: string; // リンク先（ページ内アンカー 例: "#profile"）
 };
 
+export type MessageParagraph = {
+  text: string; // 段落の本文
+  emphasis?: boolean; // true の場合、明朝体で大きく強調表示する
+};
+
 export type SiteConfig = {
   nav: {
     items: NavLink[]; // ヘッダーのナビゲーション項目（PC は横並び、スマホはメニュー内）
@@ -38,6 +43,14 @@ export type SiteConfig = {
   };
   hero: {
     cta: NavLink; // Hero のボタン
+  };
+  message: {
+    title: string; // セクション見出し
+    paragraphs: MessageParagraph[]; // 挨拶文（段落ごと）
+    signatureTitle: string; // 署名の肩書き
+    signatureName: string; // 署名の氏名（手書き風フォントで表示）
+    photo?: string; // 写真パス（public/ 以下）
+    photoAlt?: string; // 写真の alt テキスト
   };
   brand: {
     headerLogo?: string; // ヘッダーロゴ画像パス（public/ 以下）例: "/images/brand/logo.png"
@@ -77,15 +90,20 @@ export type SiteConfig = {
     qualificationsIcon?: string; // 資格セクションアイコン画像パス（public/ 以下）例: "/images/profile/qualifications.png"
     hobbies?: string[]; // 趣味・特技リスト（任意）
     hobbiesIcon?: string; // 趣味セクションアイコン画像パス（public/ 以下）例: "/images/profile/hobbies.png"
+    snapshot?: string; // プロフィール欄に添える写真パス（public/ 以下）
+    snapshotAlt?: string; // 上記写真の alt テキスト
   };
   policies: Policy[];
   video: {
     videos: VideoItem[]; // YouTube 動画リスト
+    playLabel: string; // 再生ボタンの読み上げラベル
+    fallbackTitle: string; // タイトル未設定時の読み上げ用タイトル
+    placeholder: string; // 動画 ID 未設定時の表示文言
   };
   donation: {
     url: string; // 外部寄付ページ URL
     label: string; // CTA ボタンラベル
-    description?: string; // セクション説明文（任意）
+    description?: string; // セクション説明文（任意。\\n で改行）
   };
   sns: SnsLink[];
   footer: {
@@ -97,6 +115,7 @@ export type SiteConfig = {
 export const siteConfig: SiteConfig = {
   nav: {
     items: [
+      { label: "ごあいさつ", href: "#message" },
       { label: "プロフィール", href: "#profile" },
       { label: "政策", href: "#policy" },
       { label: "動画", href: "#video" },
@@ -109,7 +128,36 @@ export const siteConfig: SiteConfig = {
     menuCloseLabel: "メニューを閉じる",
   },
   hero: {
-    cta: { label: "プロフィールを見る", href: "#profile" },
+    cta: { label: "ごあいさつを読む", href: "#message" },
+  },
+  message: {
+    title: "ごあいさつ",
+    paragraphs: [
+      { text: "はじめまして。大洲市議会議員の菊地謙太です。" },
+      {
+        text: "私は大洲市で生まれ育ち、大学進学を機に地元を離れました。その後、コンサルティング会社で公共分野を中心に、デジタル技術を活用した業務改善や課題解決に携わってきました。",
+      },
+      {
+        text: "そんな中、幼い頃から親しんできたショッピングセンターの閉店や、母校を含む高校の統合の話を耳にし、ふるさと大洲の変化を強く実感しました。",
+      },
+      {
+        text: "「大好きな大洲の未来のために、自分にも何かできるのでは。」",
+        emphasis: true,
+      },
+      {
+        text: "その想いが次第に強くなり、2025年に市議会議員選挙への挑戦を決意しました。",
+      },
+      {
+        text: "私が大切にしているのは、市民の皆さまの声に耳を傾け、課題から目を背けず、行動し続けることです。",
+      },
+      {
+        text: "これまでの経験と新しい視点を生かし、誰もが希望を持って暮らせる大洲市を目指してまいります。",
+      },
+    ],
+    signatureTitle: "大洲市議会議員",
+    signatureName: "菊地 謙太",
+    photo: "/images/profile/council.jpg",
+    photoAlt: "大洲市議会の一般質問で登壇する菊地けんた",
   },
   brand: {
     // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
@@ -137,7 +185,7 @@ export const siteConfig: SiteConfig = {
     bio: [
       "愛媛県大洲市出身、1996年生まれ。",
       "広島大学工学部・京都大学大学院（情報学）修了。",
-      "アクセンチュアにてコンサルタントとして、公共領域のDXに従事。",
+      "アクセンチュア株式会社にてコンサルタントとして、公共領域のDXに従事。",
       "2025年に退社し、大洲市にて故郷の未来に向き合う活動を開始。",
     ],
     photo: "/images/profile/profile.jpg",
@@ -150,11 +198,15 @@ export const siteConfig: SiteConfig = {
       "FP技能検定 2級",
       "証券外務員一種",
       "色彩検定 2級",
+      "ウイスキー検定 2級",
+      "おおず歴史華回廊案内人",
     ],
     // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
     // qualificationsIcon: "/images/profile/qualifications.png",
     hobbies: ["フルマラソン", "カヌー", "筋トレ", "居酒屋巡り", "読書", "旅行"],
     // hobbiesIcon: "/images/profile/hobbies.png",
+    snapshot: "/images/profile/cycling.jpg",
+    snapshotAlt: "ツール・ド・ひじかわで自転車に乗る菊地けんた",
   },
   policies: [
     {
@@ -189,6 +241,9 @@ export const siteConfig: SiteConfig = {
     },
   ],
   video: {
+    playLabel: "動画を再生",
+    fallbackTitle: "YouTube 動画",
+    placeholder: "動画は準備中です",
     videos: [
       {
         youtubeVideoId: "pZFlAz39n6o",
@@ -223,7 +278,7 @@ export const siteConfig: SiteConfig = {
     url: "https://go2senkyo.com/donate/flow/196504",
     label: "活動を応援する",
     description:
-      "菊地けんたの活動を応援してください。皆さまのご支援が、市民のための政治を実現します。",
+      "皆さまと一緒に考え、一緒に行動しながら、地域の未来をつくっていきたいと考えています。\n日々の取り組みに共感いただけましたら、応援していただけると大きな励みになります。",
   },
   sns: [
     {
