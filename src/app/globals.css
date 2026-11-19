@@ -3,7 +3,7 @@
 /* デザイントークン（Tailwind v4: text-ink / bg-paper / font-display などのクラスになる） */
 @theme {
   --color-ink: #1c2430; /* 墨色：本文・見出し */
-  --color-sub: #5a6472; /* 補助テキスト */
+  --color-sub: #4b5563; /* 補助テキスト */
   --color-brand: #1e50a2; /* 瑠璃色：アクセント（1色に限定） */
   --color-paper: #eff4fa; /* 淡い青：セクション背景 */
   --color-line: #dbe2ec; /* 罫線 */
@@ -18,7 +18,7 @@
 body {
   font-family: var(--font-body), 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
   color: var(--color-ink);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   /* 日本語の改行を文節単位にし、行末に1〜2文字だけ残るのを避ける（対応ブラウザのみ） */
@@ -28,6 +28,21 @@ body {
 }
 
 /* ページ内リンクで固定ヘッダーに見出しが隠れないようにする */
+/* 画面が広いほど文字と余白を一段ずつ大きくする（rem 指定の要素すべてに効く） */
+html {
+  font-size: 106.25%; /* 17px */
+}
+@media (min-width: 1024px) {
+  html {
+    font-size: 112.5%; /* 18px */
+  }
+}
+@media (min-width: 1536px) {
+  html {
+    font-size: 125%; /* 20px */
+  }
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;

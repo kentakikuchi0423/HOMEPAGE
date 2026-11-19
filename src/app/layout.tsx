@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Zen_Kaku_Gothic_New, Shippori_Mincho, Yuji_Syuku } from "next/font/google";
+import { IBM_Plex_Sans_JP, Shippori_Mincho, Yuji_Syuku } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/content/site";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/JsonLd";
 
-const bodyFont = Zen_Kaku_Gothic_New({
+const bodyFont = IBM_Plex_Sans_JP({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-body",

@@ -54,7 +54,7 @@ export default function Header() {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-7 text-[0.9375rem] tracking-[0.08em] text-ink lg:flex">
+        <nav className="hidden items-center gap-6 text-[0.9375rem] font-medium tracking-[0.04em] text-ink lg:flex">
           {items.map((item) => (
             <a key={item.href} href={item.href} className="transition-colors hover:text-brand">
               {item.label}
