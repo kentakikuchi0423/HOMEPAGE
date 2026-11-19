@@ -220,7 +220,7 @@ export const siteConfig: SiteConfig = {
 - **書体**：全体を明朝体（Shippori Mincho、標準ウェイト 500）で統一。署名のみ筆ペン風（Yuji Syuku）
 - **文字サイズ**：`html` の基準サイズを画面幅で切り替える（17px → 1024px 以上 18px → 1536px 以上 20px）。各要素は rem 指定のため全体が連動する
 - **形**：角丸・影・グラデーションは使わず、細い罫線と余白で区切る
-- **動き**：スクロール時のゆっくりしたフェードと、矢印付きリンクの小さな移動のみ
+- **動き**：定義は `globals.css` の「動き」節に集約。読み込み時の順次表示（`hero-*`）、写真の幕開き（`curtain`）、見出しのせり上がり（`mask` / `rise`）、罫線の描画（`row-line`）、流れる文字（`ticker-track`）。画面に入ったことの検知は `ui/Reveal.tsx` と `hooks/useInView.ts`
 
 ---
 
