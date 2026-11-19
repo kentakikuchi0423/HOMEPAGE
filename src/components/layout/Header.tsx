@@ -29,13 +29,11 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-        scrolled || menuOpen
-          ? 'bg-white/95 shadow-md backdrop-blur-sm'
-          : 'bg-white/80 backdrop-blur-sm'
+      className={`fixed left-0 right-0 top-0 z-50 border-b transition-colors duration-200 ${
+        scrolled || menuOpen ? 'border-line bg-white' : 'border-transparent bg-paper'
       }`}
     >
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
         <a href="/" aria-label={homeLabel} className="shrink-0">
           {siteConfig.brand.headerLogo ? (
             <img
@@ -45,10 +43,10 @@ export default function Header() {
             />
           ) : (
             <span className="flex flex-col leading-tight">
-              <span className="text-[10px] font-medium tracking-widest text-blue-600 uppercase sm:text-xs">
+              <span className="text-[10px] font-bold tracking-widest text-brand sm:text-xs">
                 {siteConfig.profile.title}
               </span>
-              <span className="text-base font-bold text-blue-700 sm:text-lg">
+              <span className="font-display text-base font-black text-ink sm:text-lg">
                 {siteConfig.profile.name}
               </span>
             </span>
@@ -56,15 +54,15 @@ export default function Header() {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-5 text-sm font-medium text-gray-700 sm:flex">
+        <nav className="hidden items-center gap-6 text-sm font-bold text-ink sm:flex">
           {items.map((item) => (
-            <a key={item.href} href={item.href} className="transition-colors hover:text-blue-600">
+            <a key={item.href} href={item.href} className="transition-colors hover:text-brand">
               {item.label}
             </a>
           ))}
           <a
             href={cta.href}
-            className="rounded-full bg-blue-600 px-5 py-1.5 font-semibold text-white transition-colors hover:bg-blue-700"
+            className="rounded-md bg-ink px-5 py-2 font-bold text-white transition-colors hover:bg-brand"
           >
             {cta.label}
           </a>
@@ -75,7 +73,7 @@ export default function Header() {
           <a
             href={cta.href}
             onClick={closeMenu}
-            className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+            className="rounded-md bg-ink px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-brand"
           >
             {cta.label}
           </a>
@@ -85,7 +83,7 @@ export default function Header() {
             aria-expanded={menuOpen}
             aria-controls={MOBILE_MENU_ID}
             onClick={() => setMenuOpen((v) => !v)}
-            className="flex h-11 w-11 items-center justify-center rounded-full text-blue-800 transition-colors hover:bg-blue-50"
+            className="flex h-11 w-11 items-center justify-center rounded-md text-ink transition-colors hover:bg-ink/5"
           >
             <svg
               viewBox="0 0 24 24"
@@ -110,18 +108,18 @@ export default function Header() {
       <nav
         id={MOBILE_MENU_ID}
         hidden={!menuOpen}
-        className="border-t border-blue-100 bg-white px-4 pb-4 pt-2 sm:hidden"
+        className="border-t border-line bg-white px-5 pb-4 pt-1 sm:hidden"
       >
-        <ul className="divide-y divide-blue-50">
+        <ul className="divide-y divide-line">
           {items.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
                 onClick={closeMenu}
-                className="flex items-center justify-between py-3.5 text-base font-medium text-gray-800"
+                className="flex items-center justify-between py-4 font-display text-base font-bold text-ink"
               >
                 {item.label}
-                <span className="text-blue-600" aria-hidden="true">›</span>
+                <span className="text-brand" aria-hidden="true">→</span>
               </a>
             </li>
           ))}

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
-  /** English subtitle displayed above the Japanese heading */
+  /** English label displayed beside the Japanese heading */
   en?: string
   /** Use light variant on dark/colored backgrounds */
   light?: boolean
@@ -10,28 +10,27 @@ interface Props {
 
 export default function SectionHeading({ children, en, light = false }: Props) {
   return (
-    <div className="mb-12 text-center">
+    <div
+      className={`mb-10 flex items-baseline gap-4 border-b-2 pb-4 sm:mb-12 ${
+        light ? 'border-white/40' : 'border-ink'
+      }`}
+    >
+      <h2
+        className={`font-display text-3xl font-black tracking-wide sm:text-4xl ${
+          light ? 'text-white' : 'text-ink'
+        }`}
+      >
+        {children}
+      </h2>
       {en && (
         <p
-          className={`mb-2 text-xs font-medium tracking-[0.2em] uppercase ${
-            light ? 'text-white/80' : 'text-blue-600'
+          className={`text-xs font-bold tracking-[0.25em] uppercase ${
+            light ? 'text-white/80' : 'text-brand'
           }`}
         >
           {en}
         </p>
       )}
-      <h2
-        className={`text-3xl font-bold tracking-wide sm:text-4xl ${
-          light ? 'text-white' : 'text-gray-900'
-        }`}
-      >
-        {children}
-      </h2>
-      <div
-        className={`section-bar mx-auto mt-3 h-[3px] rounded-full ${
-          light ? 'bg-white/60' : 'bg-blue-600'
-        }`}
-      />
     </div>
   )
 }

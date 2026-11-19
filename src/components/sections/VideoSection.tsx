@@ -1,43 +1,54 @@
 'use client'
+import { useState } from 'react'
 import { siteConfig } from '@/content/site'
 import { useInView } from '@/hooks/useInView'
 import SectionHeading from '@/components/ui/SectionHeading'
 
 function VideoCard({ youtubeVideoId, title }: { youtubeVideoId: string; title?: string }) {
+  const { playLabel, fallbackTitle, placeholder } = siteConfig.video
+  // サムネイルだけ先に表示し、クリックされた時点で YouTube のプレーヤーを読み込む
+  const [playing, setPlaying] = useState(false)
+  const label = title ?? fallbackTitle
+
   return (
-    <div className="overflow-hidden rounded-2xl bg-blue-50 shadow-sm">
-      <div className="relative aspect-video">
-        {youtubeVideoId ? (
+    <div>
+      <div className="relative aspect-video overflow-hidden rounded-sm bg-ink">
+        {!youtubeVideoId ? (
+          <div className="flex h-full w-full items-center justify-center">
+            <p className="text-sm font-medium text-white/80">{placeholder}</p>
+          </div>
+        ) : playing ? (
           <iframe
-            src={`https://www.youtube.com/embed/${youtubeVideoId}`}
-            title={title ?? 'YouTube 動画'}
+            src={`https://www.youtube-nocookie.com/embed/${youtubeVideoId}?autoplay=1`}
+            title={label}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            loading="lazy"
             className="absolute inset-0 h-full w-full"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
-            <div className="flex flex-col items-center gap-3 text-blue-400">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-8 w-8 translate-x-0.5 text-blue-600"
-                  aria-hidden="true"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-              <p className="text-sm font-medium text-blue-500">動画は準備中です</p>
-            </div>
-          </div>
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            aria-label={`${playLabel}: ${label}`}
+            className="group absolute inset-0 h-full w-full cursor-pointer"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`}
+              alt=""
+              loading="lazy"
+              className="h-full w-full object-cover transition-opacity group-hover:opacity-85"
+            />
+            <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-marker text-ink transition-transform group-hover:scale-110">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 translate-x-0.5" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </span>
+          </button>
         )}
       </div>
       {title && (
-        <div className="px-6 py-4">
-          <p className="font-medium text-gray-700">{title}</p>
-        </div>
+        <p className="mt-3 font-display font-bold leading-snug text-ink">{title}</p>
       )}
     </div>
   )
@@ -53,12 +64,12 @@ export default function VideoSection() {
     <section
       ref={ref}
       id="video"
-      className={`bg-white px-4 py-20 reveal ${inView ? 'is-visible' : ''}`}
+      className={`bg-white px-5 py-16 sm:py-24 reveal ${inView ? 'is-visible' : ''}`}
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-5xl">
         <SectionHeading en="VIDEO">動画</SectionHeading>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-6 gap-y-9 md:grid-cols-3">
           {videos.map((video, i) => (
             <div key={video.youtubeVideoId || i} className={`reveal ${revealDelay[Math.min(i, 3)]} ${inView ? 'is-visible' : ''}`}>
               <VideoCard {...video} />

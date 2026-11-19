@@ -81,6 +81,9 @@ export type SiteConfig = {
   policies: Policy[];
   video: {
     videos: VideoItem[]; // YouTube 動画リスト
+    playLabel: string; // 再生ボタンの読み上げラベル
+    fallbackTitle: string; // タイトル未設定時の読み上げ用タイトル
+    placeholder: string; // 動画 ID 未設定時の表示文言
   };
   donation: {
     url: string; // 外部寄付ページ URL
@@ -189,6 +192,9 @@ export const siteConfig: SiteConfig = {
     },
   ],
   video: {
+    playLabel: "動画を再生",
+    fallbackTitle: "YouTube 動画",
+    placeholder: "動画は準備中です",
     videos: [
       {
         youtubeVideoId: "pZFlAz39n6o",

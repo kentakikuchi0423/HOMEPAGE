@@ -137,7 +137,10 @@ export type SiteConfig = {
   }
   policies: Policy[]
   video: {
-    videos: VideoItem[]     // YouTube 動画リスト（最大2本）
+    videos: VideoItem[]     // YouTube 動画リスト
+    playLabel: string       // 再生ボタンの読み上げラベル
+    fallbackTitle: string   // タイトル未設定時の読み上げ用タイトル
+    placeholder: string     // 動画 ID 未設定時の表示文言
   }
   xTimeline: {
     handle: string       // X アカウント名（@ なし、例："taro_yamada"）

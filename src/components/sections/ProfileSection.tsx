@@ -12,22 +12,18 @@ export default function ProfileSection() {
     <section
       ref={ref}
       id="profile"
-      className={`bg-white px-4 py-20 reveal ${inView ? 'is-visible' : ''}`}
+      className={`bg-white px-5 py-16 sm:py-24 reveal ${inView ? 'is-visible' : ''}`}
     >
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-5xl">
         <SectionHeading en="PROFILE">プロフィール</SectionHeading>
 
-        {/* 上段: プロフィール本体 */}
-        <div className={`reveal reveal-delay-1 ${inView ? 'is-visible' : ''}`}>
+        <div className="grid grid-cols-1 gap-x-14 gap-y-10 md:grid-cols-[1.2fr_1fr]">
+          {/* 左: 経歴 */}
           <ProfileCard />
-        </div>
 
-        {/* 下段: 資格・趣味（デスクトップ2カラム / モバイル縦積み） */}
-        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div className={`reveal reveal-delay-2 ${inView ? 'is-visible' : ''}`}>
+          {/* 右: 資格・趣味 */}
+          <div className="flex flex-col gap-9">
             <QualificationsCard />
-          </div>
-          <div className={`reveal reveal-delay-3 ${inView ? 'is-visible' : ''}`}>
             <HobbiesCard />
           </div>
         </div>
