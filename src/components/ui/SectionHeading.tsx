@@ -14,7 +14,7 @@ export default function SectionHeading({ children, en, light = false }: Props) {
       {en && (
         <p
           className={`mb-2 text-xs font-medium tracking-[0.2em] uppercase ${
-            light ? 'text-white/60' : 'text-blue-500'
+            light ? 'text-white/80' : 'text-blue-600'
           }`}
         >
           {en}

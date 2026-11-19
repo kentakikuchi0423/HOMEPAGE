@@ -103,3 +103,40 @@ body {
 .hero-cta:hover::after {
   transform: translateX(120%);
 }
+
+/* ページ内リンクで固定ヘッダーに見出しが隠れないようにする */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+/* キーボード操作時のフォーカス表示 */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* 「視差効果を減らす」設定の利用者にはアニメーションを無効化 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .hero-animate {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+  .section-bar {
+    width: 4rem;
+    animation: none !important;
+  }
+  .hero-blob,
+  .hero-blob-offset,
+  .hero-blob-slow,
+  .hero-glow-pulse {
+    animation: none;
+  }
+}

@@ -74,7 +74,22 @@ HomePage/
 コンテンツの変更はこのファイルのみ行う。
 
 ```typescript
+export type NavLink = {
+  label: string         // 表示ラベル
+  href: string          // リンク先（ページ内アンカー 例: "#profile"）
+}
+
 export type SiteConfig = {
+  nav: {
+    items: NavLink[]      // ヘッダーのナビゲーション項目（PC は横並び、スマホはメニュー内）
+    cta: NavLink          // ヘッダー右端の強調ボタン
+    homeLabel: string     // ロゴリンクの読み上げラベル
+    menuOpenLabel: string // スマホ用メニューボタンの読み上げラベル（開く）
+    menuCloseLabel: string // スマホ用メニューボタンの読み上げラベル（閉じる）
+  }
+  hero: {
+    cta: NavLink          // Hero のボタン
+  }
   brand: {
     headerLogo?: string   // ヘッダーロゴ画像パス（public/ 以下）例: "/images/brand/logo.png"
     logoAlt?: string      // alt テキスト（省略時は profile.name を使用）
@@ -160,7 +175,7 @@ export const siteConfig: SiteConfig = {
 
 | コンポーネント | 責務 |
 |---|---|
-| `Header` | ナビゲーション表示（スクロール追従 or シンプル固定） |
+| `Header` | ナビゲーション表示（固定ヘッダー。スマホではメニューボタンで開閉） |
 | `Footer` | コピーライト・免責文表示 |
 
 ### `sections/` — セクション
