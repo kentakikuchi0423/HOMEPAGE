@@ -20,6 +20,8 @@ function PlatformIcon({
         src={iconImage}
         alt=""
         className="h-5 w-5 object-contain"
+        loading="lazy"
+        decoding="async"
         onError={() => setError(true)}
       />
     );

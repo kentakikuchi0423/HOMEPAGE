@@ -12,6 +12,9 @@ const mincho = Shippori_Mincho({
   weight: ["500", "600", "700"],
   variable: "--font-mincho",
   display: "swap",
+  // 日本語フォントは文字範囲ごとに多数のファイルへ分割される。全ファイルの先読みを止め、
+  // ページで実際に使う文字のファイルだけをブラウザに読み込ませる
+  preload: false,
 });
 
 // 署名用の手書き（筆ペン）風フォント
@@ -20,6 +23,9 @@ const signature = Yuji_Syuku({
   weight: "400",
   variable: "--font-signature",
   display: "swap",
+  // 日本語フォントは文字範囲ごとに多数のファイルへ分割される。全ファイルの先読みを止め、
+  // ページで実際に使う文字のファイルだけをブラウザに読み込ませる
+  preload: false,
 });
 
 export const metadata: Metadata = {
