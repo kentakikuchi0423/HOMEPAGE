@@ -28,11 +28,11 @@ public/
     │   └── ogp.png          ← OGP 画像（SNS シェア用）
     ├── profile/
     │   ├── profile.jpg      ← プロフィール写真（ファーストビュー）
-    │   ├── council.jpg      ← ごあいさつ欄の写真（photos/2026年9月一般質問.jpg を切り出したもの）
-    │   └── cycling.jpg      ← プロフィール欄の写真（photos/ツールドひじかわ.jpg と同じもの）
+    │   ├── council.jpg      ← ごあいさつ欄の写真（photos/2026-09-general-question.jpg を切り出したもの）
+    │   └── cycling.jpg      ← プロフィール欄の写真（photos/tour-de-hijikawa.jpg と同じもの）
     ├── photos/              ← 写真の原本置き場（サイトでは直接使用しない）
-    │   ├── 2026年9月一般質問.jpg
-    │   ├── ツールドひじかわ.jpg
+    │   ├── 2026-09-general-question.jpg  ← 2026年9月 一般質問
+    │   ├── tour-de-hijikawa.jpg          ← ツール・ド・ひじかわ
     │   ├── marathon.jpg
     │   └── report-meeting.jpg
     ├── policy/
