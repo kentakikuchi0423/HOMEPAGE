@@ -53,8 +53,8 @@ export default function ActivitySection() {
               style={syncedHeight !== undefined ? { height: syncedHeight } : undefined}
               className={`reveal reveal-delay-1 ${inView ? 'is-visible' : ''} flex flex-col overflow-hidden border border-line bg-white`}
             >
-              <div className="shrink-0 border-b border-line px-5 py-3.5">
-                <p className="text-sm tracking-[0.1em] text-ink">{rss.title}</p>
+              <div className="shrink-0 border-b border-line border-t-2 border-t-brand px-5 py-3.5">
+                <p className="text-base tracking-[0.1em] text-ink">{rss.title}</p>
               </div>
 
               {loading ? (
@@ -98,10 +98,10 @@ export default function ActivitySection() {
                           </div>
                         )}
                         <div className="flex min-w-0 flex-1 flex-col justify-center">
-                          <time className="text-xs tracking-[0.1em] text-sub">
+                          <time className="text-[0.8125rem] tracking-[0.1em] text-brand">
                             {formatDate(item.pubDate)}
                           </time>
-                          <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-ink group-hover:text-brand">
+                          <p className="mt-1 line-clamp-2 text-[0.9375rem] leading-relaxed text-ink group-hover:text-brand">
                             {item.title}
                           </p>
                         </div>
@@ -114,7 +114,7 @@ export default function ActivitySection() {
                         href={rss.baseUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block border-b border-ink pb-1 text-sm tracking-[0.1em] text-ink transition-colors hover:border-brand hover:text-brand"
+                        className="inline-block border-b border-brand pb-1 text-[0.9375rem] tracking-[0.1em] text-brand"
                       >
                         活動をもっと見る →
                       </a>
@@ -123,12 +123,12 @@ export default function ActivitySection() {
                 </ul>
               ) : (
                 <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 py-10">
-                  <p className="text-sm text-sub">投稿を読み込めませんでした</p>
+                  <p className="text-[0.9375rem] text-sub">投稿を読み込めませんでした</p>
                   <a
                     href={rss.baseUrl ?? rss.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border-b border-ink pb-1 text-sm tracking-[0.1em] text-ink transition-colors hover:border-brand hover:text-brand"
+                    className="border-b border-brand pb-1 text-[0.9375rem] tracking-[0.1em] text-brand"
                   >
                     選挙ドットコムで見る →
                   </a>
@@ -142,8 +142,8 @@ export default function ActivitySection() {
             ref={rightCardRef}
             className={`reveal reveal-delay-2 ${inView ? 'is-visible' : ''} self-start overflow-hidden border border-line bg-white`}
           >
-            <div className="border-b border-line px-5 py-3.5">
-              <p className="text-sm tracking-[0.1em] text-ink">市政報告</p>
+            <div className="border-b border-line border-t-2 border-t-brand px-5 py-3.5">
+              <p className="text-base tracking-[0.1em] text-ink">市政報告</p>
             </div>
             {municipalReport.image && (
               <div className="relative h-56 w-full overflow-hidden">
@@ -156,7 +156,7 @@ export default function ActivitySection() {
               </div>
             )}
             <div className="px-5 py-5">
-              <p className="text-sm leading-[1.9] text-sub">
+              <p className="text-[0.9375rem] leading-[1.9] text-sub">
                 {municipalReport.description}
               </p>
             </div>

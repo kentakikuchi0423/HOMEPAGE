@@ -101,7 +101,7 @@ export default function SocialLinksSection() {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-full w-full items-center gap-3 border-b border-r border-line bg-white px-4 py-5 text-sm text-ink transition-colors hover:bg-paper sm:px-5"
+                  className="flex h-full w-full items-center gap-3 border-b border-r border-line bg-white px-4 py-5 text-[0.9375rem] text-ink transition-colors hover:bg-paper sm:px-5"
                 >
                   <span
                     className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold sm:h-8 sm:w-8 ${config.iconBg} ${config.iconText}`}

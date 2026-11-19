@@ -43,10 +43,10 @@ export default function Header() {
             />
           ) : (
             <span className="flex items-baseline gap-3">
-              <span className="font-display text-lg font-semibold tracking-[0.14em] text-ink">
+              <span className="font-display text-xl font-semibold tracking-[0.14em] text-ink">
                 {siteConfig.profile.name}
               </span>
-              <span className="hidden text-[0.6875rem] tracking-[0.2em] text-sub sm:inline">
+              <span className="hidden text-[0.8125rem] tracking-[0.16em] text-brand sm:inline">
                 {siteConfig.profile.title}
               </span>
             </span>
@@ -54,7 +54,7 @@ export default function Header() {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-8 text-[0.8125rem] tracking-[0.1em] text-ink md:flex">
+        <nav className="hidden items-center gap-7 text-[0.9375rem] tracking-[0.08em] text-ink md:flex">
           {items.map((item) => (
             <a key={item.href} href={item.href} className="transition-colors hover:text-brand">
               {item.label}
@@ -62,7 +62,7 @@ export default function Header() {
           ))}
           <a
             href={cta.href}
-            className="border border-brand px-5 py-2 text-brand transition-colors hover:bg-brand hover:text-white"
+            className="bg-brand px-6 py-2 text-white transition-colors hover:bg-ink"
           >
             {cta.label}
           </a>
@@ -73,7 +73,7 @@ export default function Header() {
           <a
             href={cta.href}
             onClick={closeMenu}
-            className="border border-brand px-4 py-2 text-[0.8125rem] tracking-[0.1em] text-brand"
+            className="bg-brand px-4 py-2 text-[0.9375rem] tracking-[0.08em] text-white"
           >
             {cta.label}
           </a>
@@ -108,10 +108,10 @@ export default function Header() {
               <a
                 href={item.href}
                 onClick={closeMenu}
-                className="flex items-center justify-between py-4 text-[0.9375rem] tracking-[0.1em] text-ink"
+                className="flex items-center justify-between py-4 text-base tracking-[0.1em] text-ink"
               >
                 {item.label}
-                <span className="text-sub" aria-hidden="true">→</span>
+                <span className="text-brand" aria-hidden="true">→</span>
               </a>
             </li>
           ))}

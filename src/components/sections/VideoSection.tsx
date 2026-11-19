@@ -39,7 +39,7 @@ function VideoCard({ youtubeVideoId, title }: { youtubeVideoId: string; title?: 
               loading="lazy"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
-            <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-ink">
+            <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand text-white">
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 translate-x-0.5" aria-hidden="true">
                 <path d="M8 5v14l11-7z" />
               </svg>
@@ -47,7 +47,7 @@ function VideoCard({ youtubeVideoId, title }: { youtubeVideoId: string; title?: 
           </button>
         )}
       </div>
-      {title && <p className="mt-3 text-sm leading-relaxed text-ink">{title}</p>}
+      {title && <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink">{title}</p>}
     </div>
   )
 }

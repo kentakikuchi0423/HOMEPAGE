@@ -6,7 +6,7 @@ export default function ProfileCard() {
   return (
     <ul className="border-t border-line">
       {bio.map((line, i) => (
-        <li key={i} className="border-b border-line py-5 text-[0.9375rem] sm:text-base">
+        <li key={i} className="border-b border-line py-5 text-base">
           {line}
         </li>
       ))}

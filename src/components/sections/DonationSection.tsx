@@ -17,13 +17,13 @@ export default function DonationSection() {
         <SectionHeading en="SUPPORT" light>ご支援のお願い</SectionHeading>
 
         <div>
-          {description && <p className="max-w-xl text-white/90">{description}</p>}
+          {description && <p className="max-w-xl text-base text-white/90">{description}</p>}
 
           <a
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="arrow-link mt-9 inline-flex items-center gap-8 bg-white py-4 pl-8 pr-7 text-[0.9375rem] font-bold tracking-[0.1em] text-brand transition-colors hover:bg-paper"
+            className="arrow-link mt-9 inline-flex items-center gap-8 bg-white py-4 pl-8 pr-7 text-base font-bold tracking-[0.1em] text-brand transition-colors hover:bg-paper"
           >
             {label}
             <span className="arrow" aria-hidden="true">→</span>

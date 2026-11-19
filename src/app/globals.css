@@ -5,8 +5,8 @@
   --color-ink: #1c2430; /* 墨色：本文・見出し */
   --color-sub: #5a6472; /* 補助テキスト */
   --color-brand: #1e50a2; /* 瑠璃色：アクセント（1色に限定） */
-  --color-paper: #f5f7f9; /* ごく淡い青灰：セクション背景 */
-  --color-line: #e1e5ea; /* 罫線 */
+  --color-paper: #eff4fa; /* 淡い青：セクション背景 */
+  --color-line: #dbe2ec; /* 罫線 */
 }
 
 /* フォント変数は body で定義されるため、inline 指定で実行時に解決させる */
