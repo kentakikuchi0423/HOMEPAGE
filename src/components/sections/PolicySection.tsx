@@ -10,7 +10,7 @@ export default function PolicySection() {
     <section
       ref={ref}
       id="policy"
-      className={`bg-paper px-6 py-20 md:py-32 reveal ${inView ? "is-visible" : ""}`}
+      className={`bg-paper px-6 py-16 md:py-20 reveal ${inView ? "is-visible" : ""}`}
     >
       <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="POLICY">政策</SectionHeading>

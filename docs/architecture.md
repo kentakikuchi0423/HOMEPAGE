@@ -207,27 +207,20 @@ export const siteConfig: SiteConfig = {
 
 ## デザイントークン方針
 
-`tailwind.config.ts` でカスタムカラーを定義：
+`src/app/globals.css` の `@theme` でトークンを定義する（Tailwind v4 方式。`text-ink` / `bg-paper` などのクラスになる）。
 
-```typescript
-colors: {
-  primary: {
-    50:  '#eff6ff',
-    100: '#dbeafe',
-    500: '#3b82f6',
-    600: '#2563eb',
-    700: '#1d4ed8',
-    900: '#1e3a8a',
-  },
-  surface: {
-    DEFAULT: '#ffffff',
-    muted:   '#f8fafc',
-  },
-  accent: {
-    DEFAULT: '#60a5fa',  // 親しみやすさのポイントカラー
-  },
-}
-```
+| トークン | 値 | 用途 |
+|---|---|---|
+| `ink` | `#1c2430` | 本文・見出しの墨色 |
+| `sub` | `#4b5563` | 補助テキスト |
+| `brand` | `#1e50a2` | イメージカラーの瑠璃色（アクセントはこの1色に限定） |
+| `paper` | `#eff4fa` | 淡い青のセクション背景 |
+| `line` | `#dbe2ec` | 罫線 |
+
+- **書体**：全体を明朝体（Shippori Mincho、標準ウェイト 500）で統一。署名のみ筆ペン風（Yuji Syuku）
+- **文字サイズ**：`html` の基準サイズを画面幅で切り替える（17px → 1024px 以上 18px → 1536px 以上 20px）。各要素は rem 指定のため全体が連動する
+- **形**：角丸・影・グラデーションは使わず、細い罫線と余白で区切る
+- **動き**：スクロール時のゆっくりしたフェードと、矢印付きリンクの小さな移動のみ
 
 ---
 

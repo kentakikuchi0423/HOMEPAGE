@@ -103,7 +103,7 @@ export type SiteConfig = {
   donation: {
     url: string; // 外部寄付ページ URL
     label: string; // CTA ボタンラベル
-    description?: string; // セクション説明文（任意）
+    description?: string; // セクション説明文（任意。\\n で改行）
   };
   sns: SnsLink[];
   footer: {
@@ -278,7 +278,7 @@ export const siteConfig: SiteConfig = {
     url: "https://go2senkyo.com/donate/flow/196504",
     label: "活動を応援する",
     description:
-      "菊地けんたの活動を応援してください。皆さまのご支援が、市民のための政治を実現します。",
+      "皆さまと一緒に考え、一緒に行動しながら、地域の未来をつくっていきたいと考えています。\n日々の取り組みに共感いただけましたら、応援していただけると大きな励みになります。",
   },
   sns: [
     {

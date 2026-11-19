@@ -1,5 +1,4 @@
 type Props = {
-  icon?: React.ReactNode
   title: string
   items: string[]
 }

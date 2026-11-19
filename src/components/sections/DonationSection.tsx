@@ -11,13 +11,13 @@ export default function DonationSection() {
     <section
       ref={ref}
       id="donation"
-      className={`bg-brand px-6 py-20 md:py-28 reveal ${inView ? 'is-visible' : ''}`}
+      className={`bg-brand px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
       <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="SUPPORT" light>ご支援のお願い</SectionHeading>
 
         <div>
-          {description && <p className="max-w-xl text-base text-white/90">{description}</p>}
+          {description && <p className="whitespace-pre-line text-base text-white/90">{description}</p>}
 
           <a
             href={url}

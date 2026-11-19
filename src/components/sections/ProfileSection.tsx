@@ -15,7 +15,7 @@ export default function ProfileSection() {
     <section
       ref={ref}
       id="profile"
-      className={`bg-white px-6 py-20 md:py-32 reveal ${inView ? 'is-visible' : ''}`}
+      className={`bg-white px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
       <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="PROFILE">プロフィール</SectionHeading>

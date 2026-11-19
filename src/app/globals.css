@@ -56,7 +56,7 @@ html {
 }
 
 /* Hero のキャッチコピー：PC では縦書きにする */
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .hero-catch {
     writing-mode: vertical-rl;
   }
