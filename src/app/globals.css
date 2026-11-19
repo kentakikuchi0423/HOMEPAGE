@@ -45,8 +45,16 @@ html {
 }
 
 html {
+  /* 表示アニメーションで要素が動いても、ブラウザがスクロール位置を補正しないようにする
+     （補正されると、再読み込みのたびに表示位置が少しずつ下へずれる） */
+  overflow-anchor: none;
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+}
+
+/* ページ内リンクの移動先（セクション）自体にはフォーカス枠を出さない */
+section:focus {
+  outline: none;
 }
 
 /* キーボード操作時のフォーカス表示 */

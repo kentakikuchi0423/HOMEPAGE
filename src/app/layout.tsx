@@ -5,6 +5,7 @@ import { siteConfig } from "@/content/site";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/JsonLd";
+import InPageNav from "@/components/layout/InPageNav";
 
 const mincho = Shippori_Mincho({
   subsets: ["latin"],
@@ -63,6 +64,7 @@ export default function RootLayout({
           <style>{`.reveal,.rise,.curtain img{opacity:1!important;transform:none!important}.curtain::after{display:none!important}.row-line::after{transform:none!important}`}</style>
         </noscript>
         <JsonLd />
+        <InPageNav />
         <Header />
         <main className="pt-16">{children}</main>
         <Footer />

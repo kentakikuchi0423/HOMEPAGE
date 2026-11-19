@@ -23,8 +23,11 @@ export default function ActivitySection() {
   useEffect(() => {
     const el = rightCardRef.current
     if (!el) return
+    // 2 列で並ぶ幅（1024px 以上）のときだけ高さを揃える。
+    // 縦に積まれる幅では CSS の固定高さを使い、読み込み後に全体の高さが変わらないようにする
+    const twoColumns = window.matchMedia('(min-width: 1024px)')
     const ro = new ResizeObserver(() => {
-      setSyncedHeight(el.getBoundingClientRect().height)
+      setSyncedHeight(twoColumns.matches ? el.getBoundingClientRect().height : undefined)
     })
     ro.observe(el)
     return () => ro.disconnect()
@@ -52,10 +55,10 @@ export default function ActivitySection() {
           {rss && (
             <div
               style={syncedHeight !== undefined ? { height: syncedHeight } : undefined}
-              className={`reveal reveal-delay-1 ${inView ? 'is-visible' : ''} flex flex-col overflow-hidden border border-line bg-white`}
+              className={`reveal reveal-delay-1 ${inView ? 'is-visible' : ''} flex h-[26rem] flex-col overflow-hidden border border-line bg-white lg:h-auto`}
             >
-              <div className="shrink-0 border-b border-line border-t-2 border-t-brand px-5 py-3.5">
-                <p className="text-base tracking-[0.1em] text-ink">{rss.title}</p>
+              <div className="shrink-0 bg-brand px-5 py-3">
+                <p className="text-base tracking-[0.1em] text-white">{rss.title}</p>
               </div>
 
               {loading ? (
@@ -143,11 +146,11 @@ export default function ActivitySection() {
             ref={rightCardRef}
             className={`reveal reveal-delay-2 ${inView ? 'is-visible' : ''} self-start overflow-hidden border border-line bg-white`}
           >
-            <div className="border-b border-line border-t-2 border-t-brand px-5 py-3.5">
-              <p className="text-base tracking-[0.1em] text-ink">市政報告</p>
+            <div className="bg-brand px-5 py-3">
+              <p className="text-base tracking-[0.1em] text-white">市政報告</p>
             </div>
             {municipalReport.image && (
-              <Reveal className="curtain h-56 w-full">
+              <Reveal className="curtain aspect-[1124/789] w-full">
                 <Image
                   src={municipalReport.image}
                   alt={municipalReport.imageAlt ?? '市政報告'}
