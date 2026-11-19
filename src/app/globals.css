@@ -16,10 +16,10 @@
 }
 
 body {
-  font-family: var(--font-noto-sans-jp), 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+  font-family: var(--font-body), 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
   color: var(--color-ink);
-  letter-spacing: 0.04em;
-  line-height: 1.9;
+  letter-spacing: 0.02em;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   /* 日本語の改行を文節単位にし、行末に1〜2文字だけ残るのを避ける（対応ブラウザのみ） */
   word-break: auto-phrase;

@@ -15,17 +15,14 @@ export default function MessageSection() {
       className={`bg-paper px-6 py-20 md:py-32 reveal ${inView ? 'is-visible' : ''}`}
     >
       <div className="mx-auto grid max-w-5xl gap-x-16 gap-y-12 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
-        {/* 写真：PC ではスクロールに追従させる */}
         {photo && (
-          <div className="md:sticky md:top-24 md:self-start">
-            <Image
-              src={photo}
-              alt={photoAlt ?? ''}
-              width={700}
-              height={840}
-              className="aspect-[5/6] w-full object-cover"
-            />
-          </div>
+          <Image
+            src={photo}
+            alt={photoAlt ?? ''}
+            width={1100}
+            height={1337}
+            className="h-auto w-full self-start"
+          />
         )}
 
         <div>

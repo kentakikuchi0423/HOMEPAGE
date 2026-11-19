@@ -17,14 +17,11 @@ export default function HeroSection() {
         {/* Text：スマホは上から「キャッチコピー → 氏名」、PC は左下に氏名・右上に縦書きのキャッチコピー */}
         <div className="flex flex-col-reverse gap-9 md:flex-row md:justify-between md:gap-8">
           <div className="md:self-end">
-            <p className="flex items-center gap-3 text-[0.9375rem] tracking-[0.24em] text-brand">
-              <span className="h-px w-8 bg-brand" aria-hidden="true" />
-              {title}
-            </p>
-            <h1 className="mt-4 font-display text-[2.5rem] font-semibold leading-tight tracking-[0.16em] text-ink lg:text-5xl">
+            <p className="text-[0.9375rem] font-medium tracking-[0.16em] text-brand">{title}</p>
+            <h1 className="mt-4 font-display text-[2.75rem] font-semibold leading-tight tracking-[0.1em] text-ink lg:text-6xl">
               {name}
             </h1>
-            <p className="mt-3 text-[0.8125rem] tracking-[0.36em] text-sub">{nameKana}</p>
+            <p className="mt-3 text-[0.8125rem] tracking-[0.3em] text-sub">{nameKana}</p>
 
             {subcopy && <p className="mt-7 text-base text-ink md:mt-9">{subcopy}</p>}
 

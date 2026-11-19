@@ -39,7 +39,7 @@ function VideoCard({ youtubeVideoId, title }: { youtubeVideoId: string; title?: 
               loading="lazy"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
-            {/* 動画サイトで一般的な、角丸長方形に三角の再生ボタン */}
+            {/* YouTube と同様の、赤い角丸長方形に白い三角の再生ボタン */}
             <svg
               viewBox="0 0 68 48"
               className="absolute left-1/2 top-1/2 h-12 w-[4.25rem] -translate-x-1/2 -translate-y-1/2"
@@ -49,7 +49,7 @@ function VideoCard({ youtubeVideoId, title }: { youtubeVideoId: string; title?: 
                 width="68"
                 height="48"
                 rx="12"
-                className="fill-ink/85 transition-colors duration-300 group-hover:fill-brand"
+                className="fill-[#f00] transition-opacity duration-300 group-hover:opacity-85"
               />
               <path d="M27 14v20l18-10z" fill="#fff" />
             </svg>
