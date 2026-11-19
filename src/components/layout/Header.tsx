@@ -62,7 +62,7 @@ export default function Header() {
           ))}
           <a
             href={cta.href}
-            className="bg-brand px-6 py-2 text-white transition-colors hover:bg-ink"
+            className="border-b border-brand pb-0.5 text-brand transition-colors hover:border-ink hover:text-ink"
           >
             {cta.label}
           </a>
@@ -73,7 +73,7 @@ export default function Header() {
           <a
             href={cta.href}
             onClick={closeMenu}
-            className="bg-brand px-4 py-2 text-[0.9375rem] tracking-[0.08em] text-white"
+            className="mr-2 border-b border-brand pb-0.5 text-[0.9375rem] font-medium tracking-[0.04em] text-brand"
           >
             {cta.label}
           </a>
