@@ -17,7 +17,14 @@ export default function InPageNav() {
       const id = link?.getAttribute('href')?.slice(1)
       if (!id) return
       const target = document.getElementById(id)
-      if (!target) return
+      if (!target) {
+        // トップページ以外（存在しないページなど）では、トップページの該当箇所へ移動する
+        if (location.pathname !== '/') {
+          e.preventDefault()
+          location.href = `/#${id}`
+        }
+        return
+      }
 
       e.preventDefault()
       target.scrollIntoView() // scroll-behavior / scroll-padding-top は CSS の指定に従う
@@ -27,11 +34,21 @@ export default function InPageNav() {
       clearHash()
     }
 
+    // # 付きの URL で開かれた／アドレス欄で # を変えられた場合も、移動が済んでから # を外す
+    let timer: number | undefined
+    const scheduleClear = () => {
+      if (!location.hash) return
+      window.clearTimeout(timer)
+      timer = window.setTimeout(clearHash, 1500)
+    }
+
+    scheduleClear()
     document.addEventListener('click', onClick)
-    const timer = location.hash ? window.setTimeout(clearHash, 1500) : undefined
+    window.addEventListener('hashchange', scheduleClear)
     return () => {
       document.removeEventListener('click', onClick)
-      if (timer) window.clearTimeout(timer)
+      window.removeEventListener('hashchange', scheduleClear)
+      window.clearTimeout(timer)
     }
   }, [])
 

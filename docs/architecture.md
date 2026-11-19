@@ -90,6 +90,11 @@ export type SiteConfig = {
   hero: {
     cta: NavLink          // Hero のボタン
   }
+  notFound: {
+    title: string         // 存在しないページ（404）の見出し
+    message: string       // 説明文
+    linkLabel: string     // トップページへ戻るリンクの文言
+  }
   message: {
     title: string                   // セクション見出し
     paragraphs: MessageParagraph[]  // 挨拶文（emphasis: true の段落は強調表示）

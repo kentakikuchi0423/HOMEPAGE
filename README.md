@@ -53,7 +53,10 @@ npx serve out       # ローカルでビルド成果物を確認
 
 ```
 src/content/site.ts
-  ├── meta        サイトタイトル・OGP 画像・URL・favicon
+  ├── nav         ヘッダーのメニュー項目・「応援する」リンク
+  ├── hero        ファーストビューのボタン
+  ├── message     ごあいさつ（本文・署名・写真）
+  ├── meta        サイトタイトル・説明文・OGP 画像・本番 URL・favicon
   ├── brand       ヘッダーロゴ画像パス
   ├── profile     氏名・肩書き・プロフィール文・顔写真・キャッチコピー・資格・趣味
   ├── policies    政策項目（配列）
@@ -61,7 +64,8 @@ src/content/site.ts
   ├── activity    市政報告（画像・説明文）
   ├── donation    寄付ページ URL・ボタンラベル
   ├── sns         SNS リンク一覧（配列）
-  └── footer      コピーライト・免責文
+  ├── footer      コピーライト・免責文
+  └── notFound    存在しないページ（404）の文言
 ```
 
 詳細な型定義は `docs/architecture.md` を参照してください。
