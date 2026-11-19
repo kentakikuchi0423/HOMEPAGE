@@ -1,113 +1,55 @@
-# TASKS.md — フェーズ別タスク一覧
+# TASKS.md — 作業記録と運用タスク
 
-## Phase 0: ドキュメント整備 ✅
+## 現在の状態
 
-- [x] `CLAUDE.md` 作成
-- [x] `TASKS.md` 作成
-- [x] `docs/architecture.md` 作成
-- [x] `.claude/settings.json` 作成
-- [x] `README.md` 作成
+- **公開 URL**：https://kikuchi-kenta.jp/
+- **ホスティング**：Netlify（`main` ブランチへのマージで自動デプロイ）
+- **旧 URL**：`kentakikuchi.netlify.app` は新ドメインへ 301 転送
 
 ---
 
-## Phase 1: プロジェクト初期化 ✅
+## 完了した作業
 
-- [x] Dev Container 設定作成（`.devcontainer/devcontainer.json`）
-- [x] `npx create-next-app` で Next.js プロジェクト初期化
-  - TypeScript: Yes
-  - Tailwind CSS: Yes
-  - App Router: Yes
-  - `src/` ディレクトリ: Yes
-  - import alias: `@/*` → `./src/*`
-- [x] `next.config.ts` に `output: 'export'` を設定
-- [x] Tailwind CSS カスタムカラーを `globals.css` の CSS 変数として定義（Tailwind v4 方式）
-- [x] `src/content/site.ts` にダミーデータで `SiteConfig` を実装
-- [x] Netlify 用 `.gitignore` 確認・更新
+### 初期構築（Phase 0〜7）✅
 
----
+- [x] ドキュメント整備、プロジェクト初期化（Next.js / TypeScript / Tailwind CSS）
+- [x] レイアウト・各セクションの実装
+- [x] Netlify へのデプロイ設定と本番公開
 
-## Phase 2: レイアウト・共通コンポーネント ✅
+### 2026年11月：リニューアル ✅
 
-- [x] `src/app/layout.tsx` に RootLayout 実装（フォント・メタタグ）
-- [x] `src/app/globals.css` にベーススタイル設定
-- [x] `src/components/layout/Header.tsx` 実装（固定ナビ）
-- [x] `src/components/layout/Footer.tsx` 実装
-- [x] `src/components/ui/SectionHeading.tsx` 実装
-- [x] `src/components/ui/FeatureCard.tsx` 実装（Phase 6 で追加）
+- [x] セキュリティ更新（Next.js 15.5 系への更新、CSP から `unsafe-eval` を削除、RSS 由来 URL の検証）
+- [x] デザイン刷新（明朝体・白地・瑠璃色 1 色、余白と罫線による構成）
+- [x] 「ごあいさつ」セクションの追加、写真の追加・差し替え
+- [x] 読み込み時・スクロール時の控えめな動きの追加
+- [x] スマホ・タブレットの表示崩れ、再読み込み時の位置ずれの修正
+- [x] 表示速度の改善（フォントの先読み停止、画像の軽量化）
+- [x] 独自ドメイン `kikuchi-kenta.jp` への切り替え（canonical・OGP・サイトマップ・301 転送）
+- [x] SNS シェア用画像（OGP）の更新、404 ページの日本語化
 
 ---
 
-## Phase 3: 各セクション実装 ✅
+## 運用タスク
 
-- [x] `src/app/page.tsx` に全セクションを並べる構造を実装
-- [x] `HeroSection.tsx`：顔写真・キャッチコピー・サブコピー
-- [x] `ProfileSection.tsx`：自己紹介文・経歴ハイライト
-- [x] `PolicySection.tsx`：政策カード（3〜5項目）
-- [x] `ActivitySection.tsx`：X タイムライン埋め込み + 市政報告
-- [x] `DonationSection.tsx`：寄付 CTA ボタン・外部リンク遷移
-- [x] `SocialLinksSection.tsx`：SNS リンクボタン群
-- [x] `VideoSection.tsx`：動画セクション
+### 随時
 
----
+- [ ] 内容の更新は `src/content/site.ts` を編集する（手順は `README.md`）
+- [ ] 写真を追加するときは、他の方が写り込んでいないか確認する（リポジトリは公開設定）
 
-## Phase 4: アニメーション・スタイル仕上げ ✅
+### 定期（半年に一度を目安）
 
-- [x] スクロール連動フェードインアニメーション実装（`src/hooks/useInView.ts`）
-- [x] Hero セクションの入場アニメーション実装（`hero-animate` CSS クラス）
-- [x] Policy カードのホバーエフェクト実装
-- [x] Donation セクションの CTA ボタンのアニメーション実装
-- [x] モバイル・タブレット・デスクトップのレイアウト確認・調整
-- [x] フォント・行間・余白の最終調整
+- [ ] 依存パッケージの更新と `npm audit` の確認
+- [ ] Next.js 16 への更新を検討（同梱の PostCSS に起因する指摘 2 件の解消。実害は低い）
+- [ ] ドメイン `kikuchi-kenta.jp` の更新期限と自動更新設定の確認（ムームードメイン）
+
+### 注意事項
+
+- Netlify のサイト名 `kentakikuchi` は変更しない（旧 URL からの転送が切れる）
+- デザインの方針は `CLAUDE.md`、トークンの値は `docs/architecture.md` を参照
 
 ---
 
-## Phase 5: デザインポリッシュ ✅
-
-- [x] ヘッダー・アイコンのリファイン
-- [x] Policy カード・モーション強化
-- [x] X タイムライン埋め込み安定化
-- [x] YouTube 埋め込み修正
-- [x] 全体デザイン仕上げ
-
----
-
-## Phase 6: リファクタリング・コード整備 ✅
-
-### リファクタリング（完了）
-
-- [x] OGP / Twitter Card メタタグ追加（`layout.tsx`）
-- [x] 動的 Tailwind クラス名を配列マッピングに変換（Tailwind JIT 対策）
-- [x] `ActivitySection.tsx` の X ウィジェットロジックをカスタムフックに抽出（`useXTimelineWidget.ts`）
-- [x] `HobbiesCard` / `QualificationsCard` を `FeatureCard.tsx` に統合
-- [x] README にコンテンツ更新手順（`video` / `activity` / `brand`）を追記
-- [x] TASKS.md 進捗更新
-
-### コンテンツ・QA（本番公開前に実施）
-
-- [ ] `src/content/site.ts` に実コンテンツを入力
-- [ ] 顔写真・OGP 画像を `public/images/` に配置
-- [ ] Lighthouse スコア計測（Performance / Accessibility / SEO）
-- [ ] モバイル実機確認
-- [ ] X Timeline 埋め込み表示確認
-- [ ] 寄付ページへの遷移確認
-- [ ] OGP タグ・メタタグ確認
-
----
-
-## Phase 7: 本番公開
-
-- [ ] `netlify.toml` 作成（ビルドコマンド・公開ディレクトリ設定）
-- [ ] Netlify プロジェクト作成・GitHub リポジトリ連携
-- [ ] 環境変数設定（必要な場合）
-- [ ] プレビューデプロイで動作確認
-- [ ] 独自ドメイン設定（Netlify DNS または外部 DNS）
-- [ ] HTTPS 証明書確認
-- [ ] 本番 URL での最終動作確認
-- [ ] 公開
-
----
-
-## 初期スコープ外（将来フェーズで検討）
+## スコープ外（将来検討）
 
 - 問い合わせフォーム
 - 管理画面・CMS

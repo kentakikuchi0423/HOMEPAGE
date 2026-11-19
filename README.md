@@ -128,5 +128,5 @@ public/images/
 ## プロジェクト構成
 
 詳細は `docs/architecture.md` を参照。
-フェーズ別タスクは `TASKS.md` を参照。
+作業記録と運用タスクは `TASKS.md` を参照。
 開発ルールは `CLAUDE.md` を参照。
