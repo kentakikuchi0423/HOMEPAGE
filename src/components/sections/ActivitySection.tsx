@@ -41,20 +41,20 @@ export default function ActivitySection() {
     <section
       ref={ref}
       id="activity"
-      className={`bg-paper px-5 py-16 sm:py-24 reveal ${inView ? 'is-visible' : ''}`}
+      className={`bg-paper px-6 py-20 md:py-32 reveal ${inView ? 'is-visible' : ''}`}
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="ACTIVITY">活動報告</SectionHeading>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* 最新の活動（RSS） */}
           {rss && (
             <div
               style={syncedHeight !== undefined ? { height: syncedHeight } : undefined}
               className={`reveal reveal-delay-1 ${inView ? 'is-visible' : ''} flex flex-col overflow-hidden border border-line bg-white`}
             >
-              <div className="shrink-0 border-b-2 border-ink px-5 py-3.5">
-                <p className="font-display font-bold text-ink">{rss.title}</p>
+              <div className="shrink-0 border-b border-line px-5 py-3.5">
+                <p className="text-sm tracking-[0.1em] text-ink">{rss.title}</p>
               </div>
 
               {loading ? (
@@ -81,7 +81,7 @@ export default function ActivitySection() {
                         className="group flex gap-4 px-5 py-4 transition-colors hover:bg-paper"
                       >
                         {item.image ? (
-                          <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm">
+                          <div className="relative h-20 w-20 shrink-0 overflow-hidden">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={item.image}
@@ -98,10 +98,10 @@ export default function ActivitySection() {
                           </div>
                         )}
                         <div className="flex min-w-0 flex-1 flex-col justify-center">
-                          <time className="text-xs font-bold tracking-wider text-brand">
+                          <time className="text-xs tracking-[0.1em] text-sub">
                             {formatDate(item.pubDate)}
                           </time>
-                          <p className="mt-1 line-clamp-2 text-sm font-medium leading-snug text-ink group-hover:underline">
+                          <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-ink group-hover:text-brand">
                             {item.title}
                           </p>
                         </div>
@@ -114,7 +114,7 @@ export default function ActivitySection() {
                         href={rss.baseUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block rounded-md border border-ink px-6 py-2 text-sm font-bold text-ink transition-colors hover:bg-ink hover:text-white"
+                        className="inline-block border-b border-ink pb-1 text-sm tracking-[0.1em] text-ink transition-colors hover:border-brand hover:text-brand"
                       >
                         活動をもっと見る →
                       </a>
@@ -123,12 +123,12 @@ export default function ActivitySection() {
                 </ul>
               ) : (
                 <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 py-10">
-                  <p className="text-sm text-ink/70">投稿を読み込めませんでした</p>
+                  <p className="text-sm text-sub">投稿を読み込めませんでした</p>
                   <a
                     href={rss.baseUrl ?? rss.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-md border border-ink px-6 py-3 text-sm font-bold text-ink transition-colors hover:bg-ink hover:text-white"
+                    className="border-b border-ink pb-1 text-sm tracking-[0.1em] text-ink transition-colors hover:border-brand hover:text-brand"
                   >
                     選挙ドットコムで見る →
                   </a>
@@ -142,8 +142,8 @@ export default function ActivitySection() {
             ref={rightCardRef}
             className={`reveal reveal-delay-2 ${inView ? 'is-visible' : ''} self-start overflow-hidden border border-line bg-white`}
           >
-            <div className="border-b-2 border-ink px-5 py-3.5">
-              <p className="font-display font-bold text-ink">市政報告</p>
+            <div className="border-b border-line px-5 py-3.5">
+              <p className="text-sm tracking-[0.1em] text-ink">市政報告</p>
             </div>
             {municipalReport.image && (
               <div className="relative h-56 w-full overflow-hidden">
@@ -156,7 +156,7 @@ export default function ActivitySection() {
               </div>
             )}
             <div className="px-5 py-5">
-              <p className="text-sm leading-relaxed text-ink/80">
+              <p className="text-sm leading-[1.9] text-sub">
                 {municipalReport.description}
               </p>
             </div>

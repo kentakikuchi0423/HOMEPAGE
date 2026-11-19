@@ -79,12 +79,12 @@ export default function SocialLinksSection() {
     <section
       ref={ref}
       id="social"
-      className={`bg-white px-5 py-16 sm:py-24 reveal ${inView ? "is-visible" : ""}`}
+      className={`bg-white px-6 py-20 md:py-32 reveal ${inView ? "is-visible" : ""}`}
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="CONNECT">SNS・リンク</SectionHeading>
 
-        <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+        <ul className="grid grid-cols-2 border-l border-t border-line sm:grid-cols-3">
           {sorted.map(({ platform, url, iconImage }, i) => {
             const config = platformConfig[platform] ?? {
               label: platform,
@@ -101,7 +101,7 @@ export default function SocialLinksSection() {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-full w-full items-center gap-2 rounded-md border border-line bg-white px-3 py-4 text-sm font-bold text-ink transition-colors hover:border-ink hover:bg-paper sm:gap-3 sm:px-5"
+                  className="flex h-full w-full items-center gap-3 border-b border-r border-line bg-white px-4 py-5 text-sm text-ink transition-colors hover:bg-paper sm:px-5"
                 >
                   <span
                     className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold sm:h-8 sm:w-8 ${config.iconBg} ${config.iconText}`}

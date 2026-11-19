@@ -12,10 +12,10 @@ function VideoCard({ youtubeVideoId, title }: { youtubeVideoId: string; title?: 
 
   return (
     <div>
-      <div className="relative aspect-video overflow-hidden rounded-sm bg-ink">
+      <div className="relative aspect-video overflow-hidden bg-ink">
         {!youtubeVideoId ? (
           <div className="flex h-full w-full items-center justify-center">
-            <p className="text-sm font-medium text-white/80">{placeholder}</p>
+            <p className="text-sm text-white/80">{placeholder}</p>
           </div>
         ) : playing ? (
           <iframe
@@ -37,19 +37,17 @@ function VideoCard({ youtubeVideoId, title }: { youtubeVideoId: string; title?: 
               src={`https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`}
               alt=""
               loading="lazy"
-              className="h-full w-full object-cover transition-opacity group-hover:opacity-85"
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
-            <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-marker text-ink transition-transform group-hover:scale-110">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 translate-x-0.5" aria-hidden="true">
+            <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-ink">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 translate-x-0.5" aria-hidden="true">
                 <path d="M8 5v14l11-7z" />
               </svg>
             </span>
           </button>
         )}
       </div>
-      {title && (
-        <p className="mt-3 font-display font-bold leading-snug text-ink">{title}</p>
-      )}
+      {title && <p className="mt-3 text-sm leading-relaxed text-ink">{title}</p>}
     </div>
   )
 }
@@ -64,12 +62,12 @@ export default function VideoSection() {
     <section
       ref={ref}
       id="video"
-      className={`bg-white px-5 py-16 sm:py-24 reveal ${inView ? 'is-visible' : ''}`}
+      className={`bg-white px-6 py-20 md:py-32 reveal ${inView ? 'is-visible' : ''}`}
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="VIDEO">動画</SectionHeading>
 
-        <div className="grid grid-cols-1 gap-x-6 gap-y-9 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
           {videos.map((video, i) => (
             <div key={video.youtubeVideoId || i} className={`reveal ${revealDelay[Math.min(i, 3)]} ${inView ? 'is-visible' : ''}`}>
               <VideoCard {...video} />

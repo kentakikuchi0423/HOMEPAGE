@@ -11,24 +11,22 @@ export default function DonationSection() {
     <section
       ref={ref}
       id="donation"
-      className={`bg-ink px-5 py-16 sm:py-24 reveal ${inView ? 'is-visible' : ''}`}
+      className={`bg-brand px-6 py-20 md:py-28 reveal ${inView ? 'is-visible' : ''}`}
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="SUPPORT" light>ご支援のお願い</SectionHeading>
 
-        <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between md:gap-12">
-          {description && (
-            <p className="max-w-xl text-base leading-loose text-white/90 sm:text-lg">{description}</p>
-          )}
+        <div>
+          {description && <p className="max-w-xl text-white/90">{description}</p>}
 
           <a
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex shrink-0 items-center gap-3 rounded-md bg-marker px-9 py-4 font-display text-lg font-black text-ink transition-colors hover:bg-white"
+            className="arrow-link mt-9 inline-flex items-center gap-8 bg-white py-4 pl-8 pr-7 text-[0.9375rem] font-bold tracking-[0.1em] text-brand transition-colors hover:bg-paper"
           >
             {label}
-            <span aria-hidden="true">→</span>
+            <span className="arrow" aria-hidden="true">→</span>
           </a>
         </div>
       </div>

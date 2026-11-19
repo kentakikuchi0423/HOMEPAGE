@@ -2,65 +2,69 @@
 
 /* デザイントークン（Tailwind v4: text-ink / bg-paper / font-display などのクラスになる） */
 @theme {
-  --color-ink: #0f2350; /* 濃紺：見出し・本文の基調色 */
-  --color-brand: #1d4ed8; /* 青：アクセント */
-  --color-paper: #f6f4ee; /* 生成り：セクション背景 */
-  --color-marker: #ffe14d; /* 黄：マーカー・強調ボタン */
-  --color-line: #d5d9e2; /* 罫線 */
-  --font-display: var(--font-zen-kaku), var(--font-noto-sans-jp), sans-serif;
+  --color-ink: #1c2430; /* 墨色：本文・見出し */
+  --color-sub: #5a6472; /* 補助テキスト */
+  --color-brand: #1e50a2; /* 瑠璃色：アクセント（1色に限定） */
+  --color-paper: #f5f7f9; /* ごく淡い青灰：セクション背景 */
+  --color-line: #e1e5ea; /* 罫線 */
+}
+
+/* フォント変数は body で定義されるため、inline 指定で実行時に解決させる */
+@theme inline {
+  --font-display: var(--font-mincho), 'Hiragino Mincho ProN', 'Yu Mincho', serif;
 }
 
 body {
   font-family: var(--font-noto-sans-jp), 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
   color: var(--color-ink);
-  font-feature-settings: 'palt';
+  letter-spacing: 0.04em;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ページ内リンクで固定ヘッダーに見出しが隠れないようにする */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 4.5rem;
+  scroll-padding-top: 5rem;
 }
 
 /* キーボード操作時のフォーカス表示 */
 :focus-visible {
-  outline: 3px solid var(--color-brand);
-  outline-offset: 3px;
-}
-
-/* 蛍光マーカー風の下線（横書き） */
-.marker {
-  background: linear-gradient(transparent 62%, var(--color-marker) 62%);
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
+  outline: 2px solid var(--color-brand);
+  outline-offset: 4px;
 }
 
 /* Hero のキャッチコピー：PC では縦書きにする */
 @media (min-width: 768px) {
   .hero-catch {
     writing-mode: vertical-rl;
-    font-feature-settings: normal;
-  }
-  .hero-catch .marker {
-    background: linear-gradient(to left, transparent 62%, var(--color-marker) 62%);
   }
 }
 
-/* スクロール連動の表示：控えめなフェードのみ */
+/* 矢印付きリンク：ホバーで矢印が少し進む */
+.arrow-link .arrow {
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+.arrow-link:hover .arrow {
+  transform: translateX(6px);
+}
+
+/* スクロール連動の表示：ゆっくりとしたフェードのみ */
 .reveal {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transform: translateY(10px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
-.reveal-delay-1 { transition-delay: 0.05s; }
-.reveal-delay-2 { transition-delay: 0.1s; }
-.reveal-delay-3 { transition-delay: 0.15s; }
-.reveal-delay-4 { transition-delay: 0.2s; }
-.reveal-delay-5 { transition-delay: 0.25s; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.4s; }
 
 /* 「視差効果を減らす」設定の利用者にはアニメーションを無効化 */
 @media (prefers-reduced-motion: reduce) {
@@ -70,6 +74,9 @@ html {
   .reveal {
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+  .arrow-link .arrow {
     transition: none;
   }
 }

@@ -10,29 +10,29 @@ export default function PolicySection() {
     <section
       ref={ref}
       id="policy"
-      className={`bg-paper px-5 py-16 sm:py-24 reveal ${inView ? "is-visible" : ""}`}
+      className={`bg-paper px-6 py-20 md:py-32 reveal ${inView ? "is-visible" : ""}`}
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="POLICY">政策</SectionHeading>
 
-        <ol className="border-t border-ink/20">
+        <ol className="border-t border-ink/15">
           {siteConfig.policies.map((policy, i) => (
             <li
               key={policy.title}
-              className="grid grid-cols-[3rem_minmax(0,1fr)] items-baseline gap-x-4 gap-y-2 border-b border-ink/20 py-7 md:grid-cols-[5.5rem_minmax(0,1fr)_minmax(0,1.25fr)] md:gap-x-8 md:py-9"
+              className="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-x-4 border-b border-ink/15 py-8 sm:grid-cols-[4rem_minmax(0,1fr)]"
             >
               <span
-                className="font-display text-3xl font-black leading-none text-brand md:text-5xl"
+                className="font-display text-lg leading-[1.9] text-brand"
                 aria-hidden="true"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="font-display text-xl font-bold leading-snug text-ink md:text-2xl">
-                {policy.title}
-              </h3>
-              <p className="col-start-2 leading-relaxed text-ink/80 md:col-start-3">
-                {policy.description}
-              </p>
+              <div>
+                <h3 className="text-lg font-bold leading-[1.9] tracking-[0.06em] text-ink">
+                  {policy.title}
+                </h3>
+                <p className="mt-2 text-[0.9375rem] text-sub">{policy.description}</p>
+              </div>
             </li>
           ))}
         </ol>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Zen_Kaku_Gothic_New } from "next/font/google";
+import { Noto_Sans_JP, Shippori_Mincho } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/content/site";
 import Header from "@/components/layout/Header";
@@ -8,15 +8,15 @@ import JsonLd from "@/components/JsonLd";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
+  weight: ["400", "500", "700"],
   variable: "--font-noto-sans-jp",
   display: "swap",
 });
 
-const zenKaku = Zen_Kaku_Gothic_New({
+const mincho = Shippori_Mincho({
   subsets: ["latin"],
-  weight: ["700", "900"],
-  variable: "--font-zen-kaku",
+  weight: ["500", "600"],
+  variable: "--font-mincho",
   display: "swap",
 });
 
@@ -56,7 +56,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={`${notoSansJP.variable} ${zenKaku.variable}`}>
+      <body className={`${notoSansJP.variable} ${mincho.variable}`}>
         {/* JavaScript が無効でも本文が表示されるようにする */}
         <noscript>
           <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>

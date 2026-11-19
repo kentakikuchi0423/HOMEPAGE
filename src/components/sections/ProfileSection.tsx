@@ -12,20 +12,15 @@ export default function ProfileSection() {
     <section
       ref={ref}
       id="profile"
-      className={`bg-white px-5 py-16 sm:py-24 reveal ${inView ? 'is-visible' : ''}`}
+      className={`bg-white px-6 py-20 md:py-32 reveal ${inView ? 'is-visible' : ''}`}
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
         <SectionHeading en="PROFILE">プロフィール</SectionHeading>
 
-        <div className="grid grid-cols-1 gap-x-14 gap-y-10 md:grid-cols-[1.2fr_1fr]">
-          {/* 左: 経歴 */}
+        <div>
           <ProfileCard />
-
-          {/* 右: 資格・趣味 */}
-          <div className="flex flex-col gap-9">
-            <QualificationsCard />
-            <HobbiesCard />
-          </div>
+          <QualificationsCard />
+          <HobbiesCard />
         </div>
       </div>
     </section>
