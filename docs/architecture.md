@@ -90,6 +90,14 @@ export type SiteConfig = {
   hero: {
     cta: NavLink          // Hero のボタン
   }
+  message: {
+    title: string                   // セクション見出し
+    paragraphs: MessageParagraph[]  // 挨拶文（emphasis: true の段落は強調表示）
+    signatureTitle: string          // 署名の肩書き
+    signatureName: string           // 署名の氏名（手書き風フォントで表示）
+    photo?: string                  // 写真パス（public/ 以下）
+    photoAlt?: string               // 写真の alt テキスト
+  }
   brand: {
     headerLogo?: string   // ヘッダーロゴ画像パス（public/ 以下）例: "/images/brand/logo.png"
     logoAlt?: string      // alt テキスト（省略時は profile.name を使用）

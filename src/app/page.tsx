@@ -1,4 +1,5 @@
 import HeroSection from '@/components/sections/HeroSection'
+import MessageSection from '@/components/sections/MessageSection'
 import ProfileSection from '@/components/sections/ProfileSection'
 import PolicySection from '@/components/sections/PolicySection'
 import VideoSection from '@/components/sections/VideoSection'
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <MessageSection />
       <ProfileSection />
       <PolicySection />
       <VideoSection />

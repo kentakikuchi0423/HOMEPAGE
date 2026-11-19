@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Shippori_Mincho } from "next/font/google";
+import { Noto_Sans_JP, Shippori_Mincho, Yuji_Syuku } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/content/site";
 import Header from "@/components/layout/Header";
@@ -17,6 +17,14 @@ const mincho = Shippori_Mincho({
   subsets: ["latin"],
   weight: ["500", "600"],
   variable: "--font-mincho",
+  display: "swap",
+});
+
+// 署名用の手書き（筆ペン）風フォント
+const signature = Yuji_Syuku({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-signature",
   display: "swap",
 });
 
@@ -56,7 +64,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={`${notoSansJP.variable} ${mincho.variable}`}>
+      <body className={`${notoSansJP.variable} ${mincho.variable} ${signature.variable}`}>
         {/* JavaScript が無効でも本文が表示されるようにする */}
         <noscript>
           <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>

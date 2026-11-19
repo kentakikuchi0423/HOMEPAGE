@@ -27,7 +27,14 @@ public/
     │   ├── logo.png         ← ヘッダーロゴ画像（差し替え用）
     │   └── ogp.png          ← OGP 画像（SNS シェア用）
     ├── profile/
-    │   └── profile.jpg      ← プロフィール写真
+    │   ├── profile.jpg      ← プロフィール写真（ファーストビュー）
+    │   ├── council.jpg      ← ごあいさつ欄の写真（photos/council.jpg を切り出したもの）
+    │   └── cycling.jpg      ← プロフィール欄の写真（photos/cycling.jpg を切り出したもの）
+    ├── photos/              ← 写真の原本置き場（サイトでは直接使用しない）
+    │   ├── council.jpg
+    │   ├── cycling.jpg
+    │   ├── marathon.jpg
+    │   └── report-meeting.jpg
     ├── policy/
     │   ├── education.png    ← 政策アイコン: 子育て・教育
     │   ├── economy.png      ← 政策アイコン: 地域経済

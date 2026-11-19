@@ -54,7 +54,7 @@ export default function Header() {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-7 text-[0.9375rem] tracking-[0.08em] text-ink md:flex">
+        <nav className="hidden items-center gap-7 text-[0.9375rem] tracking-[0.08em] text-ink lg:flex">
           {items.map((item) => (
             <a key={item.href} href={item.href} className="transition-colors hover:text-brand">
               {item.label}
@@ -69,7 +69,7 @@ export default function Header() {
         </nav>
 
         {/* Mobile: CTA + menu button */}
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
           <a
             href={cta.href}
             onClick={closeMenu}
@@ -101,7 +101,7 @@ export default function Header() {
       </div>
 
       {/* Mobile menu panel */}
-      <nav id={MOBILE_MENU_ID} hidden={!menuOpen} className="border-t border-line bg-white px-6 pb-6 md:hidden">
+      <nav id={MOBILE_MENU_ID} hidden={!menuOpen} className="border-t border-line bg-white px-6 pb-6 lg:hidden">
         <ul>
           {items.map((item) => (
             <li key={item.href} className="border-b border-line">
