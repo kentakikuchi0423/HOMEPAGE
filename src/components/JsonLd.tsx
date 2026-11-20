@@ -1,6 +1,7 @@
 import { siteConfig } from "@/content/site";
 
 export default function JsonLd() {
+  const { person } = siteConfig.meta;
   const baseUrl = siteConfig.meta.url.replace(/\/$/, "");
   const websiteId = `${baseUrl}/#website`;
   const profilePageId = `${baseUrl}/#profilepage`;
@@ -30,19 +31,14 @@ export default function JsonLd() {
       {
         "@type": "Person",
         "@id": personId,
-        name: "菊地謙太",
-        alternateName: [
-          "菊地けんた",
-          "きくちけんた",
-          "キクチケンタ",
-          "Kenta Kikuchi",
-        ],
+        name: person.name,
+        alternateName: person.alternateNames,
         url: siteConfig.meta.url,
         image: `${baseUrl}${siteConfig.profile.photo}`,
-        jobTitle: "大洲市議会議員",
+        jobTitle: person.jobTitle,
         homeLocation: {
           "@type": "Place",
-          name: "愛媛県大洲市",
+          name: person.homeLocation,
         },
         sameAs: siteConfig.sns.map((s) => s.url),
       },

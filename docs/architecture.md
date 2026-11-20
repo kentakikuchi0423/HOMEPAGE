@@ -79,7 +79,19 @@ export type NavLink = {
   href: string          // リンク先（ページ内アンカー 例: "#profile"）
 }
 
+export type SectionHeadingText = {
+  title: string         // セクション見出し（日本語）
+  label: string         // 見出しの下に添える英字ラベル
+}
+
 export type SiteConfig = {
+  headings: {           // 各セクションの見出し（profile / policy / video / activity / social / donation）
+    [section: string]: SectionHeadingText
+  }
+  // このほか、次の文言も site.ts で管理する
+  //   message.label / profile.hobbiesTitle / profile.qualificationsTitle
+  //   activity.municipalReport.title / activity.labels（more・loadError・fallbackLink）
+  //   sns[].label / meta.shortName / meta.person（構造化データ用の人物情報）
   nav: {
     items: NavLink[]      // ヘッダーのナビゲーション項目（PC は横並び、スマホはメニュー内）
     cta: NavLink          // ヘッダー右端の強調ボタン
@@ -226,6 +238,7 @@ export const siteConfig: SiteConfig = {
 - **書体**：全体を明朝体（Shippori Mincho、標準ウェイト 500）で統一。署名は本人の手書きの画像
 - **文字サイズ**：`html` の基準サイズを画面幅で切り替える（17px → 1024px 以上 18px → 1536px 以上 20px）。各要素は rem 指定のため全体が連動する
 - **形**：角丸・影・グラデーションは使わず、細い罫線と余白で区切る
+- **波**：セクション境界の波（肱川のイメージ）は `ui/WaveEdge.tsx`。ファーストビューの下端と「ご支援のお願い」の上端の 2 か所のみ
 - **動き**：定義は `globals.css` の「動き」節に集約。読み込み時の順次表示（`hero-*`）、写真の幕開き（`curtain`）、見出しのせり上がり（`mask` / `rise`）、罫線の描画（`row-line`）、流れる文字（`ticker-track`）。画面に入ったことの検知は `ui/Reveal.tsx` と `hooks/useInView.ts`
 
 ---

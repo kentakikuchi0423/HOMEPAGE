@@ -31,40 +31,34 @@ function PlatformIcon({
 
 const platformConfig: Record<
   string,
-  { label: string; iconBg: string; iconText: string; icon: string }
+  { iconBg: string; iconText: string; icon: string }
 > = {
   X: {
-    label: "X (Twitter)",
     iconBg: "bg-gray-100",
     iconText: "text-gray-700",
     icon: "𝕏",
   },
   Facebook: {
-    label: "Facebook",
     iconBg: "bg-blue-100",
     iconText: "text-blue-700",
     icon: "f",
   },
   Instagram: {
-    label: "Instagram",
     iconBg: "bg-pink-50",
     iconText: "text-pink-500",
     icon: "I",
   },
   YouTube: {
-    label: "YouTube",
     iconBg: "bg-red-50",
     iconText: "text-red-500",
     icon: "▶",
   },
   LINE: {
-    label: "LINE",
     iconBg: "bg-green-50",
     iconText: "text-green-600",
     icon: "L",
   },
   選挙ドットコム: {
-    label: "選挙ドットコム",
     iconBg: "bg-indigo-50",
     iconText: "text-indigo-600",
     icon: "選",
@@ -84,12 +78,13 @@ export default function SocialLinksSection() {
       className={`bg-white px-6 py-16 md:py-20 reveal ${inView ? "is-visible" : ""}`}
     >
       <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
-        <SectionHeading en="CONNECT">SNS・リンク</SectionHeading>
+        <SectionHeading en={siteConfig.headings.social.label}>
+          {siteConfig.headings.social.title}
+        </SectionHeading>
 
         <ul className="grid grid-cols-2 border-l border-t border-line lg:grid-cols-3">
-          {sorted.map(({ platform, url, iconImage }, i) => {
+          {sorted.map(({ platform, label, url, iconImage }, i) => {
             const config = platformConfig[platform] ?? {
-              label: platform,
               iconBg: "bg-gray-100",
               iconText: "text-gray-600",
               icon: "●",
@@ -114,7 +109,7 @@ export default function SocialLinksSection() {
                       fallback={config.icon}
                     />
                   </span>
-                  {config.label}
+                  {label}
                 </a>
               </li>
             );

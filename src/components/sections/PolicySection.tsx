@@ -14,7 +14,9 @@ export default function PolicySection() {
       className={`bg-paper px-6 py-16 md:py-20 reveal ${inView ? "is-visible" : ""}`}
     >
       <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
-        <SectionHeading en="POLICY">政策</SectionHeading>
+        <SectionHeading en={siteConfig.headings.policy.label}>
+          {siteConfig.headings.policy.title}
+        </SectionHeading>
 
         <ol className="border-t border-brand/25">
           {siteConfig.policies.map((policy, i) => (

@@ -71,6 +71,12 @@ section:focus {
     /* 写真の高さ：画面の高さからヘッダーと余白を引いた分。上限は列幅いっぱい（4:5）、下限は 20rem */
     --hero-h: clamp(20rem, calc(100svh - 10rem), calc(var(--hero-col) * 1.25));
     --photo-w: calc(var(--hero-h) * 0.8);
+    /* 全体の横幅も高さに合わせて狭める。写真が小さいときに、氏名・キャッチコピー・写真が離れすぎないようにする */
+    --hero-max: clamp(56rem, calc(var(--hero-h) * 2.3), 72rem);
+  }
+  .hero-inner {
+    max-width: var(--hero-max);
+    grid-template-columns: minmax(0, 1fr) var(--photo-w);
   }
   .hero-photo {
     width: var(--photo-w);
@@ -86,7 +92,7 @@ section:focus {
   }
   .hero-panel {
     /* 写真の右半分に重なる幅（画面右端から、写真の中央まで） */
-    width: calc(max(0px, 50vw - 36rem) + 1.5rem + var(--photo-w) * 0.5);
+    width: calc(max(0px, 50vw - var(--hero-max) / 2) + 1.5rem + var(--photo-w) * 0.5);
   }
 }
 @media (min-width: 1280px) {
@@ -265,6 +271,35 @@ html:not(.fonts-ready) #hero *,
 html:not(.fonts-ready) #hero *::after {
   animation-play-state: paused;
 }
+html:not(.fonts-ready) #hero .wave svg {
+  animation-play-state: running;
+}
+
+/* 波：セクションの境目を、川面のようにゆっくり流れる波にする（肱川のイメージ） */
+@keyframes waveFlow {
+  to { transform: translateX(-50%); }
+}
+.wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: clamp(1.5rem, 4.5vw, 3rem);
+  overflow: hidden;
+  pointer-events: none;
+}
+.wave svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  min-width: 100rem;
+  height: 100%;
+  animation: waveFlow 36s linear infinite;
+}
+.wave svg.wave-back {
+  opacity: 0.55;
+  animation-duration: 58s;
+}
 
 /* 帯：大きな文字がゆっくり横に流れる */
 @keyframes tickerMove {
@@ -301,6 +336,7 @@ html:not(.fonts-ready) #hero *::after {
   .hero-char,
   .hero-panel,
   .hero-photo img,
+  .wave svg,
   .ticker-track {
     animation: none;
   }

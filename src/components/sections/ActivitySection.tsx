@@ -9,7 +9,7 @@ import type { RssItem } from '@/lib/rss'
 import { formatDate } from '@/lib/date'
 
 export default function ActivitySection() {
-  const { municipalReport, rss } = siteConfig.activity
+  const { municipalReport, rss, labels } = siteConfig.activity
   const { ref, inView } = useInView<HTMLElement>()
   const [rssItems, setRssItems] = useState<RssItem[]>([])
   const [hasMore, setHasMore] = useState(false)
@@ -48,7 +48,9 @@ export default function ActivitySection() {
       className={`bg-paper px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
       <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
-        <SectionHeading en="ACTIVITY">活動報告</SectionHeading>
+        <SectionHeading en={siteConfig.headings.activity.label}>
+          {siteConfig.headings.activity.title}
+        </SectionHeading>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* 最新の活動（RSS） */}
@@ -120,21 +122,21 @@ export default function ActivitySection() {
                         rel="noopener noreferrer"
                         className="inline-flex min-h-11 items-center text-[0.9375rem] tracking-[0.1em] text-brand"
                       >
-                        <span className="border-b border-brand pb-1">活動をもっと見る →</span>
+                        <span className="border-b border-brand pb-1">{labels.more} →</span>
                       </a>
                     </li>
                   )}
                 </ul>
               ) : (
                 <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 py-10">
-                  <p className="text-[0.9375rem] text-sub">投稿を読み込めませんでした</p>
+                  <p className="text-[0.9375rem] text-sub">{labels.loadError}</p>
                   <a
                     href={rss.baseUrl ?? rss.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex min-h-11 items-center text-[0.9375rem] tracking-[0.1em] text-brand"
                   >
-                    <span className="border-b border-brand pb-1">選挙ドットコムで見る →</span>
+                    <span className="border-b border-brand pb-1">{labels.fallbackLink} →</span>
                   </a>
                 </div>
               )}
@@ -147,13 +149,13 @@ export default function ActivitySection() {
             className={`reveal reveal-delay-2 ${inView ? 'is-visible' : ''} self-start overflow-hidden border border-line bg-white`}
           >
             <div className="bg-brand px-5 py-3">
-              <p className="text-base tracking-[0.1em] text-white">市政報告</p>
+              <p className="text-base tracking-[0.1em] text-white">{municipalReport.title}</p>
             </div>
             {municipalReport.image && (
               <Reveal className="curtain aspect-[1124/789] w-full">
                 <Image
                   src={municipalReport.image}
-                  alt={municipalReport.imageAlt ?? '市政報告'}
+                  alt={municipalReport.imageAlt ?? municipalReport.title}
                   fill
                   className="object-cover"
                 />
