@@ -232,7 +232,7 @@ section:focus {
 }
 
 /* 書体の読み込みが済むまで、ファーストビューのアニメーションを開始位置で待たせる
-   （FontsReady が html に fonts-ready を付けた時点で動き出す） */
+   （layout.tsx の埋め込みスクリプトが html に fonts-ready を付けた時点で動き出す） */
 html:not(.fonts-ready) #hero,
 html:not(.fonts-ready) #hero *,
 html:not(.fonts-ready) #hero *::after {
