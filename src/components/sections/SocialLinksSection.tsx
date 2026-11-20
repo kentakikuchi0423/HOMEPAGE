@@ -31,40 +31,34 @@ function PlatformIcon({
 
 const platformConfig: Record<
   string,
-  { label: string; iconBg: string; iconText: string; icon: string }
+  { iconBg: string; iconText: string; icon: string }
 > = {
   X: {
-    label: "X (Twitter)",
     iconBg: "bg-gray-100",
     iconText: "text-gray-700",
     icon: "𝕏",
   },
   Facebook: {
-    label: "Facebook",
     iconBg: "bg-blue-100",
     iconText: "text-blue-700",
     icon: "f",
   },
   Instagram: {
-    label: "Instagram",
     iconBg: "bg-pink-50",
     iconText: "text-pink-500",
     icon: "I",
   },
   YouTube: {
-    label: "YouTube",
     iconBg: "bg-red-50",
     iconText: "text-red-500",
     icon: "▶",
   },
   LINE: {
-    label: "LINE",
     iconBg: "bg-green-50",
     iconText: "text-green-600",
     icon: "L",
   },
   選挙ドットコム: {
-    label: "選挙ドットコム",
     iconBg: "bg-indigo-50",
     iconText: "text-indigo-600",
     icon: "選",
@@ -84,12 +78,13 @@ export default function SocialLinksSection() {
       className={`bg-white px-6 py-16 md:py-20 reveal ${inView ? "is-visible" : ""}`}
     >
       <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
-        <SectionHeading en="CONNECT">SNS・リンク</SectionHeading>
+        <SectionHeading en={siteConfig.headings.social.label}>
+          {siteConfig.headings.social.title}
+        </SectionHeading>
 
         <ul className="grid grid-cols-2 border-l border-t border-line lg:grid-cols-3">
-          {sorted.map(({ platform, url, iconImage }, i) => {
+          {sorted.map(({ platform, label, url, iconImage }, i) => {
             const config = platformConfig[platform] ?? {
-              label: platform,
               iconBg: "bg-gray-100",
               iconText: "text-gray-600",
               icon: "●",
@@ -103,7 +98,7 @@ export default function SocialLinksSection() {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-full w-full min-w-0 items-center gap-2 whitespace-nowrap border-b border-r border-line bg-white px-2 py-5 text-[clamp(0.625rem,3.2vw,0.9375rem)] min-[380px]:px-3 leading-snug text-ink transition-colors hover:bg-paper sm:gap-3 sm:px-5"
+                  className="flex h-full w-full min-w-0 items-center gap-1.5 whitespace-nowrap min-[400px]:gap-2 border-b border-r border-line bg-white px-1.5 py-5 text-[clamp(13px,3.6vw,0.9375rem)] tracking-normal min-[400px]:px-3 min-[400px]:tracking-[0.03em] leading-snug text-ink transition-colors hover:bg-paper sm:gap-3 sm:px-5"
                 >
                   <span
                     className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold sm:h-8 sm:w-8 ${config.iconBg} ${config.iconText}`}
@@ -114,7 +109,7 @@ export default function SocialLinksSection() {
                       fallback={config.icon}
                     />
                   </span>
-                  {config.label}
+                  {label}
                 </a>
               </li>
             );

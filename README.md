@@ -53,6 +53,7 @@ npx serve out       # ローカルでビルド成果物を確認
 
 ```
 src/content/site.ts
+  ├── headings    各セクションの見出しと英字ラベル
   ├── nav         ヘッダーのメニュー項目・「応援する」リンク
   ├── hero        ファーストビューのボタン
   ├── message     ごあいさつ（本文・署名・写真）

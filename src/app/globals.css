@@ -62,10 +62,43 @@ section:focus {
   outline-offset: 4px;
 }
 
-/* Hero のキャッチコピー：PC では縦書きにする */
+/* Hero（PC）：画面の高さに合わせて、写真・縦書きのキャッチコピー・青い色面をまとめて伸縮させる。
+   高さが足りないときに写真が切れたり、キャッチコピーが 2 行に折り返したりしないようにする */
 @media (min-width: 1024px) {
+  #hero {
+    --hero-col: 27rem; /* 写真の列幅（HeroSection の grid と揃える） */
+    --catch-max: 1.75rem;
+    /* 写真の高さ：画面の高さからヘッダーと余白を引いた分。上限は列幅いっぱい（4:5）、下限は 20rem */
+    --hero-h: clamp(20rem, calc(100svh - 10rem), calc(var(--hero-col) * 1.25));
+    --photo-w: calc(var(--hero-h) * 0.8);
+    /* 全体の横幅も高さに合わせて狭める。写真が小さいときに、氏名・キャッチコピー・写真が離れすぎないようにする */
+    --hero-max: clamp(56rem, calc(var(--hero-h) * 2.3), 72rem);
+  }
+  .hero-inner {
+    max-width: var(--hero-max);
+    grid-template-columns: minmax(0, 1fr) var(--photo-w);
+  }
+  .hero-photo {
+    width: var(--photo-w);
+    height: var(--hero-h);
+    aspect-ratio: auto;
+    justify-self: end;
+  }
   .hero-catch {
     writing-mode: vertical-rl;
+    white-space: nowrap;
+    /* 14 文字＋字間が写真の高さに収まる大きさ */
+    font-size: min(var(--catch-max), calc(var(--hero-h) / 18));
+  }
+  .hero-panel {
+    /* 写真の右半分に重なる幅（画面右端から、写真の中央まで） */
+    width: calc(max(0px, 50vw - var(--hero-max) / 2) + 1.5rem + var(--photo-w) * 0.5);
+  }
+}
+@media (min-width: 1280px) {
+  #hero {
+    --hero-col: 30rem;
+    --catch-max: 2rem;
   }
 }
 
@@ -239,6 +272,38 @@ html:not(.fonts-ready) #hero *::after {
   animation-play-state: paused;
 }
 
+
+/* 波：セクションの境目を、川面のようにゆっくり流れる波にする（肱川のイメージ） */
+@keyframes waveFlow {
+  to { transform: translateX(-50%); }
+}
+.wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: clamp(2.25rem, 6.5vw, 4.5rem);
+  overflow: hidden;
+  pointer-events: none;
+}
+.wave svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  min-width: 60rem; /* 狭い画面でも波の山がいくつか見えるようにする */
+  height: 100%;
+  animation: waveFlow 26s linear infinite;
+}
+/* 奥の波ほど薄く、ゆっくり流す */
+.wave svg.wave-layer-1 {
+  opacity: 0.3;
+  animation-duration: 64s;
+}
+.wave svg.wave-layer-2 {
+  opacity: 0.55;
+  animation-duration: 40s;
+}
+
 /* 帯：大きな文字がゆっくり横に流れる */
 @keyframes tickerMove {
   to { transform: translateX(-50%); }
@@ -274,6 +339,7 @@ html:not(.fonts-ready) #hero *::after {
   .hero-char,
   .hero-panel,
   .hero-photo img,
+  .wave svg,
   .ticker-track {
     animation: none;
   }

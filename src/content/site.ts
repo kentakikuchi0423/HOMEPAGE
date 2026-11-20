@@ -13,6 +13,7 @@ export type SnsLink = {
     | "YouTube"
     | "LINE"
     | "選挙ドットコム";
+  label: string; // 表示名（例: "X (Twitter)"）
   url: string;
   order: number; // 表示順（昇順）
   iconImage?: string; // 画像パス（public/ 以下）例: "/images/social/x.png"
@@ -33,7 +34,20 @@ export type MessageParagraph = {
   emphasis?: boolean; // true の場合、明朝体で大きく強調表示する
 };
 
+export type SectionHeadingText = {
+  title: string; // セクション見出し（日本語）
+  label: string; // 見出しの下に添える英字ラベル
+};
+
 export type SiteConfig = {
+  headings: {
+    profile: SectionHeadingText;
+    policy: SectionHeadingText;
+    video: SectionHeadingText;
+    activity: SectionHeadingText;
+    social: SectionHeadingText;
+    donation: SectionHeadingText;
+  };
   nav: {
     items: NavLink[]; // ヘッダーのナビゲーション項目（PC は横並び、スマホはメニュー内）
     cta: NavLink; // ヘッダー右端の強調ボタン
@@ -46,6 +60,7 @@ export type SiteConfig = {
   };
   message: {
     title: string; // セクション見出し
+    label: string; // 見出しの下に添える英字ラベル
     paragraphs: MessageParagraph[]; // 挨拶文（段落ごと）
     signatureTitle: string; // 署名の肩書き
     signatureName: string; // 署名の氏名（署名画像の代替テキスト。画像が無い場合はこの文字を表示）
@@ -59,9 +74,15 @@ export type SiteConfig = {
   };
   activity: {
     municipalReport: {
+      title: string; // カードの見出し
       image?: string; // 画像パス（public/ 以下）例: "/images/activity/report.jpg"
       imageAlt?: string; // 画像の alt テキスト
       description: string; // 説明文
+    };
+    labels: {
+      more: string; // 一覧の末尾に出す「もっと見る」リンクの文言
+      loadError: string; // 投稿を取得できなかったときの文言
+      fallbackLink: string; // 取得できなかったときに出すリンクの文言
     };
     rss?: {
       url: string; // RSS フィード URL
@@ -78,6 +99,14 @@ export type SiteConfig = {
     favicon: string; // favicon 画像パス（public/ 以下）例: "/images/brand/favicon.png"
     siteName: string; // サイト名（og:site_name・WebSite schema の name に使用）
     siteNameAlt?: string[]; // サイト名の別表記（WebSite schema の alternateName）
+    shortName: string; // ホーム画面に追加したときの短い名前（マニフェスト）
+    person: {
+      // 検索エンジン向けの人物情報（構造化データ）
+      name: string; // 氏名（正式表記）
+      alternateNames: string[]; // 氏名の別表記
+      jobTitle: string; // 役職
+      homeLocation: string; // 活動地域
+    };
   };
   profile: {
     name: string; // 氏名（漢字）
@@ -87,7 +116,9 @@ export type SiteConfig = {
     photo: string; // 顔写真パス（public/ 以下）
     catchcopy: string; // Hero キャッチコピー
     subcopy: string; // Hero サブコピー
+    qualificationsTitle: string; // 資格欄の見出し
     qualifications?: string[]; // 資格・試験リスト（任意）
+    hobbiesTitle: string; // 趣味欄の見出し
     hobbies?: string[]; // 趣味・特技リスト（任意）
     snapshot?: string; // プロフィール欄に添える写真パス（public/ 以下）
     snapshotAlt?: string; // 上記写真の alt テキスト
@@ -117,6 +148,14 @@ export type SiteConfig = {
 };
 
 export const siteConfig: SiteConfig = {
+  headings: {
+    profile: { title: "プロフィール", label: "PROFILE" },
+    policy: { title: "政策", label: "POLICY" },
+    video: { title: "動画", label: "VIDEO" },
+    activity: { title: "活動報告", label: "ACTIVITY" },
+    social: { title: "SNS・リンク", label: "CONNECT" },
+    donation: { title: "ご支援のお願い", label: "SUPPORT" },
+  },
   nav: {
     items: [
       { label: "ごあいさつ", href: "#message" },
@@ -136,6 +175,7 @@ export const siteConfig: SiteConfig = {
   },
   message: {
     title: "ごあいさつ",
+    label: "MESSAGE",
     paragraphs: [
       { text: "はじめまして。大洲市議会議員の菊地謙太です。" },
       {
@@ -182,6 +222,13 @@ export const siteConfig: SiteConfig = {
       "菊地謙太公式サイト",
       "キクチケンタ公式サイト",
     ],
+    shortName: "菊地けんた",
+    person: {
+      name: "菊地謙太",
+      alternateNames: ["菊地けんた", "きくちけんた", "キクチケンタ", "Kenta Kikuchi"],
+      jobTitle: "大洲市議会議員",
+      homeLocation: "愛媛県大洲市",
+    },
   },
   profile: {
     name: "菊地 けんた",
@@ -196,6 +243,7 @@ export const siteConfig: SiteConfig = {
     photo: "/images/profile/profile.jpg",
     catchcopy: "いつまでも魅力的な大洲市に。",
     subcopy: "未来をひらく、あなたとともに。",
+    qualificationsTitle: "資格・試験",
     qualifications: [
       "TOEIC 930",
       "応用情報技術者試験",
@@ -206,6 +254,7 @@ export const siteConfig: SiteConfig = {
       "ウイスキー検定 2級",
       "おおず歴史華回廊案内人",
     ],
+    hobbiesTitle: "趣味・特技",
     hobbies: ["フルマラソン", "カヌー", "筋トレ", "居酒屋巡り", "読書", "旅行"],
     snapshot: "/images/profile/cycling.jpg",
     snapshotAlt: "ツール・ド・ひじかわで自転車に乗る菊地けんた",
@@ -263,11 +312,17 @@ export const siteConfig: SiteConfig = {
   },
   activity: {
     municipalReport: {
+      title: "市政報告",
       // 画像ファイルを配置したら下の行のコメントを外してパスを設定してください
       image: "/images/activity/report.jpg",
       imageAlt: "市政報告の様子",
       description:
         "市政報告を定期的に開催し、市政の動きを丁寧にお伝えしています。開催情報や詳しい内容は X・Facebook・Instagram などの各種 SNS でご案内していますので、ぜひフォローしてご確認ください。",
+    },
+    labels: {
+      more: "活動をもっと見る",
+      loadError: "投稿を読み込めませんでした",
+      fallbackLink: "選挙ドットコムで見る",
     },
     rss: {
       url: "https://www.go2senkyo.com/seijika/196504/posts.rss",
@@ -285,36 +340,42 @@ export const siteConfig: SiteConfig = {
   sns: [
     {
       platform: "X",
+      label: "X (Twitter)",
       url: "https://x.com/kkikuchi_maru",
       order: 1,
       iconImage: "/images/social/x.png",
     },
     {
       platform: "Facebook",
+      label: "Facebook",
       url: "https://www.facebook.com/kenta.kikuchi.9022",
       order: 2,
       iconImage: "/images/social/facebook.png",
     },
     {
       platform: "Instagram",
+      label: "Instagram",
       url: "https://www.instagram.com/kkikuchi_maru/",
       order: 3,
       iconImage: "/images/social/instagram.png",
     },
     {
       platform: "YouTube",
+      label: "YouTube",
       url: "https://www.youtube.com/@%E8%8F%8A%E5%9C%B0%E3%81%91%E3%82%93%E3%81%9F%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB",
       order: 4,
       iconImage: "/images/social/youtube.png",
     },
     {
       platform: "LINE",
+      label: "LINE",
       url: "https://line.me/R/ti/p/@512nbxiw",
       order: 5,
       iconImage: "/images/social/line.png",
     },
     {
       platform: "選挙ドットコム",
+      label: "選挙ドットコム",
       url: "https://go2senkyo.com/seijika/196504",
       order: 6,
       iconImage: "/images/social/senkyo.png",

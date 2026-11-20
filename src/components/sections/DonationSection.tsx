@@ -2,6 +2,7 @@
 import { siteConfig } from '@/content/site'
 import { useInView } from '@/hooks/useInView'
 import SectionHeading from '@/components/ui/SectionHeading'
+import WaveEdge from '@/components/ui/WaveEdge'
 
 export default function DonationSection() {
   const { url, label, description } = siteConfig.donation
@@ -12,8 +13,11 @@ export default function DonationSection() {
     <section
       ref={ref}
       id="donation"
-      className={`relative overflow-hidden bg-brand px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
+      className={`relative overflow-hidden bg-brand px-6 pb-16 pt-24 md:pb-20 md:pt-32 reveal ${inView ? 'is-visible' : ''}`}
     >
+      {/* 前のセクション（白）との境目を波にする */}
+      <WaveEdge edge="top" fillClassName="fill-white" />
+
       {/* 背景：サブコピーが大きな文字でゆっくり流れる */}
       {subcopy && (
         <div
@@ -31,7 +35,9 @@ export default function DonationSection() {
       )}
 
       <div className="relative mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
-        <SectionHeading en="SUPPORT" light>ご支援のお願い</SectionHeading>
+        <SectionHeading en={siteConfig.headings.donation.label} light>
+          {siteConfig.headings.donation.title}
+        </SectionHeading>
 
         <div>
           {description && <p className="whitespace-pre-line text-base text-white/90">{description}</p>}

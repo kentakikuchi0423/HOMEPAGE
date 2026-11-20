@@ -19,7 +19,9 @@ export default function ProfileSection() {
       className={`bg-white px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
       <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
-        <SectionHeading en="PROFILE">プロフィール</SectionHeading>
+        <SectionHeading en={siteConfig.headings.profile.label}>
+          {siteConfig.headings.profile.title}
+        </SectionHeading>
 
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_14rem]">
           <div>

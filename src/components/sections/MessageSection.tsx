@@ -6,7 +6,7 @@ import SectionHeading from '@/components/ui/SectionHeading'
 import Reveal from '@/components/ui/Reveal'
 
 export default function MessageSection() {
-  const { title, paragraphs, signatureTitle, signatureName, signatureImage, photo, photoAlt } =
+  const { title, label, paragraphs, signatureTitle, signatureName, signatureImage, photo, photoAlt } =
     siteConfig.message
   const { ref, inView } = useInView<HTMLElement>(0.05)
 
@@ -19,7 +19,7 @@ export default function MessageSection() {
       {/* 並び順：スマホは「見出し → 写真 → 本文」。PC は左列に写真、右列に見出しと本文 */}
       <div className="mx-auto grid max-w-5xl md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] md:gap-x-16 md:gap-y-10">
         <div className="md:col-start-2 md:row-start-1">
-          <SectionHeading en="MESSAGE">{title}</SectionHeading>
+          <SectionHeading en={label}>{title}</SectionHeading>
         </div>
 
         {photo && (

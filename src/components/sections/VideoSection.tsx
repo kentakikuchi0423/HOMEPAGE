@@ -74,7 +74,9 @@ export default function VideoSection() {
       className={`bg-white px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
       <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
-        <SectionHeading en="VIDEO">動画</SectionHeading>
+        <SectionHeading en={siteConfig.headings.video.label}>
+          {siteConfig.headings.video.title}
+        </SectionHeading>
 
         <div className="grid grid-cols-1 gap-x-5 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
           {videos.map((video, i) => (
