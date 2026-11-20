@@ -113,14 +113,14 @@ export default function ActivitySection() {
                     </li>
                   ))}
                   {hasMore && (
-                    <li className="px-5 py-4 text-center">
+                    <li className="px-5 py-2 text-center">
                       <a
                         href={rss.baseUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block border-b border-brand pb-1 text-[0.9375rem] tracking-[0.1em] text-brand"
+                        className="inline-flex min-h-11 items-center text-[0.9375rem] tracking-[0.1em] text-brand"
                       >
-                        活動をもっと見る →
+                        <span className="border-b border-brand pb-1">活動をもっと見る →</span>
                       </a>
                     </li>
                   )}
@@ -132,9 +132,9 @@ export default function ActivitySection() {
                     href={rss.baseUrl ?? rss.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border-b border-brand pb-1 text-[0.9375rem] tracking-[0.1em] text-brand"
+                    className="inline-flex min-h-11 items-center text-[0.9375rem] tracking-[0.1em] text-brand"
                   >
-                    選挙ドットコムで見る →
+                    <span className="border-b border-brand pb-1">選挙ドットコムで見る →</span>
                   </a>
                 </div>
               )}

@@ -38,7 +38,7 @@ export default function Header() {
       className="fixed left-0 right-0 top-0 z-50 border-b border-line bg-white/95 backdrop-blur-sm"
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a href="/" aria-label={homeLabel} className="shrink-0">
+        <a href="/" aria-label={homeLabel} className="flex h-11 shrink-0 items-center">
           {siteConfig.brand.headerLogo ? (
             <img
               src={siteConfig.brand.headerLogo}
@@ -77,9 +77,9 @@ export default function Header() {
           <a
             href={cta.href}
             onClick={closeMenu}
-            className="mr-2 border-b border-brand pb-0.5 text-[0.9375rem] font-medium tracking-[0.04em] text-brand"
+            className="flex h-11 items-center px-2 text-[0.9375rem] font-medium tracking-[0.04em] text-brand"
           >
-            {cta.label}
+            <span className="border-b border-brand pb-0.5">{cta.label}</span>
           </a>
           <button
             type="button"

@@ -62,10 +62,37 @@ section:focus {
   outline-offset: 4px;
 }
 
-/* Hero のキャッチコピー：PC では縦書きにする */
+/* Hero（PC）：画面の高さに合わせて、写真・縦書きのキャッチコピー・青い色面をまとめて伸縮させる。
+   高さが足りないときに写真が切れたり、キャッチコピーが 2 行に折り返したりしないようにする */
 @media (min-width: 1024px) {
+  #hero {
+    --hero-col: 27rem; /* 写真の列幅（HeroSection の grid と揃える） */
+    --catch-max: 1.75rem;
+    /* 写真の高さ：画面の高さからヘッダーと余白を引いた分。上限は列幅いっぱい（4:5）、下限は 20rem */
+    --hero-h: clamp(20rem, calc(100svh - 10rem), calc(var(--hero-col) * 1.25));
+    --photo-w: calc(var(--hero-h) * 0.8);
+  }
+  .hero-photo {
+    width: var(--photo-w);
+    height: var(--hero-h);
+    aspect-ratio: auto;
+    justify-self: end;
+  }
   .hero-catch {
     writing-mode: vertical-rl;
+    white-space: nowrap;
+    /* 14 文字＋字間が写真の高さに収まる大きさ */
+    font-size: min(var(--catch-max), calc(var(--hero-h) / 18));
+  }
+  .hero-panel {
+    /* 写真の右半分に重なる幅（画面右端から、写真の中央まで） */
+    width: calc(max(0px, 50vw - 36rem) + 1.5rem + var(--photo-w) * 0.5);
+  }
+}
+@media (min-width: 1280px) {
+  #hero {
+    --hero-col: 30rem;
+    --catch-max: 2rem;
   }
 }
 

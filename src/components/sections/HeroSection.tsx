@@ -9,7 +9,7 @@ export default function HeroSection() {
     <section id="hero" className="relative overflow-hidden bg-white">
       {/* イメージカラーの色面：PC は右端の縦帯、スマホは写真の下半分に敷く */}
       <div
-        className="hero-panel absolute bottom-0 right-0 h-44 w-full bg-brand md:h-full md:w-[14vw] lg:w-[calc(50vw-17rem)] xl:w-[calc(50vw-20rem)]"
+        className="hero-panel absolute bottom-0 right-0 h-44 w-full bg-brand md:h-full md:w-[14vw]"
         aria-hidden="true"
       />
 
@@ -34,7 +34,7 @@ export default function HeroSection() {
             </a>
           </div>
 
-          <p className="hero-catch font-display text-[min(1.5rem,5.7vw)] font-medium leading-[1.7] tracking-[0.06em] text-ink md:text-[1.25rem] lg:text-[1.75rem] lg:leading-[2] lg:tracking-[0.24em] xl:text-[2rem]" aria-label={catchcopy}>
+          <p className="hero-catch font-display text-[min(1.5rem,5.7vw)] font-medium leading-[1.7] tracking-[0.06em] text-ink md:text-[1.25rem] lg:leading-[2] lg:tracking-[0.24em]" aria-label={catchcopy}>
             {/* 1文字ずつ順に現れる */}
             {Array.from(catchcopy).map((char, i) => (
               <span
@@ -51,7 +51,7 @@ export default function HeroSection() {
 
         {/* Photo */}
         {photo && (
-          <div className="hero-photo aspect-[4/5] w-full lg:max-h-[calc(100svh-10rem)]">
+          <div className="hero-photo aspect-[4/5] w-full">
             <Image
               src={photo}
               alt={name}
