@@ -15,9 +15,14 @@ export default function MessageSection() {
       id="message"
       className={`bg-paper px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
     >
-      <div className="mx-auto grid max-w-5xl gap-x-16 gap-y-12 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
+      {/* 並び順：スマホは「見出し → 写真 → 本文」。PC は左列に写真、右列に見出しと本文 */}
+      <div className="mx-auto grid max-w-5xl md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] md:gap-x-16 md:gap-y-10">
+        <div className="md:col-start-2 md:row-start-1">
+          <SectionHeading en="MESSAGE">{title}</SectionHeading>
+        </div>
+
         {photo && (
-          <Reveal className="curtain self-start">
+          <Reveal className="curtain mb-10 self-start md:col-start-1 md:row-span-2 md:row-start-1 md:mb-0">
             <Image
               src={photo}
               alt={photoAlt ?? ''}
@@ -28,10 +33,8 @@ export default function MessageSection() {
           </Reveal>
         )}
 
-        <div>
-          <SectionHeading en="MESSAGE">{title}</SectionHeading>
-
-          <div className="space-y-5 font-display text-[1.0625rem] font-medium leading-[2] tracking-[0.04em] md:mt-10">
+        <div className="md:col-start-2 md:row-start-2">
+          <div className="space-y-5 font-display text-[1.0625rem] font-medium leading-[2] tracking-[0.04em]">
             {paragraphs.map((p, i) =>
               p.emphasis ? (
                 <p
