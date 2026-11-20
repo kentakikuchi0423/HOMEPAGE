@@ -48,7 +48,8 @@ export type SiteConfig = {
     title: string; // セクション見出し
     paragraphs: MessageParagraph[]; // 挨拶文（段落ごと）
     signatureTitle: string; // 署名の肩書き
-    signatureName: string; // 署名の氏名（手書き風フォントで表示）
+    signatureName: string; // 署名の氏名（署名画像の代替テキスト。画像が無い場合はこの文字を表示）
+    signatureImage?: string; // 手書き署名の画像パス（public/ 以下。背景が透明な PNG）
     photo?: string; // 写真パス（public/ 以下）
     photoAlt?: string; // 写真の alt テキスト
   };
@@ -159,6 +160,7 @@ export const siteConfig: SiteConfig = {
     ],
     signatureTitle: "大洲市議会議員",
     signatureName: "菊地 謙太",
+    signatureImage: "/images/profile/signature.png",
     photo: "/images/profile/council.jpg",
     photoAlt: "大洲市議会の一般質問で登壇する菊地けんた",
   },
