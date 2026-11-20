@@ -57,7 +57,7 @@ export default function MessageSection() {
                 src={signatureImage}
                 alt={signatureName}
                 width={900}
-                height={284}
+                height={260}
                 className="h-14 w-auto md:h-16"
               />
             ) : (
