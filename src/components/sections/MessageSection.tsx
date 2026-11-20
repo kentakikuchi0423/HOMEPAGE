@@ -50,15 +50,18 @@ export default function MessageSection() {
             )}
           </div>
 
-          <p className="mt-10 flex flex-wrap items-end justify-end gap-x-5 gap-y-2">
-            <span className="whitespace-nowrap pb-2 text-base tracking-[0.1em] text-ink">{signatureTitle}</span>
+          {/* 肩書きと署名は常に 1 行に並べる。狭い画面では文字と署名を画面幅に合わせて少し小さくする */}
+          <p className="mt-10 flex items-end justify-end gap-x-2.5 lg:gap-x-5">
+            <span className="shrink-0 whitespace-nowrap pb-[0.4em] text-[clamp(0.8125rem,3.6vw,1rem)] tracking-[0.1em] text-ink md:text-[clamp(0.8125rem,1.6vw,1rem)]">
+              {signatureTitle}
+            </span>
             {signatureImage ? (
               <Image
                 src={signatureImage}
                 alt={signatureName}
                 width={900}
                 height={260}
-                className="h-14 w-auto md:h-16"
+                className="h-[min(3.5rem,13.5vw)] w-auto min-w-0 shrink object-contain object-right md:h-[min(4rem,5.6vw)] lg:h-16"
               />
             ) : (
               <span className="font-display text-[2rem] leading-none tracking-[0.12em] text-ink">
