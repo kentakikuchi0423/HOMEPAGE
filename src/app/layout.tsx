@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Shippori_Mincho, Yuji_Syuku } from "next/font/google";
+import { Shippori_Mincho, Klee_One } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/content/site";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/JsonLd";
 import InPageNav from "@/components/layout/InPageNav";
+import FontsReady from "@/components/layout/FontsReady";
 
 const mincho = Shippori_Mincho({
   subsets: ["latin"],
@@ -17,10 +18,10 @@ const mincho = Shippori_Mincho({
   preload: false,
 });
 
-// 署名用の手書き（筆ペン）風フォント
-const signature = Yuji_Syuku({
+// 署名用の手書き（ペン字）風フォント
+const signature = Klee_One({
   subsets: ["latin"],
-  weight: "400",
+  weight: "600",
   variable: "--font-signature",
   display: "swap",
   // 日本語フォントは文字範囲ごとに多数のファイルへ分割される。全ファイルの先読みを止め、
@@ -67,10 +68,11 @@ export default function RootLayout({
       <body className={`${mincho.variable} ${signature.variable}`}>
         {/* JavaScript が無効でも本文が表示されるようにする */}
         <noscript>
-          <style>{`.reveal,.rise,.curtain img{opacity:1!important;transform:none!important}.curtain::after{display:none!important}.row-line::after{transform:none!important}`}</style>
+          <style>{`.reveal,.rise,.curtain img{opacity:1!important;transform:none!important}.curtain::after{display:none!important}.row-line::after{transform:none!important}#hero,#hero *,#hero *::after{animation-play-state:running!important}`}</style>
         </noscript>
         <JsonLd />
         <InPageNav />
+        <FontsReady />
         <Header />
         <main className="pt-16">{children}</main>
         <Footer />

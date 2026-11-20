@@ -219,6 +219,27 @@ section:focus {
   animation: heroZoom 2s cubic-bezier(0.2, 0.7, 0.2, 1) 0.45s both;
 }
 
+/* スマホ・タブレット（横書き）では、キャッチコピーを 1 文字ずつではなく全体でふわっと出す */
+@keyframes heroSoft {
+  from { opacity: 0; }
+}
+@media (max-width: 1023px) {
+  .hero-char {
+    animation: none;
+  }
+  .hero-catch {
+    animation: heroSoft 1.8s ease 0.15s both;
+  }
+}
+
+/* 書体の読み込みが済むまで、ファーストビューのアニメーションを開始位置で待たせる
+   （FontsReady が html に fonts-ready を付けた時点で動き出す） */
+html:not(.fonts-ready) #hero,
+html:not(.fonts-ready) #hero *,
+html:not(.fonts-ready) #hero *::after {
+  animation-play-state: paused;
+}
+
 /* 帯：大きな文字がゆっくり横に流れる */
 @keyframes tickerMove {
   to { transform: translateX(-50%); }
@@ -250,6 +271,7 @@ section:focus {
     transition: none;
   }
   .hero-in,
+  .hero-catch,
   .hero-char,
   .hero-panel,
   .hero-photo img,
