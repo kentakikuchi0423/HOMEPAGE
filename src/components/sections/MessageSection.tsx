@@ -6,7 +6,8 @@ import SectionHeading from '@/components/ui/SectionHeading'
 import Reveal from '@/components/ui/Reveal'
 
 export default function MessageSection() {
-  const { title, paragraphs, signatureTitle, signatureName, photo, photoAlt } = siteConfig.message
+  const { title, paragraphs, signatureTitle, signatureName, signatureImage, photo, photoAlt } =
+    siteConfig.message
   const { ref, inView } = useInView<HTMLElement>(0.05)
 
   return (
@@ -49,11 +50,21 @@ export default function MessageSection() {
             )}
           </div>
 
-          <p className="mt-10 flex items-baseline justify-end gap-5">
-            <span className="text-base tracking-[0.1em] text-ink">{signatureTitle}</span>
-            <span className="font-signature text-[2rem] leading-none tracking-[0.12em] text-ink">
-              {signatureName}
-            </span>
+          <p className="mt-10 flex flex-wrap items-end justify-end gap-x-5 gap-y-2">
+            <span className="whitespace-nowrap pb-2 text-base tracking-[0.1em] text-ink">{signatureTitle}</span>
+            {signatureImage ? (
+              <Image
+                src={signatureImage}
+                alt={signatureName}
+                width={900}
+                height={284}
+                className="h-14 w-auto md:h-16"
+              />
+            ) : (
+              <span className="font-display text-[2rem] leading-none tracking-[0.12em] text-ink">
+                {signatureName}
+              </span>
+            )}
           </p>
         </div>
       </div>

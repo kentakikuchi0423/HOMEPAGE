@@ -12,7 +12,6 @@
 /* フォント変数は body で定義されるため、inline 指定で実行時に解決させる */
 @theme inline {
   --font-display: var(--font-mincho), 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-  --font-signature: var(--font-signature), var(--font-mincho), serif;
 }
 
 body {

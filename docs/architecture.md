@@ -99,7 +99,8 @@ export type SiteConfig = {
     title: string                   // セクション見出し
     paragraphs: MessageParagraph[]  // 挨拶文（emphasis: true の段落は強調表示）
     signatureTitle: string          // 署名の肩書き
-    signatureName: string           // 署名の氏名（手書き風フォントで表示）
+    signatureName: string           // 署名の氏名（署名画像の代替テキスト。画像が無い場合はこの文字を表示）
+    signatureImage?: string         // 手書き署名の画像パス（背景が透明な PNG）
     photo?: string                  // 写真パス（public/ 以下）
     photoAlt?: string               // 写真の alt テキスト
   }
@@ -222,7 +223,7 @@ export const siteConfig: SiteConfig = {
 | `paper` | `#eff4fa` | 淡い青のセクション背景 |
 | `line` | `#dbe2ec` | 罫線 |
 
-- **書体**：全体を明朝体（Shippori Mincho、標準ウェイト 500）で統一。署名のみ手書き（ペン字）風（Klee One）
+- **書体**：全体を明朝体（Shippori Mincho、標準ウェイト 500）で統一。署名は本人の手書きの画像
 - **文字サイズ**：`html` の基準サイズを画面幅で切り替える（17px → 1024px 以上 18px → 1536px 以上 20px）。各要素は rem 指定のため全体が連動する
 - **形**：角丸・影・グラデーションは使わず、細い罫線と余白で区切る
 - **動き**：定義は `globals.css` の「動き」節に集約。読み込み時の順次表示（`hero-*`）、写真の幕開き（`curtain`）、見出しのせり上がり（`mask` / `rise`）、罫線の描画（`row-line`）、流れる文字（`ticker-track`）。画面に入ったことの検知は `ui/Reveal.tsx` と `hooks/useInView.ts`

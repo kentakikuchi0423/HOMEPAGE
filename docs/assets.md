@@ -29,7 +29,8 @@ public/
     ├── profile/
     │   ├── profile.jpg      ← プロフィール写真（ファーストビュー）
     │   ├── council.jpg      ← ごあいさつ欄の写真（2026年9月 一般質問）
-    │   └── cycling.jpg      ← プロフィール欄の写真（ツール・ド・ひじかわ）
+    │   ├── cycling.jpg      ← プロフィール欄の写真（ツール・ド・ひじかわ）
+    │   └── signature.png    ← ごあいさつ末尾の手書き署名（背景が透明な PNG）
     ├── policy/
     │   ├── education.png    ← 政策アイコン: 子育て・教育
     │   ├── economy.png      ← 政策アイコン: 地域経済
