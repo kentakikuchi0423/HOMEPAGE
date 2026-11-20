@@ -21,6 +21,7 @@ export default function InPageNav() {
         // トップページ以外（存在しないページなど）では、トップページの該当箇所へ移動する
         if (location.pathname !== '/') {
           e.preventDefault()
+          // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- 読み込み直して # の位置へ移動させる
           location.href = `/#${id}`
         }
         return

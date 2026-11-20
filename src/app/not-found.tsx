@@ -11,6 +11,7 @@ export default function NotFound() {
           {title}
         </h1>
         <p className="mt-6 text-base text-sub">{message}</p>
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- 1 ページ構成のため、通常のリンクでトップを読み込む */}
         <a
           href="/"
           className="arrow-link mt-10 inline-flex items-center gap-8 bg-brand py-3.5 pl-7 pr-6 text-[0.9375rem] tracking-[0.12em] text-white transition-colors hover:bg-ink"

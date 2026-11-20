@@ -13,7 +13,8 @@ export default function ActivitySection() {
   const { ref, inView } = useInView<HTMLElement>()
   const [rssItems, setRssItems] = useState<RssItem[]>([])
   const [hasMore, setHasMore] = useState(false)
-  const [loading, setLoading] = useState(true)
+  // RSS の設定があるときだけ「読み込み中」から始める
+  const [loading, setLoading] = useState(Boolean(siteConfig.activity.rss))
   const [fetchError, setFetchError] = useState(false)
 
   // 右カード（市政報告）の実高さを左カードに同期する
@@ -34,7 +35,7 @@ export default function ActivitySection() {
   }, [])
 
   useEffect(() => {
-    if (!rss) { setLoading(false); return }
+    if (!rss) return
     fetch('/.netlify/functions/go2senkyo-rss')
       .then((r) => { if (!r.ok) throw new Error(); return r.json() as Promise<{ items: RssItem[]; hasMore?: boolean }> })
       .then((data) => { setRssItems(data.items ?? []); setHasMore(data.hasMore ?? false); setLoading(false) })
