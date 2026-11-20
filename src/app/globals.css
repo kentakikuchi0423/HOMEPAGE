@@ -271,9 +271,7 @@ html:not(.fonts-ready) #hero *,
 html:not(.fonts-ready) #hero *::after {
   animation-play-state: paused;
 }
-html:not(.fonts-ready) #hero .wave svg {
-  animation-play-state: running;
-}
+
 
 /* 波：セクションの境目を、川面のようにゆっくり流れる波にする（肱川のイメージ） */
 @keyframes waveFlow {
@@ -283,7 +281,7 @@ html:not(.fonts-ready) #hero .wave svg {
   position: absolute;
   left: 0;
   right: 0;
-  height: clamp(1.5rem, 4.5vw, 3rem);
+  height: clamp(2.25rem, 6.5vw, 4.5rem);
   overflow: hidden;
   pointer-events: none;
 }
@@ -292,13 +290,18 @@ html:not(.fonts-ready) #hero .wave svg {
   top: 0;
   left: 0;
   width: 200%;
-  min-width: 100rem;
+  min-width: 60rem; /* 狭い画面でも波の山がいくつか見えるようにする */
   height: 100%;
-  animation: waveFlow 36s linear infinite;
+  animation: waveFlow 26s linear infinite;
 }
-.wave svg.wave-back {
+/* 奥の波ほど薄く、ゆっくり流す */
+.wave svg.wave-layer-1 {
+  opacity: 0.3;
+  animation-duration: 64s;
+}
+.wave svg.wave-layer-2 {
   opacity: 0.55;
-  animation-duration: 58s;
+  animation-duration: 40s;
 }
 
 /* 帯：大きな文字がゆっくり横に流れる */

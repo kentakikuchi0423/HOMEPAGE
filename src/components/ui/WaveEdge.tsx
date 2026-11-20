@@ -23,23 +23,30 @@ function wavePath(edge: Props['edge'], shift: number, scale: number) {
   return `M0,${base} L${points.join(' L')} L${PERIOD * 2},${base} Z`
 }
 
+// 奥から手前へ 3 枚。奥ほど薄く・ゆっくり流し、川面の重なりを出す（速さと濃さは globals.css の .wave-layer-*）
+const LAYERS = [
+  { shift: 760, scale: 1.2 },
+  { shift: 380, scale: 1.0 },
+  { shift: 0, scale: 0.8 },
+]
+
 /**
  * 肱川の流れをイメージした、セクション境界の波。
- * 2 枚の波を少し違う速さでゆっくり横に流す（動きの定義は globals.css の .wave）。
+ * 重ねた波を少しずつ違う速さでゆっくり横に流す（動きの定義は globals.css の .wave）。
  */
 export default function WaveEdge({ edge, fillClassName }: Props) {
   return (
     <div className={`wave ${edge === 'bottom' ? 'bottom-[-1px]' : 'top-[-1px]'}`} aria-hidden="true">
-      <svg
-        className={`wave-back ${fillClassName}`}
-        viewBox={`0 0 ${PERIOD * 2} ${HEIGHT}`}
-        preserveAspectRatio="none"
-      >
-        <path d={wavePath(edge, 420, edge === 'bottom' ? 1.15 : 1.15)} />
-      </svg>
-      <svg className={fillClassName} viewBox={`0 0 ${PERIOD * 2} ${HEIGHT}`} preserveAspectRatio="none">
-        <path d={wavePath(edge, 0, 0.85)} />
-      </svg>
+      {LAYERS.map((layer, i) => (
+        <svg
+          key={i}
+          className={`wave-layer-${i + 1} ${fillClassName}`}
+          viewBox={`0 0 ${PERIOD * 2} ${HEIGHT}`}
+          preserveAspectRatio="none"
+        >
+          <path d={wavePath(edge, layer.shift, layer.scale)} />
+        </svg>
+      ))}
     </div>
   )
 }
