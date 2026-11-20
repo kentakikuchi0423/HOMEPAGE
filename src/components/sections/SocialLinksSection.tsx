@@ -6,16 +6,15 @@ import SectionHeading from "@/components/ui/SectionHeading";
 
 function PlatformIcon({
   iconImage,
-  platform,
   fallback,
 }: {
   iconImage?: string;
-  platform: string;
   fallback: string;
 }) {
   const [error, setError] = useState(false);
   if (iconImage && !error) {
     return (
+      // eslint-disable-next-line @next/next/no-img-element -- 静的書き出しのため画像最適化は使わない
       <img
         src={iconImage}
         alt=""
@@ -105,7 +104,6 @@ export default function SocialLinksSection() {
                   >
                     <PlatformIcon
                       iconImage={iconImage}
-                      platform={platform}
                       fallback={config.icon}
                     />
                   </span>

@@ -38,8 +38,10 @@ export default function Header() {
       className="fixed left-0 right-0 top-0 z-50 border-b border-line bg-white/95 backdrop-blur-sm"
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- 1 ページ構成のため、通常のリンクで先頭から読み込み直す */}
         <a href="/" aria-label={homeLabel} className="flex h-11 shrink-0 items-center">
           {siteConfig.brand.headerLogo ? (
+            // eslint-disable-next-line @next/next/no-img-element -- 静的書き出しのため画像最適化は使わない
             <img
               src={siteConfig.brand.headerLogo}
               alt={siteConfig.brand.logoAlt ?? siteConfig.profile.name}
