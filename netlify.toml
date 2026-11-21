@@ -17,24 +17,29 @@
   status = 301
   force = true
 
-# セキュリティヘッダー（全ページ共通）
+# セキュリティヘッダー（静的ファイルすべてに適用。Netlify Function の応答には適用されないため、
+# Function 側（netlify/functions/go2senkyo-rss.ts）でも必要なヘッダーを個別に付けている）
 [[headers]]
   for = "/*"
   [headers.values]
-    # クリックジャッキング対策（CSP の frame-ancestors と組み合わせ）
-    X-Frame-Options = "SAMEORIGIN"
-    # MIME タイプスニッフィング防止
+    # 他のサイトの枠（iframe）にこのサイトを埋め込ませない（クリックジャッキング対策。CSP の frame-ancestors と併用）
+    X-Frame-Options = "DENY"
+    # ファイルの種類をブラウザに推測させない
     X-Content-Type-Options = "nosniff"
-    # リファラ情報の制限
+    # 外部サイトへ移動するときに伝える参照元を、ドメイン名までに限る
     Referrer-Policy = "strict-origin-when-cross-origin"
-    # 不要な機能へのアクセス制限（YouTube の autoplay / picture-in-picture は影響しない）
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    # CSP:
-    #   script-src: Next.js 静的エクスポートはインラインスクリプト（__NEXT_DATA__ 等）を生成するため unsafe-inline が必要
-    #   style-src:  Tailwind CSS / Next.js のインラインスタイルに unsafe-inline が必要
-    #   img-src:    RSS フィード由来の外部画像を https: で許可
-    #   font-src:   next/font が自己ホストするフォントのみ（self）で対応
-    #   connect-src: RSS は Netlify Functions（同一オリジン）経由のため self のみ
-    #   frame-src:  YouTube 埋め込みのみ許可
-    #   frame-ancestors: 他ドメインからの iframe 埋め込みを禁止
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-src https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self';"
+    # このサイトでは使わないブラウザ機能を、埋め込んだ動画も含めて無効にする
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), serial=(), hid=(), accelerometer=(), gyroscope=(), magnetometer=(), browsing-topics=()"
+    # このサイトが開いた別タブ・このサイトを開いた別タブとの間で、互いの画面を操作できないようにする
+    Cross-Origin-Opener-Policy = "same-origin"
+    # Content-Security-Policy（読み込みを許可する範囲の指定）:
+    #   script-src:  静的書き出しでは Next.js がページ内にスクリプトを直接書き出すため 'unsafe-inline' が必要
+    #   style-src:   Next.js がページ内に書き出すスタイルのため 'unsafe-inline' が必要
+    #   img-src:     自サイト、YouTube のサムネイル、選挙ドットコムの投稿画像に限定
+    #                （投稿画像のホストは src/content/site.ts の activity.rss.imageHosts と揃えること）
+    #   font-src:    書体は next/font が自サイトから配信する
+    #   connect-src: 通信先は自サイト（Netlify Function）のみ
+    #   frame-src:   埋め込みは YouTube（Cookie を使わない youtube-nocookie）のみ
+    #   frame-ancestors: 他のサイトからの埋め込みを禁止
+    #   upgrade-insecure-requests: http の読み込みが混ざっても https に切り替える
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://i.ytimg.com https://go2senkyo-com-production-1.s3.ap-northeast-1.amazonaws.com https://*.go2senkyo.com https://go2senkyo.com; font-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"

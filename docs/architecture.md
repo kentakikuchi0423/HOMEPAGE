@@ -1,227 +1,99 @@
 # architecture.md — アーキテクチャ設計
 
+静的に書き出した 1 ページのサイトと、「最新の活動」用の Netlify Function 1 本で構成する。
+
 ## ディレクトリ構成
 
 ```
-HomePage/
-├── .devcontainer/
-│   └── devcontainer.json       # Dev Container 設定
-├── .claude/
-│   ├── settings.json           # Claude Code 共有設定
-│   └── settings.local.json     # Claude Code 個人設定（git 管理外）
-├── docs/
-│   └── architecture.md         # 本ファイル
-├── public/
-│   └── images/
-│       ├── profile.jpg         # プロフィール写真
-│       ├── ogp.png             # OGP 画像
-│       ├── favicon.png         # favicon 元画像
-│       ├── policy/             # 政策アイコン画像（差し替え用）
-│       └── social/             # SNS リンクアイコン画像（差し替え用）
+.
+├── netlify.toml                    ビルド設定・転送・セキュリティヘッダー（CSP）
+├── netlify/functions/
+│   └── go2senkyo-rss.ts            RSS を取得して JSON で返す（「最新の活動」用）
+├── public/images/                  画像（docs/assets.md 参照）
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx          # RootLayout（フォント・メタタグ）
-│   │   ├── page.tsx            # 1ページ構成のエントリポイント
-│   │   ├── manifest.ts         # Web App Manifest（/manifest.webmanifest）
-│   │   └── globals.css         # グローバルスタイル
+│   │   ├── layout.tsx              全ページ共通の枠（書体・メタデータ・ヘッダー・フッター）
+│   │   ├── page.tsx                トップページ（各セクションを並べる。OGP・構造化データ）
+│   │   ├── not-found.tsx           存在しないページ（404）
+│   │   ├── globals.css             配色などのトークン・動き・印刷用の指定
+│   │   ├── manifest.ts / robots.ts / sitemap.ts
+│   │   └── favicon.ico / apple-icon.png
 │   ├── components/
-│   │   ├── layout/
-│   │   │   ├── Header.tsx      # ヘッダー（ナビゲーション）
-│   │   │   └── Footer.tsx      # フッター
-│   │   ├── sections/
-│   │   │   ├── HeroSection.tsx
-│   │   │   ├── ProfileSection.tsx
-│   │   │   ├── PolicySection.tsx
-│   │   │   ├── ActivitySection.tsx
-│   │   │   └── DonationSection.tsx
-│   │   └── ui/
-│   │       ├── Button.tsx
-│   │       ├── Card.tsx
-│   │       └── SectionHeading.tsx
-│   ├── content/
-│   │   └── site.ts             # コンテンツの唯一の真実（Single Source of Truth）
+│   │   ├── JsonLd.tsx              検索エンジン向けの構造化データ
+│   │   ├── layout/                 Header・Footer・InPageNav（ページ内リンクの挙動）
+│   │   ├── sections/               Hero・Message・Profile・Policy・Video（+VideoCard）・Activity・SocialLinks・Donation
+│   │   └── ui/                     SectionHeading・Reveal・WaveEdge・ExternalLink・FeatureList
+│   ├── content/site.ts             サイトの文言・URL・設定（内容の変更はここだけ）
+│   ├── hooks/useInView.ts          要素が画面に入ったことの検知
 │   └── lib/
-│       └── utils.ts            # 共通ユーティリティ
-├── CLAUDE.md
-├── TASKS.md
-├── README.md
-├── next.config.ts
-├── tailwind.config.ts
-├── tsconfig.json
-└── netlify.toml
+│       ├── rss.ts                  RSS の解析と検証（サーバー・ブラウザ共通）
+│       └── date.ts                 日付の整形（日本時間）
+└── tests/                          lib のテスト（npm test）
 ```
 
----
+## セクション構成（表示順）
 
-## セクション構成
-
-1ページを縦にスクロールする構成。セクション順序：
-
-| # | セクション | コンポーネント | 概要 |
+| # | id | コンポーネント | 内容 |
 |---|---|---|---|
-| 1 | Hero | `HeroSection` | 顔写真・キャッチコピー・サブコピー |
-| 2 | Profile | `ProfileSection` | 自己紹介文・経歴ハイライト |
-| 3 | Policy | `PolicySection` | 政策3〜5項目（アイコン付きカード） |
-| 4 | Activity | `ActivitySection` | X タイムライン + 市政報告（2カラム） |
-| 5 | Donation | `DonationSection` | 外部寄付ページへの CTA |
-| 6 | SNS | `SocialLinksSection` | 各 SNS へのリンクボタン群 |
-| 7 | Footer | `Footer` (layout) | コピーライト・免責 |
+| 1 | `hero` | `HeroSection` | 肩書き・氏名・キャッチコピー・顔写真 |
+| 2 | `message` | `MessageSection` | ごあいさつ・署名・写真 |
+| 3 | `profile` | `ProfileSection` | 経歴・趣味・資格・写真 |
+| 4 | `policy` | `PolicySection` | 政策（番号つきの一覧） |
+| 5 | `video` | `VideoSection` | YouTube 動画（押すまでプレーヤーを読み込まない） |
+| 6 | `activity` | `ActivitySection` | 最新の活動（RSS）・市政報告 |
+| 7 | `social` | `SocialLinksSection` | SNS へのリンク |
+| 8 | `donation` | `DonationSection` | ご支援のお願い（外部の寄付ページへ） |
 
----
+## コンポーネントの方針
 
-## src/content/site.ts — 型設計
+- **内容は `site.ts` から受け取る。** コンポーネントに文言や URL を直接書かない
+- **サーバー側で描画するのを基本にする。** ブラウザで動かす必要があるもの（`'use client'`）は次の 5 つだけ
+  - `Header`（メニューの開閉・読み進み線）、`InPageNav`（ページ内リンク）
+  - `Reveal`（画面に入ったら `is-visible` を付ける）、`VideoCard`（再生）、`ActivitySection`（RSS の取得）
+- **表示の動きは CSS で定義する。** セクションを `Reveal` で包むと、画面に入った時点で `is-visible` クラスが付き、
+  `reveal`（自身）・`reveal-child`（中の項目）・`rise`（見出し）・`curtain`（写真）・`row-line`（罫線）が動き出す
+- **外部へのリンクは `ExternalLink` を使う。** `rel="noopener noreferrer"` と読み上げ用の補足が付く
 
-コンテンツの変更はこのファイルのみ行う。
+## src/content/site.ts — 設定の構成
 
-```typescript
-export type NavLink = {
-  label: string         // 表示ラベル
-  href: string          // リンク先（ページ内アンカー 例: "#profile"）
-}
+型の定義とコメントは `src/content/site.ts` の `SiteConfig` が正。主な項目は次のとおり。
 
-export type SectionHeadingText = {
-  title: string         // セクション見出し（日本語）
-  label: string         // 見出しの下に添える英字ラベル
-}
+| キー | 内容 |
+|---|---|
+| `headings` | 各セクションの見出しと英字ラベル |
+| `nav` | メニュー項目、「応援する」リンク、読み上げ用の文言（本文へ移動・新しいタブで開きます など） |
+| `hero` | ファーストビューのボタン |
+| `message` | ごあいさつの本文（`emphasis: true` の段落は強調）、署名（`signatureImage`）、写真 |
+| `brand` | ヘッダーロゴ（任意。未設定なら氏名を表示） |
+| `meta` | タイトル・説明文・本番 URL・OGP 画像・色・Search Console の確認コード・`person`（構造化データ用の人物情報） |
+| `profile` | 氏名・肩書き・経歴・写真・キャッチコピー・趣味・資格 |
+| `policies` | 政策（題名と説明） |
+| `video` | YouTube 動画の ID と題名、再生ボタンの文言 |
+| `activity` | 市政報告（題名・画像・説明）、`rss`（取得先・件数・許可するホスト）、`labels` |
+| `donation` | 寄付ページの URL・ボタンの文言・説明文 |
+| `sns` | SNS のリンク（表示名・URL・順番・アイコン・`isProfile`） |
+| `footer` / `notFound` | フッターの文言、404 ページの文言 |
 
-export type SiteConfig = {
-  headings: {           // 各セクションの見出し（profile / policy / video / activity / social / donation）
-    [section: string]: SectionHeadingText
-  }
-  // このほか、次の文言も site.ts で管理する
-  //   message.label / profile.hobbiesTitle / profile.qualificationsTitle
-  //   activity.municipalReport.title / activity.labels（more・loadError・fallbackLink）
-  //   sns[].label / meta.shortName / meta.person（構造化データ用の人物情報）
-  nav: {
-    items: NavLink[]      // ヘッダーのナビゲーション項目（PC は横並び、スマホはメニュー内）
-    cta: NavLink          // ヘッダー右端の強調ボタン
-    homeLabel: string     // ロゴリンクの読み上げラベル
-    menuOpenLabel: string // スマホ用メニューボタンの読み上げラベル（開く）
-    menuCloseLabel: string // スマホ用メニューボタンの読み上げラベル（閉じる）
-  }
-  hero: {
-    cta: NavLink          // Hero のボタン
-  }
-  notFound: {
-    title: string         // 存在しないページ（404）の見出し
-    message: string       // 説明文
-    linkLabel: string     // トップページへ戻るリンクの文言
-  }
-  message: {
-    title: string                   // セクション見出し
-    paragraphs: MessageParagraph[]  // 挨拶文（emphasis: true の段落は強調表示）
-    signatureTitle: string          // 署名の肩書き
-    signatureName: string           // 署名の氏名（署名画像の代替テキスト。画像が無い場合はこの文字を表示）
-    signatureImage?: string         // 手書き署名の画像パス（背景が透明な PNG）
-    photo?: string                  // 写真パス（public/ 以下）
-    photoAlt?: string               // 写真の alt テキスト
-  }
-  brand: {
-    headerLogo?: string   // ヘッダーロゴ画像パス（public/ 以下）例: "/images/brand/logo.png"
-    logoAlt?: string      // alt テキスト（省略時は profile.name を使用）
-  }
-  // ...
-}
+`SiteConfig` の型を変えたときは、この表も更新する。
 
-export type Policy = {
-  icon: string          // 絵文字フォールバック識別子
-  iconImage?: string    // 画像パス（public/ 以下）例: "/images/policy/education.png"
-  title: string         // 政策タイトル
-  description: string   // 政策説明文
-}
+## 「最新の活動」（RSS）の流れと安全対策
 
-export type VideoItem = {
-  youtubeVideoId: string  // YouTube 動画 ID（空文字はプレースホルダー表示）
-  title?: string          // 動画タイトル（任意）
-}
-
-export type SnsLink = {
-  platform: 'X' | 'Instagram' | 'Facebook' | 'YouTube' | '選挙ドットコム'
-  url: string
-  order: number         // 表示順（昇順）
-  iconImage?: string    // 画像パス（public/ 以下）例: "/images/social/x.png"
-}
-
-export type SiteConfig = {
-  meta: {
-    title: string        // サイトタイトル（ブラウザタブ・OGP）
-    description: string  // サイト説明文（OGP）
-    url: string          // 本番 URL（https://...）
-    ogImage: string      // OGP 画像パス（public/ 以下）
-    favicon: string      // favicon 画像パス（public/ 以下）例: "/images/favicon.png"
-    siteName: string     // サイト名（og:site_name・WebSite schema の name に使用）
-    siteNameAlt?: string[] // サイト名の別表記（WebSite schema の alternateName）
-  }
-  profile: {
-    name: string         // 氏名（漢字）
-    nameKana: string     // 氏名（ふりがな）
-    title: string        // 肩書き（例："○○市議会議員候補"）
-    bio: string          // プロフィール本文（複数行可）
-    photo: string        // 顔写真パス（public/ 以下）
-    catchcopy: string    // Hero キャッチコピー（短く力強いメッセージ）
-    subcopy: string      // Hero サブコピー（補足メッセージ）
-  }
-  policies: Policy[]
-  video: {
-    videos: VideoItem[]     // YouTube 動画リスト
-    playLabel: string       // 再生ボタンの読み上げラベル
-    fallbackTitle: string   // タイトル未設定時の読み上げ用タイトル
-    placeholder: string     // 動画 ID 未設定時の表示文言
-  }
-  xTimeline: {
-    handle: string       // X アカウント名（@ なし、例："taro_yamada"）
-    tweetLimit?: number  // 表示件数（省略時は X ウィジェットデフォルト）
-  }
-  activity: {
-    municipalReport: {
-      image?: string      // 画像パス（public/ 以下）例: "/images/activity/report.jpg"
-      imageAlt?: string   // 画像の alt テキスト
-      description: string // 説明文
-    }
-  }
-  donation: {
-    url: string          // 外部寄付ページ URL
-    label: string        // CTA ボタンラベル（例："活動を応援する"）
-    description?: string // セクション説明文（任意）
-  }
-  sns: SnsLink[]
-  footer: {
-    copyright: string    // コピーライト文（例："© 2024 山田太郎"）
-    disclaimer?: string  // 免責文（任意）
-  }
-}
-
-export const siteConfig: SiteConfig = {
-  // ← ここにコンテンツを入力する（Phase 1 以降）
-}
+```
+ブラウザ ──→ /.netlify/functions/go2senkyo-rss ──→ 選挙ドットコムの RSS
+        ←── JSON（題名・リンク・日付・画像）  ←──
 ```
 
----
+RSS の内容は外部から来る信頼できないデータとして扱う。
 
-## コンポーネント責務分割
+- **取得先は固定**：`site.ts` の `activity.rss.url` のみ。リクエストの内容は取得先に影響しない
+- **リンク・画像の検証**（`lib/rss.ts`）：https で、`linkHosts` / `imageHosts` に挙げたホスト（サブドメインを含む）のものだけを通す。
+  条件を満たさないリンクの項目は表示しない。条件を満たさない画像は、画像なしで表示する
+- **二重の検証**：Function で解析した直後と、ブラウザで受け取った直後の両方で同じ検証を通す
+- **上限**：取得は 5 秒で打ち切り、本文は約 1MB まで、題名は 200 文字まで。ブラウザ側は 8 秒で打ち切って案内を表示する
+- **保存（キャッシュ）**：成功した結果は Netlify の CDN に 10 分間保存する。失敗や空の結果は保存しない
+- **GET / HEAD 以外は 405**、取得に失敗したときは 502 を返す
 
-### `layout/` — ページ骨格
-
-| コンポーネント | 責務 |
-|---|---|
-| `Header` | ナビゲーション表示（固定ヘッダー。スマホではメニューボタンで開閉） |
-| `Footer` | コピーライト・免責文表示 |
-
-### `sections/` — セクション
-
-- `site.ts` からデータを受け取って描画のみ行う
-- ビジネスロジック・副作用を持たない
-- 各セクションは `<section id="xxx">` で囲み、ナビゲーションのアンカーリンクに対応
-
-### `ui/` — 汎用パーツ
-
-| コンポーネント | 責務 |
-|---|---|
-| `Button` | CTA・リンクボタン（primary / secondary バリアント） |
-| `Card` | 政策カード等に使う汎用カードレイアウト |
-| `SectionHeading` | 各セクションの見出し（統一スタイル） |
-
----
+`imageHosts` を変えるときは、`netlify.toml` の Content-Security-Policy（`img-src`）も合わせて変える。
 
 ## デザイントークン方針
 
@@ -231,70 +103,35 @@ export const siteConfig: SiteConfig = {
 |---|---|---|
 | `ink` | `#1c2430` | 本文・見出しの墨色 |
 | `sub` | `#4b5563` | 補助テキスト |
-| `brand` | `#1e50a2` | イメージカラーの瑠璃色（アクセントはこの1色に限定） |
+| `brand` | `#1e50a2` | イメージカラーの瑠璃色（アクセントはこの 1 色に限定） |
 | `paper` | `#eff4fa` | 淡い青のセクション背景 |
 | `line` | `#dbe2ec` | 罫線 |
 
-- **書体**：全体を明朝体（Shippori Mincho、標準ウェイト 500）で統一。署名は本人の手書きの画像
+- **書体**：全体を明朝体（Shippori Mincho）で統一。太さは本文用 500 と見出し・強調用 600 の 2 種類のみ。署名は本人の手書きの画像
 - **文字サイズ**：`html` の基準サイズを画面幅で切り替える（17px → 1024px 以上 18px → 1536px 以上 20px）。各要素は rem 指定のため全体が連動する
 - **形**：角丸・影・グラデーションは使わず、細い罫線と余白で区切る
 - **波**：セクション境界の波（肱川のイメージ）は `ui/WaveEdge.tsx`。「ご支援のお願い」の上端の 1 か所のみ
-- **動き**：定義は `globals.css` の「動き」節に集約。読み込み時の順次表示（`hero-*`）、写真の幕開き（`curtain`）、見出しのせり上がり（`mask` / `rise`）、罫線の描画（`row-line`）、流れる文字（`ticker-track`）。画面に入ったことの検知は `ui/Reveal.tsx` と `hooks/useInView.ts`
+- **動き**：定義は `globals.css` の「動き」節に集約。読み込み時の順次表示（`hero-*`）、写真の幕開き（`curtain`）、
+  見出しのせり上がり（`mask` / `rise`）、罫線の描画（`row-line`）、流れる文字（`ticker-track`）。
+  「動きを減らす」設定と印刷時にはすべて止め、JavaScript が無効でも本文が表示されるようにしている
 
----
+## アクセシビリティ
 
-## X Timeline 埋め込みについて
-
-- X 公式ウィジェット（`https://publish.twitter.com/`）の埋め込みコードを使用
-- `next/script` の `strategy="lazyOnload"` で読み込み（静的エクスポート対応）
-- `site.ts` の `xTimeline.handle` から埋め込み URL を生成
-
-```tsx
-// XTimelineSection.tsx の実装イメージ
-<a
-  className="twitter-timeline"
-  href={`https://twitter.com/${siteConfig.xTimeline.handle}`}
->
-  Tweets by @{siteConfig.xTimeline.handle}
-</a>
-<Script
-  src="https://platform.twitter.com/widgets.js"
-  strategy="lazyOnload"
-/>
-```
-
----
-
-## Donation セクションについて
-
-- 寄付処理・決済機能は**初期スコープ外**
-- 外部寄付ページ URL（`site.ts` の `donation.url`）へリンクするのみ
-- `target="_blank" rel="noopener noreferrer"` を付与
-
----
+- キーボード：先頭に「本文へ移動」リンク。フォーカス枠は背景に応じて色と位置を変える
+- 読み上げ：ナビゲーションに名前を付ける。外部リンクには「新しいタブで開きます」を添える。装飾（矢印・波など）は読み上げから外す
+- スマホのメニュー：Escape・メニューの外側の操作・PC 幅への切り替えで閉じる
+- 文字を大きく設定している端末でも横スクロールが出ないようにする
 
 ## Netlify デプロイ設定
 
-```toml
-# netlify.toml
-[build]
-  command = "npm run build"
-  publish = "out"
+- `main` ブランチへのマージで自動デプロイ。ビルドは `npm run build`、公開ディレクトリは `out`
+- `netlify.toml` で、旧 URL（`kentakikuchi.netlify.app`）から本番ドメインへの 301 転送と、セキュリティヘッダーを設定している
+- 静的ファイルのヘッダーは `netlify.toml`、Function の応答のヘッダーは Function のコードで付ける（`netlify.toml` の指定は Function には適用されない）
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-```
+## 確認用のコマンド
 
-```typescript
-// next.config.ts
-const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
-  images: {
-    unoptimized: true,  // 静的エクスポートでは Next.js Image Optimization 不可
-  },
-}
+```bash
+npm run lint    # コード検査（ESLint）
+npm test        # lib のテスト
+npm run build   # 本番ビルド（型チェックを含む）
 ```

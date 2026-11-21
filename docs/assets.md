@@ -1,135 +1,42 @@
 # 画像アセットガイド
 
-このドキュメントでは、サイトで使用する画像の種類・推奨サイズ・配置場所・差し替え手順を説明します。
+サイトで使う画像の種類・推奨サイズ・配置場所・差し替え手順をまとめます。
 
----
+## 一覧
 
-## 推奨サイズ一覧
-
-| 画像の種類 | 推奨サイズ | 推奨形式 | 備考 |
+| 画像 | 配置場所 | 推奨サイズ・形式 | 指定する場所（`site.ts`） |
 |---|---|---|---|
-| ヘッダーロゴ | 800 × 200 px 以上（Retina対応なら 1200 × 300 px 程度） | 透過 PNG または SVG | 横長推奨 |
-| 政策アイコン | 512 × 512 px | 透過 PNG または SVG | 正方形必須 |
-| SNS リンクアイコン | 256 × 256 px | 透過 PNG または SVG | 正方形必須 |
-| favicon 元画像 | 512 × 512 px | 透過 PNG または SVG | 正方形必須 |
-| プロフィール写真 | 600 × 800 px 程度 | JPG または PNG | 縦長推奨 |
-| OGP 画像 | 1200 × 630 px | JPG または PNG | SNS シェア時に表示 |
-
----
-
-## ディレクトリ構成
-
-```
-public/
-└── images/
-    ├── brand/
-    │   ├── favicon.png      ← favicon 元画像
-    │   ├── logo.png         ← ヘッダーロゴ画像（差し替え用）
-    │   └── ogp.png          ← OGP 画像（SNS シェア用）
-    ├── profile/
-    │   ├── profile.jpg      ← プロフィール写真（ファーストビュー）
-    │   ├── council.jpg      ← ごあいさつ欄の写真（2026年9月 一般質問）
-    │   ├── cycling.jpg      ← プロフィール欄の写真（ツール・ド・ひじかわ）
-    │   └── signature.png    ← ごあいさつ末尾の手書き署名（背景が透明な PNG）
-    ├── policy/
-    │   ├── education.png    ← 政策アイコン: 子育て・教育
-    │   ├── economy.png      ← 政策アイコン: 地域経済
-    │   ├── welfare.png      ← 政策アイコン: 高齢者・福祉
-    │   └── environment.png  ← 政策アイコン: 環境・防災
-    └── social/
-        ├── x.png            ← X (Twitter) アイコン
-        ├── facebook.png     ← Facebook アイコン
-        ├── instagram.png    ← Instagram アイコン
-        ├── youtube.png      ← YouTube アイコン
-        └── senkyo.png       ← 選挙ドットコム アイコン
-```
-
----
+| ファーストビューの顔写真 | `public/images/profile/profile.jpg` | 1200px 四方程度の JPG（上半身が中央上寄り） | `profile.photo` |
+| ごあいさつ欄の写真 | `public/images/profile/council.jpg` | 幅 1100px 程度の縦長 JPG | `message.photo` / `message.photoAlt` |
+| プロフィール欄の写真 | `public/images/profile/cycling.jpg` | 幅 600px 程度の縦長 JPG | `profile.snapshot` / `profile.snapshotAlt` |
+| 手書きの署名 | `public/images/profile/signature.png` | 幅 900px 程度、背景が透明な PNG | `message.signatureImage` |
+| 市政報告の写真 | `public/images/activity/report.jpg` | 幅 1100px 程度の横長 JPG | `activity.municipalReport.image` / `imageAlt` |
+| SNS アイコン | `public/images/social/*.png` | 96px 四方の PNG | `sns[].iconImage` |
+| SNS シェア用の画像（OGP） | `public/images/brand/ogp.png` | 1200×630px の PNG | `meta.ogImage` / `meta.ogImageAlt` |
+| ホーム画面用アイコン | `public/images/brand/favicon.png` | 512px 四方の PNG | `meta.appIcon` |
+| ブラウザのタブのアイコン | `src/app/favicon.ico`・`src/app/apple-icon.png` | ICO（16〜192px）・512px 四方の PNG | 指定不要（ファイルを置き換える） |
+| ヘッダーロゴ（任意） | `public/images/brand/logo.png` | 横長、背景が透明な PNG | `brand.headerLogo` / `brand.logoAlt` |
 
 ## 差し替え手順
 
-### ヘッダーロゴを差し替える
+1. 上の表の場所に、同じファイル名で画像を置き換える
+2. 別のファイル名にする場合は、`site.ts` の該当するパスを変える
+3. 写真を替えたときは、説明文（`…Alt`）も内容に合わせて直す
+4. `npm run build` でビルドが通ることを確認する
 
-1. 画像を `public/images/brand/logo.png` として配置
-2. `src/content/site.ts` の `brand.headerLogo` のコメントを外してパスを設定する
+### ブラウザのタブのアイコン（favicon）
 
-```ts
-// src/content/site.ts
-brand: {
-  headerLogo: "/images/brand/logo.png", // ← コメントを外す
-  logoAlt: "菊地けんた 公式ロゴ",       // ← コメントを外す
-},
-```
+- `src/app/favicon.ico` は、内部の画像が RGBA 形式である必要がある（そうでないとビルドが失敗する）
+- `public/images/brand/favicon.png` はホーム画面に追加したとき用で、タブのアイコンには使われない
 
-> `headerLogo` が設定されていない場合は氏名テキストがフォールバックとして表示されます。
+### 署名
 
-> ヘッダーロゴ（またはフォールバックの氏名テキスト）はクリックでページトップへ遷移するリンクになっています。
-
-### 政策アイコンを差し替える
-
-1. 画像を `public/images/policy/` に配置（例: `education.png`）
-2. `src/content/site.ts` の該当 policy に `iconImage` を追記する
-
-```ts
-// src/content/site.ts
-policies: [
-  {
-    icon: "AcademicCapIcon",
-    iconImage: "/images/policy/education.png", // ← この行を追加
-    title: "子育て・教育の充実",
-    description: "...",
-  },
-  // ...
-],
-```
-
-> `iconImage` が設定されていない場合は絵文字がフォールバックとして表示されます。
-
-### SNS リンクアイコンを差し替える
-
-1. 画像を `public/images/social/` に配置（例: `x.png`）
-2. `src/content/site.ts` の該当 sns エントリに `iconImage` を追記する
-
-```ts
-// src/content/site.ts
-sns: [
-  { platform: "X", url: "https://x.com/...", order: 1, iconImage: "/images/social/x.png" },
-  // ...
-],
-```
-
-> `iconImage` が設定されていない場合はテキスト文字がフォールバックとして表示されます。
-
-### favicon を差し替える
-
-1. 画像を `public/images/brand/favicon.png` として配置
-2. `src/content/site.ts` の `meta.favicon` を確認（デフォルト: `"/images/brand/favicon.png"`）
-
-```ts
-// src/content/site.ts
-meta: {
-  favicon: "/images/brand/favicon.png", // ← ファイル名を変更した場合はここも変更
-},
-```
-
-### プロフィール写真・OGP 画像を差し替える
-
-`site.ts` の対応フィールドにパスを設定する。
-
-```ts
-meta: {
-  ogImage: "/images/brand/ogp.png",  // OGP 画像
-},
-profile: {
-  photo: "/images/profile/profile.jpg",  // プロフィール写真
-},
-```
-
----
+白い紙にペンで書いた写真から、紙の部分を取り除いて背景を透明にしたものを使う。色は本文と同じ墨色（`#1c2430`）にする。
 
 ## 注意事項
 
-- ファイル名はすべて **小文字・英数字・ハイフン** のみ使用する（スペース・日本語不可）
-- アイコン画像は **透過 PNG または SVG** を推奨（白背景のカードに重なるため）
-- 画像を差し替えた後は `npm run dev` でブラウザ表示を確認する
-- 本番デプロイ前に `npm run build` でビルドエラーがないことを確認する
+- **リポジトリは公開設定。** `public/` 以下の画像は、URL を知っていれば誰でも閲覧できる
+- 他の方が写り込んだ写真は、切り抜くかぼかしを入れてから置く
+- 位置情報や撮影日時などのメタデータ（EXIF）は取り除いてから置く
+- ファイル名は英数字にする（日本語のファイル名は Netlify のビルドで問題になったことがある）
+- 大きすぎる画像は表示を遅くする。上の表のサイズを目安に縮小する

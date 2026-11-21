@@ -1,48 +1,37 @@
-'use client'
 import Image from 'next/image'
 import { siteConfig } from '@/content/site'
-import { useInView } from '@/hooks/useInView'
 import SectionHeading from '@/components/ui/SectionHeading'
 import Reveal from '@/components/ui/Reveal'
-import ProfileCard from '@/components/sections/ProfileCard'
-import QualificationsCard from '@/components/sections/QualificationsCard'
-import HobbiesCard from '@/components/sections/HobbiesCard'
+import FeatureList from '@/components/ui/FeatureList'
 
 export default function ProfileSection() {
-  const { snapshot, snapshotAlt } = siteConfig.profile
-  const { ref, inView } = useInView<HTMLElement>()
+  const { bio, hobbies, hobbiesTitle, qualifications, qualificationsTitle, snapshot, snapshotAlt } =
+    siteConfig.profile
+  const heading = siteConfig.headings.profile
 
   return (
-    <section
-      ref={ref}
-      id="profile"
-      className={`bg-white px-6 py-16 md:py-20 reveal ${inView ? 'is-visible' : ''}`}
-    >
+    <Reveal as="section" id="profile" threshold={0.12} className="reveal bg-white px-6 py-16 md:py-20">
       <div className="mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
-        <SectionHeading en={siteConfig.headings.profile.label}>
-          {siteConfig.headings.profile.title}
-        </SectionHeading>
+        <SectionHeading en={heading.label}>{heading.title}</SectionHeading>
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_14rem]">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_14rem]">
           <div>
-            <ProfileCard />
-            <HobbiesCard />
-            <QualificationsCard />
+            <ul className="space-y-3 pb-7 text-base">
+              {bio.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+            <FeatureList title={hobbiesTitle} items={hobbies} />
+            <FeatureList title={qualificationsTitle} items={qualifications} />
           </div>
 
           {snapshot && (
             <Reveal className="curtain w-full max-w-[16rem] self-start lg:max-w-none">
-              <Image
-                src={snapshot}
-                alt={snapshotAlt ?? ''}
-                width={574}
-                height={925}
-                className="h-auto w-full"
-              />
+              <Image src={snapshot} alt={snapshotAlt ?? ''} width={574} height={925} className="h-auto w-full" />
             </Reveal>
           )}
         </div>
       </div>
-    </section>
+    </Reveal>
   )
 }
