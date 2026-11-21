@@ -264,12 +264,12 @@ export const siteConfig: SiteConfig = {
     subcopy: "未来をひらく、あなたとともに。",
     qualificationsTitle: "資格・試験",
     qualifications: [
+      "防災士",
       "TOEIC 930",
       "応用情報技術者試験",
       "日商簿記 2級",
       "FP技能検定 2級",
       "証券外務員一種",
-      "防災士",
       "ウイスキー検定 2級",
       "おおず歴史華回廊案内人",
     ],
