@@ -57,12 +57,12 @@ src/content/site.ts
   ├── nav         ヘッダーのメニュー項目・「応援する」リンク
   ├── hero        ファーストビューのボタン
   ├── message     ごあいさつ（本文・署名・写真）
-  ├── meta        サイトタイトル・説明文・OGP 画像・本番 URL・favicon
+  ├── meta        サイトタイトル・説明文・OGP 画像・本番 URL・色・検索エンジン向けの人物情報
   ├── brand       ヘッダーロゴ画像パス
   ├── profile     氏名・肩書き・プロフィール文・顔写真・キャッチコピー・資格・趣味
   ├── policies    政策項目（配列）
-  ├── video       YouTube 動画 ID 一覧（配列）
-  ├── activity    市政報告（画像・説明文）
+  ├── video       YouTube 動画 ID 一覧（配列）・再生ボタンの文言
+  ├── activity    市政報告（画像・説明文）・「最新の活動」の取得先（RSS）
   ├── donation    寄付ページ URL・ボタンラベル
   ├── sns         SNS リンク一覧（配列）
   ├── footer      コピーライト・免責文
@@ -78,51 +78,41 @@ src/content/site.ts
 ```
 public/images/
   ├── brand/
-  │   ├── favicon.png      ← favicon 元画像
-  │   ├── logo.png         ← ヘッダーロゴ（差し替え用）
-  │   └── ogp.png          ← OGP 画像（SNS シェア用）
+  │   ├── favicon.png      ← ホーム画面用アイコン（512px 四方）
+  │   └── ogp.png          ← SNS シェア用の画像（1200×630px）
   ├── profile/
-  │   └── profile.jpg      ← プロフィール写真
-  ├── policy/
-  │   └── *.png            ← 政策アイコン
+  │   ├── profile.jpg      ← ファーストビューの顔写真
+  │   ├── council.jpg      ← ごあいさつ欄の写真
+  │   ├── cycling.jpg      ← プロフィール欄の写真
+  │   └── signature.png    ← 手書きの署名（背景が透明な PNG）
+  ├── activity/
+  │   └── report.jpg       ← 市政報告の写真
   └── social/
-      └── *.png            ← SNS アイコン
+      └── *.png            ← SNS アイコン（96px 四方）
 ```
 
 ### よく使う差し替え手順
 
-**ヘッダーロゴ**
+**写真（顔写真・ごあいさつ・プロフィール・市政報告）**
 
-1. `public/images/brand/logo.png` を配置
-2. `site.ts` の `brand.headerLogo` のコメントを外す
-
-**OGP 画像**
-
-1. `public/images/brand/ogp.png` を配置（推奨サイズ: 1200×630px）
-2. `site.ts` の `meta.ogImage` に `/images/brand/ogp.png` を設定
+1. 同じファイル名で上書きする（別名にする場合は `site.ts` のパスも変える）
+2. 写真の説明文（`photoAlt` / `snapshotAlt` / `imageAlt`）を内容に合わせて直す
 
 **YouTube 動画**
 
-1. `site.ts` の `video.videos` 配列に `{ youtubeVideoId: "動画ID", title: "タイトル" }` を追加
-2. `youtubeVideoId` を空文字にするとプレースホルダーが表示される
+1. `site.ts` の `video.videos` に `{ youtubeVideoId: "動画ID", title: "タイトル" }` を追加する
+2. `youtubeVideoId` を空文字にすると「準備中」の表示になる
 
-**市政報告画像**
+**SNS リンク**
 
-1. `public/images/activity/` に画像を配置
-2. `site.ts` の `activity.municipalReport.image` にパスを設定
-3. `activity.municipalReport.imageAlt` に alt テキストを設定
+1. `site.ts` の `sns` に `{ label, url, order, iconImage }` を追加する
+2. アイコンは `public/images/social/` に 96px 四方の PNG で置く（未設定なら頭文字を表示）
 
-**政策アイコン**
+**ブラウザのタブのアイコン（favicon）**
 
-1. `public/images/policy/` に画像を配置
-2. `site.ts` の該当 policy に `iconImage` フィールドを追加
+`src/app/favicon.ico` と `src/app/apple-icon.png` を差し替える（`site.ts` では指定しない）。
 
-**SNS アイコン**
-
-1. `public/images/social/` に画像を配置
-2. `site.ts` の該当 sns エントリに `iconImage` フィールドを追加
-
-> 各フィールドが未設定の場合はテキストや絵文字がフォールバックとして表示されます。
+> リポジトリは公開設定です。他の方が写り込んだ写真や、位置情報などのメタデータが残った画像を置かないよう注意してください。
 
 推奨サイズ・詳細手順は `docs/assets.md` を参照してください。
 

@@ -1,12 +1,19 @@
-import { siteConfig } from "@/content/site";
+import type { Metadata } from 'next'
+import { siteConfig } from '@/content/site'
+
+export const metadata: Metadata = {
+  title: `${siteConfig.notFound.title}｜${siteConfig.meta.siteName}`,
+  description: siteConfig.notFound.message,
+  robots: { index: false, follow: true },
+}
 
 export default function NotFound() {
-  const { title, message, linkLabel } = siteConfig.notFound;
+  const { code, title, message, linkLabel } = siteConfig.notFound
 
   return (
     <section className="bg-white px-6 py-24 md:py-32">
       <div className="mx-auto max-w-5xl">
-        <p className="text-[0.8125rem] font-medium tracking-[0.2em] text-brand">404</p>
+        <p className="text-[0.8125rem] font-medium tracking-[0.2em] text-brand">{code}</p>
         <h1 className="mt-3 font-display text-[1.75rem] font-semibold leading-snug tracking-[0.06em] text-ink sm:text-[1.875rem]">
           {title}
         </h1>
@@ -21,5 +28,5 @@ export default function NotFound() {
         </a>
       </div>
     </section>
-  );
+  )
 }

@@ -1,19 +1,20 @@
-'use client'
 import { siteConfig } from '@/content/site'
-import { useInView } from '@/hooks/useInView'
 import SectionHeading from '@/components/ui/SectionHeading'
+import Reveal from '@/components/ui/Reveal'
 import WaveEdge from '@/components/ui/WaveEdge'
+import ExternalLink from '@/components/ui/ExternalLink'
 
 export default function DonationSection() {
   const { url, label, description } = siteConfig.donation
   const { subcopy } = siteConfig.profile
-  const { ref, inView } = useInView<HTMLElement>()
+  const heading = siteConfig.headings.donation
 
   return (
-    <section
-      ref={ref}
+    <Reveal
+      as="section"
       id="donation"
-      className={`relative overflow-hidden bg-brand px-6 pb-16 pt-24 md:pb-20 md:pt-32 reveal ${inView ? 'is-visible' : ''}`}
+      threshold={0.12}
+      className="reveal relative overflow-hidden bg-brand px-6 pb-16 pt-24 md:pb-20 md:pt-32"
     >
       {/* 前のセクション（白）との境目を波にする */}
       <WaveEdge edge="top" fillClassName="fill-white" />
@@ -25,7 +26,7 @@ export default function DonationSection() {
           aria-hidden="true"
         >
           <div className="ticker-track">
-            {Array.from({ length: 4 }).map((_, i) => (
+            {Array.from({ length: 4 }, (_, i) => (
               <span key={i} className="pr-[1em]">
                 {subcopy}
               </span>
@@ -35,24 +36,22 @@ export default function DonationSection() {
       )}
 
       <div className="relative mx-auto max-w-5xl md:grid md:grid-cols-[15rem_minmax(0,1fr)] md:gap-12">
-        <SectionHeading en={siteConfig.headings.donation.label} light>
-          {siteConfig.headings.donation.title}
+        <SectionHeading en={heading.label} light>
+          {heading.title}
         </SectionHeading>
 
         <div>
           {description && <p className="whitespace-pre-line text-base text-white/90">{description}</p>}
 
-          <a
+          <ExternalLink
             href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="arrow-link mt-9 inline-flex items-center gap-8 bg-white py-4 pl-8 pr-7 text-base font-bold tracking-[0.1em] text-brand transition-colors hover:bg-paper"
+            className="arrow-link mt-9 inline-flex items-center gap-8 bg-white py-4 pl-8 pr-7 text-base font-semibold tracking-[0.1em] text-brand transition-colors hover:bg-paper"
           >
             {label}
             <span className="arrow" aria-hidden="true">→</span>
-          </a>
+          </ExternalLink>
         </div>
       </div>
-    </section>
+    </Reveal>
   )
 }

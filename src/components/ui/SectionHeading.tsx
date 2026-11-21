@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react'
 
-interface Props {
+type Props = {
   children: ReactNode
-  /** English label displayed under the Japanese heading */
+  /** 見出しの下に添える英字ラベル */
   en?: string
-  /** Use light variant on dark/colored backgrounds */
+  /** 色のついた背景の上で使う場合 */
   light?: boolean
 }
 
@@ -22,6 +22,7 @@ export default function SectionHeading({ children, en, light = false }: Props) {
       </h2>
       {en && (
         <p
+          lang="en"
           className={`mt-2 text-[0.8125rem] font-medium tracking-[0.2em] uppercase ${
             light ? 'text-white/80' : 'text-brand'
           }`}

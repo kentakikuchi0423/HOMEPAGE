@@ -18,7 +18,7 @@ export default function HeroSection() {
         <div className="flex flex-col-reverse gap-6 lg:flex-row lg:justify-between lg:gap-8">
           <div className="lg:self-end">
             <p className="hero-in text-[0.9375rem] font-medium tracking-[0.16em] text-brand [animation-delay:0.3s]">{title}</p>
-            <h1 className="hero-in [animation-delay:0.4s] mt-2 font-display text-[2.75rem] font-semibold leading-tight tracking-[0.1em] whitespace-nowrap text-ink md:text-[2.5rem] lg:text-[3.25rem] xl:text-6xl">
+            <h1 className="hero-in [animation-delay:0.4s] mt-2 font-display text-[min(2.75rem,calc((100vw-3rem)/6))] font-semibold leading-tight tracking-[0.1em] whitespace-nowrap text-ink md:text-[2.5rem] lg:text-[3.25rem] xl:text-6xl">
               {name}
             </h1>
             <p className="hero-in [animation-delay:0.5s] mt-1 text-[0.8125rem] leading-normal tracking-[0.3em] text-sub">{nameKana}</p>
@@ -27,25 +27,23 @@ export default function HeroSection() {
 
             <a
               href={cta.href}
-              className="hero-in [animation-delay:0.7s] arrow-link mt-4 inline-flex items-center gap-8 whitespace-nowrap bg-brand py-3 md:mt-5 md:py-3.5 pl-7 pr-6 text-[0.9375rem] tracking-[0.12em] text-white transition-colors hover:bg-ink"
+              className="hero-in [animation-delay:0.7s] arrow-link mt-4 inline-flex max-w-full items-center gap-8 bg-brand md:whitespace-nowrap py-3 md:mt-5 md:py-3.5 pl-7 pr-6 text-[0.9375rem] tracking-[0.12em] text-white transition-colors hover:bg-ink"
             >
               {cta.label}
               <span className="arrow" aria-hidden="true">→</span>
             </a>
           </div>
 
-          <p className="hero-catch font-display text-[min(1.5rem,5.7vw)] font-medium leading-[1.7] tracking-[0.06em] text-ink md:text-[1.25rem] lg:leading-[2] lg:tracking-[0.24em]" aria-label={catchcopy}>
-            {/* 1文字ずつ順に現れる */}
-            {Array.from(catchcopy).map((char, i) => (
-              <span
-                key={i}
-                className="hero-char"
-                style={{ animationDelay: `${0.5 + i * 0.07}s` }}
-                aria-hidden="true"
-              >
-                {char}
-              </span>
-            ))}
+          <p className="hero-catch font-display text-[min(1.5rem,5.7vw)] font-medium leading-[1.7] tracking-[0.06em] text-ink md:text-[1.25rem] lg:leading-[2] lg:tracking-[0.24em]">
+            {/* 読み上げにはまとまった文として伝え、画面には 1 文字ずつ順に出す */}
+            <span className="sr-only">{catchcopy}</span>
+            <span aria-hidden="true">
+              {Array.from(catchcopy).map((char, i) => (
+                <span key={i} className="hero-char" style={{ animationDelay: `${0.5 + i * 0.07}s` }}>
+                  {char}
+                </span>
+              ))}
+            </span>
           </p>
         </div>
 
@@ -55,8 +53,9 @@ export default function HeroSection() {
             <Image
               src={photo}
               alt={name}
-              width={720}
-              height={720}
+              width={1200}
+              height={1200}
+              sizes="(min-width: 1280px) 30rem, (min-width: 1024px) 27rem, (min-width: 768px) 20rem, 100vw"
               priority
               className="h-full w-full object-cover object-top"
             />
